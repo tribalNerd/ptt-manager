@@ -101,7 +101,7 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
             }
 
             // Portfolio
-            if ( isset( $data['portfolios'] ) && ! get_option( $this->plugin_name . '_posttype_portfolios' ) ) {
+            if ( isset( $data['portfolio'] ) && ! get_option( $this->plugin_name . '_posttype_portfolio' ) ) {
                 $this->register( 'portfolio', 'portfolio', $data );
             }
 
@@ -131,12 +131,12 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
             if( ! isset( $single, $plural ) || ! $data || ! is_array( $data ) ) { return; }
 
             // Add New Dashicons Picker
-            if ( isset( $data['dashicons_picker_posttype-add'] ) && $data['dashicons_picker_posttype-add'] != '' ) {
-                $icon = esc_attr( $data['dashicons_picker_posttype-add'] );
+            if ( isset( $data['dashicons_picker_add'] ) ) {
+                $icon = esc_attr( $data['dashicons_picker_add'] );
 
             // Set / Update Icon
-            } elseif ( isset( $data['dashicons_picker_posttype-' . $single] ) && $data['dashicons_picker_posttype-' . $single] != '' ) {
-                $icon = esc_attr( $data['dashicons_picker_posttype-' . $single] );
+            } elseif ( isset( $data['dashicons_picker_' . $plural] ) ) {
+                $icon = esc_attr( $data['dashicons_picker_' . $plural] );
 
             // Else No Icon
             } else {

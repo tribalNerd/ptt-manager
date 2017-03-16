@@ -9,16 +9,17 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method message()        Display Messages To User
  * @method isActive()       Post Type / Taxonomy Active Check
  * @method editDropdown()   Get Saved Options For Edit Dropdown
- * @method inputGet()       INPUT_GET Filter
+ * @method filterInputGet() INPUT_GET Filter
  * @method sanitize()       Sanitize Text Strings
  * @method sanitizeName()   Sanitize Label/Name
  * @method wpPosttypes()    Get All Post Type Keys
  * @method validate()       Simple Form Validation
  * @method createdUpdated() Created/Updated Inputs and Message
  * @method listPosttypes()  Create Checkbox Listing of Post Types
- * @method date() Get the Current Date & Time
- * @method author() Get Current Logged In User Display Name
- * @method settings() Get All Plugin Options
+ * @method listTaxonomies() Checkbox Listing of Taxonomies
+ * @method date()           Get the Current Date & Time
+ * @method author()         Get Current Logged In User Display Name
+ * @method settings()       Get All Plugin Options
  * @method protect()        Admin Area Protection
  */
 if( ! class_exists( 'PTTManager_Extended' ) )
@@ -210,7 +211,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             if ( $names ) {
                 $html = '<form enctype="multipart/form-data" method="get" class="textright">';
                 $html .= '<input type="hidden" name="page" value="' . $this->plugin_name . '">';
-                $html .= '<input type="hidden" name="tab" value="' . esc_attr( $this->inputGet( 'tab' ) ) . '">';
+                $html .= '<input type="hidden" name="tab" value="' . esc_attr( $this->filterInputGet( 'tab' ) ) . '">';
                 $html .= '<select name="' . esc_attr( $type ) . '" onchange="this.form.submit()">';
 
                 if ( filter_input( INPUT_GET, $type ) ) {
@@ -221,7 +222,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
                 foreach ( $names as $name => $value ) {
                     // Set Selected
-                    $selected = ( $this->inputGet( $type ) == $name ) ? ' selected' : '';
+                    $selected = ( $this->filterInputGet( $type ) == $name ) ? ' selected' : '';
 
                     // Build Options
                     $html .= '<option value="' . esc_attr( $name ) . '"' . $selected .'>' . esc_html( ucfirst( $name ) ) . '</option>';
@@ -239,7 +240,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
          * @about INPUT_GET for Taxonomy, Post Type, Tab & Page
          * @return string Sanitized INPUT_GET
          */
-        final public function inputGet( $name )
+        final public function filterInputGet( $name )
         {
             // Lowercase & Sanitize String
             $filter = strtolower( filter_input( INPUT_GET, $name, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) );
@@ -346,7 +347,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         final public function listPosttypes()
         {
             // Get Selected Post Types from Taxonomy Option for Checked Item
-            $data = get_option( $this->plugin_name . '_taxonomy_' . $this->inputGet( 'taxonomy' ) );
+            $data = get_option( $this->plugin_name . '_taxonomy_' . $this->filterInputGet( 'taxonomy' ) );
             $selected_posttypes = ( ! empty( $data ) && isset( $data['pt'] ) && is_array( $data['pt'] ) ) ? $data['pt'] : '';
 
             // Not Included Items
@@ -384,6 +385,56 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             }
 
             return $html;
+        }
+
+
+        /**
+         * @about Checkbox Listing of Taxonomies
+         * @location templates/posttypes.php
+         * @call echo parent::listTaxonomies();
+         * @param string $type Should always be 'posttype'
+         * @return string $html Checkboxes of Taxonomy Names
+         */
+        final public function listTaxonomies()
+        {
+            // Get Selected Taxonomies from Post Type Option for Checked Item
+            $data = get_option( $this->plugin_name . '_taxonomy_' . $this->filterInputGet( 'taxonomy' ) );
+            $selected_taxonomies = ( ! empty( $data ) && isset( $data['tn'] ) && is_array( $data['tn'] ) ) ? $data['tn'] : '';
+
+            // Not Included Items
+            $skip = array(
+                'link_category' => 'link_category',
+                'post_format' => 'post_format',
+                'nav_menu' => 'nav_menu',
+                'taxslug' => 'taxslug'
+            );
+
+            // No Form If No Post Types
+            $html = '';
+
+            // Build List of Taxonomies
+            foreach ( get_taxonomies() as $taxonomy ) {
+                if ( in_array( $taxonomy, $skip ) ){ continue; }
+
+                // Set Checked
+                $checked = ( isset( $selected_taxonomies[$taxonomy] ) && $taxonomy == $selected_taxonomies[$taxonomy] ) ? ' checked="checked"' : '';
+
+                // Build Taxonomy Name
+                if ( $taxonomy == "post_tag" ) {
+                    $name = esc_attr__( 'Tags (core)', 'ptt-manager' );
+
+                } elseif ( $taxonomy == "category" ) {
+                    $name = esc_attr__( 'Categories (core)', 'ptt-manager' );
+
+                } else {
+                    $name = esc_attr( ucfirst( $taxonomy ) );
+                }
+
+                // Build List
+                $html .= '<p><label for="' . esc_attr( $taxonomy ) . '"><input name="tn[' . esc_attr( $taxonomy ) . ']" type="checkbox" id="' . esc_attr( $taxonomy ) . '" value="' . esc_attr( $taxonomy ) . '" ' . $checked . '/> ' . $name . '</label></p>';
+            }
+
+            echo $html;
         }
 
 

@@ -1,0 +1,1108 @@
+# Copyright (C) 2017 Post Type & Taxonomy Manager
+# This file is distributed under the same license as the Post Type & Taxonomy Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Post Type & Taxonomy Manager 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ptt-manager\n"
+"POT-Creation-Date: 2017-03-16 14:40:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: tribalNerd <tribalnerd@technerdia.com>\n"
+"Language-Team: tribalNerd <tribalnerd@technerdia.com>\n"
+
+#: classes/class-extended.php:68
+msgid "Home"
+msgstr ""
+
+#: classes/class-extended.php:69 templates/tools.php:89
+msgid "Post Types"
+msgstr ""
+
+#: classes/class-extended.php:70 templates/tools.php:107
+msgid "Taxonomies"
+msgstr ""
+
+#: classes/class-extended.php:71 templates/tools.php:5
+msgid "Tools"
+msgstr ""
+
+#: classes/class-extended.php:89
+msgid "Preset Settings Updated!"
+msgstr ""
+
+#: classes/class-extended.php:93
+msgid "Post Type Settings Updated!"
+msgstr ""
+
+#: classes/class-extended.php:97
+msgid "Taxonomy Settings Updated!"
+msgstr ""
+
+#: classes/class-extended.php:101
+msgid "Settings Imported!"
+msgstr ""
+
+#: classes/class-extended.php:105
+msgid "Preset Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:109
+msgid "Post Type Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:113
+msgid "Taxonomy Settings Failed To Update! "
+msgstr ""
+
+#: classes/class-extended.php:117
+msgid "Import Failed!"
+msgstr ""
+
+#: classes/class-extended.php:121
+msgid "The Post Type / Taxonomy Is Already Registered or Reserved!"
+msgstr ""
+
+#: classes/class-extended.php:217
+msgid "Select To Add"
+msgstr ""
+
+#: classes/class-extended.php:219
+msgid "Select To Edit"
+msgstr ""
+
+#: classes/class-extended.php:302 classes/class-extended.php:307
+msgid "You are not authorized to perform this action."
+msgstr ""
+
+#: classes/class-extended.php:329
+msgid "Created on"
+msgstr ""
+
+#: classes/class-extended.php:329
+msgid "and lasted updated on"
+msgstr ""
+
+#: classes/class-extended.php:329
+msgid "by"
+msgstr ""
+
+#: classes/class-extended.php:373
+msgid "Post (core)"
+msgstr ""
+
+#: classes/class-extended.php:376
+msgid "Page (core)"
+msgstr ""
+
+#: classes/class-posttypes.php:233
+msgctxt "post type general name"
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:234
+msgctxt "post type singular name"
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:235
+msgctxt "admin menu"
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:236
+msgctxt "add new on admin bar"
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:238 classes/class-taxonomies.php:155
+msgid "Add New %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:239 classes/class-taxonomies.php:152
+msgid "New %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:240 classes/class-taxonomies.php:153
+msgid "Edit %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:241
+msgid "View %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:242
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:243 classes/class-taxonomies.php:156
+msgid "Search %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:244 classes/class-taxonomies.php:159
+msgid "Parent %1$s:"
+msgstr ""
+
+#: classes/class-posttypes.php:245
+msgid "No %1$s Found."
+msgstr ""
+
+#: classes/class-posttypes.php:246
+msgid "No %1$s Found in Trash."
+msgstr ""
+
+#: classes/class-posttypes.php:290
+msgid "Select %s"
+msgstr ""
+
+#: classes/class-posttypes.php:292
+msgid "%1$s Title"
+msgstr ""
+
+#: classes/class-posttypes.php:298
+msgid "Author"
+msgstr ""
+
+#: classes/class-posttypes.php:299
+msgid "Tags"
+msgstr ""
+
+#: classes/class-posttypes.php:300 templates/posttypes.php:119
+msgid "Comments"
+msgstr ""
+
+#: classes/class-posttypes.php:301
+msgctxt "column name"
+msgid "Date"
+msgstr ""
+
+#: classes/class-posttypes.php:350
+msgid "Show All %1$s"
+msgstr ""
+
+#: classes/class-process.php:437
+msgid "Tags (core)"
+msgstr ""
+
+#: classes/class-process.php:440
+msgid "Categories (core)"
+msgstr ""
+
+#: classes/class-taxonomies.php:150
+msgctxt "taxonomy general name"
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-taxonomies.php:151
+msgctxt "taxonomy singular name"
+msgid "%1$s"
+msgstr ""
+
+#: classes/class-taxonomies.php:154
+msgid "Update %1$s"
+msgstr ""
+
+#: classes/class-taxonomies.php:157
+msgid "All %1$s"
+msgstr ""
+
+#: classes/class-taxonomies.php:158
+msgid "Parent %1$s"
+msgstr ""
+
+#: classes/class-taxonomies.php:160
+msgid "No %1$s Found"
+msgstr ""
+
+#: ptt-manager.php:32
+msgid "PT & T Manager"
+msgstr ""
+
+#. #-#-#-#-#  ptt-manager.pot (Post Type & Taxonomy Manager 0.1.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: ptt-manager.php:33
+msgid "Post Type & Taxonomy Manager"
+msgstr ""
+
+#: ptt-manager.php:34
+msgid "Post Type & Taxonomy Manager For Wordpress Themes"
+msgstr ""
+
+#: ptt-manager.php:154
+msgid "Settings"
+msgstr ""
+
+#: ptt-manager.php:155
+msgid "F.A.Q."
+msgstr ""
+
+#: ptt-manager.php:156
+msgid "Support"
+msgstr ""
+
+#: ptt-manager.php:157
+msgid "Feedback"
+msgstr ""
+
+#: ptt-manager.php:158
+msgid "Donations"
+msgstr ""
+
+#: ptt-manager.php:159
+msgid "Plugin Home"
+msgstr ""
+
+#: templates/footer.php:14
+msgid "Created by"
+msgstr ""
+
+#: templates/home.php:18
+msgid "Preset Post Types"
+msgstr ""
+
+#: templates/home.php:19
+msgid ""
+"Post Types are a unique form of \"Posts\" content, displayed below the "
+"Comments menu. Post Types can be used in conjunction with a related "
+"taxonomy, which provides categories under that post type."
+msgstr ""
+
+#: templates/home.php:20
+msgid ""
+"Dashicon: To use a custom icon, select the Icon button, then an icon, "
+"afterward scroll down and click the Save Changes button. To remove an icon, "
+"select the Icon button, press the < back link in the window, select a blank "
+"icon, then scroll down and click the Save Changes button."
+msgstr ""
+
+#: templates/home.php:29
+msgid "Post Type"
+msgstr ""
+
+#: templates/home.php:30 templates/home.php:92
+msgid "Select To Use"
+msgstr ""
+
+#: templates/home.php:31
+msgid "Dashicon"
+msgstr ""
+
+#: templates/home.php:34 templates/home.php:97
+msgid "Books"
+msgstr ""
+
+#: templates/home.php:35
+msgid "Book Post Type"
+msgstr ""
+
+#: templates/home.php:36
+msgid "Book Post Type for selling or displaying books."
+msgstr ""
+
+#: templates/home.php:39 templates/home.php:103
+msgid "Docs"
+msgstr ""
+
+#: templates/home.php:40
+msgid "Docs Post Type"
+msgstr ""
+
+#: templates/home.php:41
+msgid "Docs Post Type for display help/user documents."
+msgstr ""
+
+#: templates/home.php:44 templates/home.php:109
+msgid "F.A.Q.'s"
+msgstr ""
+
+#: templates/home.php:45
+msgid "FAQ Post Type"
+msgstr ""
+
+#: templates/home.php:46
+msgid "F.A.Q. Post Type for displaying frequently asked questions."
+msgstr ""
+
+#: templates/home.php:49 templates/home.php:115
+msgid "Music"
+msgstr ""
+
+#: templates/home.php:50
+msgid "Music Post Type"
+msgstr ""
+
+#: templates/home.php:51
+msgid "Music Post Type for selling, playing, downloading or displaying music."
+msgstr ""
+
+#: templates/home.php:54 templates/home.php:121
+msgid "Portfolio"
+msgstr ""
+
+#: templates/home.php:55
+msgid "Portfolio Post Type"
+msgstr ""
+
+#: templates/home.php:56
+msgid ""
+"Portfolio Post Type for displaying creatives, designs, photography and more."
+msgstr ""
+
+#: templates/home.php:59 templates/home.php:127
+msgid "Teams"
+msgstr ""
+
+#: templates/home.php:60
+msgid "Team Post Type"
+msgstr ""
+
+#: templates/home.php:61
+msgid "Team Post Type for displaying your team members."
+msgstr ""
+
+#: templates/home.php:64 templates/home.php:133
+msgid "Testimonials"
+msgstr ""
+
+#: templates/home.php:65
+msgid "Testimonial Post Type"
+msgstr ""
+
+#: templates/home.php:66
+msgid ""
+"Testimonial Post Type for testimonials to your visitors, clients or "
+"customers."
+msgstr ""
+
+#: templates/home.php:69 templates/home.php:139
+msgid "Videos"
+msgstr ""
+
+#: templates/home.php:70
+msgid "Video Post Type"
+msgstr ""
+
+#: templates/home.php:71
+msgid "Video Post Type for displaying videos to your visitors."
+msgstr ""
+
+#: templates/home.php:81
+msgid "Preset Taxonomies"
+msgstr ""
+
+#: templates/home.php:82
+msgid ""
+"Use taxonomies with either selected Post Types, or with your Posts or Pages, "
+"helping you better categorized your content. You do not have to select Posts/"
+"Pages if the taxonomy is being used with a Post Type."
+msgstr ""
+
+#: templates/home.php:91
+msgid "Taxonomy"
+msgstr ""
+
+#: templates/home.php:93
+msgid "Posts"
+msgstr ""
+
+#: templates/home.php:94
+msgid "Pages"
+msgstr ""
+
+#: templates/home.php:98
+msgid "Book Taxonomy"
+msgstr ""
+
+#: templates/home.php:99
+msgid "Book categories for selling or displaying books."
+msgstr ""
+
+#: templates/home.php:104
+msgid "Docs Taxonomy"
+msgstr ""
+
+#: templates/home.php:105
+msgid "Docs categories for providing help/user documents."
+msgstr ""
+
+#: templates/home.php:110
+msgid "FAQ Taxonomy"
+msgstr ""
+
+#: templates/home.php:111
+msgid "F.A.Q. categories for displaying frequently asked questions."
+msgstr ""
+
+#: templates/home.php:116
+msgid "Music Taxonomy"
+msgstr ""
+
+#: templates/home.php:117
+msgid "Music categories for selling, playing, downloading or displaying music."
+msgstr ""
+
+#: templates/home.php:122
+msgid "Portfolio Taxonomy"
+msgstr ""
+
+#: templates/home.php:123
+msgid "Portfolio categories for creative professionals and businesses."
+msgstr ""
+
+#: templates/home.php:128
+msgid "Team Taxonomy"
+msgstr ""
+
+#: templates/home.php:129
+msgid "Team categories for displaying your team members."
+msgstr ""
+
+#: templates/home.php:134
+msgid "Testimonial Taxonomy"
+msgstr ""
+
+#: templates/home.php:135
+msgid ""
+"Testimonial categories for testimonials to your visitors, clients or "
+"customers."
+msgstr ""
+
+#: templates/home.php:140
+msgid "Video Taxonomy"
+msgstr ""
+
+#: templates/home.php:141
+msgid "Video categories for displaying videos to your visitors."
+msgstr ""
+
+#: templates/posttypes.php:8
+msgid "Edit Post Type"
+msgstr ""
+
+#: templates/posttypes.php:9
+msgid ""
+"Edit your custom post type. By default, post types are public, archived, "
+"will display on the admin area menu, and support all editor features."
+msgstr ""
+
+#: templates/posttypes.php:11
+msgid "Add Post Type"
+msgstr ""
+
+#: templates/posttypes.php:12
+msgid ""
+"Create a custom post type. By default, post types are public, archived, will "
+"display on the admin area menu, and support all editor features."
+msgstr ""
+
+#: templates/posttypes.php:23 templates/taxonomies.php:28
+msgid "Plural Name"
+msgstr ""
+
+#: templates/posttypes.php:25
+msgid ""
+"The plural (more than one) name of the post type. Alphanumeric, "
+"capitalization, spaces, max 32 character length!"
+msgstr ""
+
+#: templates/posttypes.php:28 templates/taxonomies.php:23
+msgid "Singular Name"
+msgstr ""
+
+#: templates/posttypes.php:30
+msgid ""
+"The singular (non-plural) name of the post type. Alphanumeric, "
+"capitalization, spaces, max 32 character length!"
+msgstr ""
+
+#: templates/posttypes.php:34
+msgid "Menu Icon"
+msgstr ""
+
+#: templates/posttypes.php:36
+msgid "Select the WordPress Dashicon to display next to the menu item."
+msgstr ""
+
+#: templates/posttypes.php:39
+msgid "Taxonomy Support"
+msgstr ""
+
+#: templates/posttypes.php:40
+msgid "Select to use core & registered taxonomies with this post type."
+msgstr ""
+
+#: templates/posttypes.php:45 templates/taxonomies.php:44
+msgid "Optional Settings"
+msgstr ""
+
+#: templates/posttypes.php:49 templates/taxonomies.php:33
+msgid "Slug Name"
+msgstr ""
+
+#: templates/posttypes.php:51
+msgid ""
+"The permalink slug name for this post type. If not set, the Plural Name will "
+"be used. Alphanumeric, lowercase, dashes, no spaces, max 32 character length!"
+msgstr ""
+
+#: templates/posttypes.php:54
+msgid "Menu Name"
+msgstr ""
+
+#: templates/posttypes.php:56
+msgid ""
+"If not set, the Plural Name will be used. Alphanumeric, capitalization, "
+"spaces, max 32 character length!"
+msgstr ""
+
+#: templates/posttypes.php:59 templates/taxonomies.php:48
+msgid "Description"
+msgstr ""
+
+#: templates/posttypes.php:60
+msgid ""
+"Describe what the post type is about. Not natively used by templates or "
+"within the admin area."
+msgstr ""
+
+#: templates/posttypes.php:63 templates/taxonomies.php:52
+msgid "Public Access"
+msgstr ""
+
+#: templates/posttypes.php:64
+msgid ""
+"Select to \"not\" have the post type visible/usable for visitors and "
+"authors. If checked, this will make the post type unsearchable, unviewable, "
+"and remove it from admin area menus."
+msgstr ""
+
+#: templates/posttypes.php:67
+msgid "Website Searchable"
+msgstr ""
+
+#: templates/posttypes.php:68
+msgid "Select to \"not\" have the post type searchable on the Website."
+msgstr ""
+
+#: templates/posttypes.php:71
+msgid "Website Viewable"
+msgstr ""
+
+#: templates/posttypes.php:72
+msgid ""
+"Select to \"not\" have the post type viewable on the Website. Disables: "
+"domain.com/post-type-slug/post-name/"
+msgstr ""
+
+#: templates/posttypes.php:75
+msgid "Archive URL"
+msgstr ""
+
+#: templates/posttypes.php:76
+msgid "Select to \"not\" allow the post type to to have a unique archive URL."
+msgstr ""
+
+#: templates/posttypes.php:79
+msgid "Archive Slug"
+msgstr ""
+
+#: templates/posttypes.php:81
+msgid ""
+"If Archive Items is selected, then optionally set an Archive Slug to be used "
+"instead of the default Post Type singular name."
+msgstr ""
+
+#: templates/posttypes.php:84 templates/taxonomies.php:60
+msgid "Admin Area Viewable"
+msgstr ""
+
+#: templates/posttypes.php:85
+msgid ""
+"Select to \"remove\" the post type from the WP Admin Area menus & editor "
+"page."
+msgstr ""
+
+#: templates/posttypes.php:88
+msgid "REST API Viewable"
+msgstr ""
+
+#: templates/posttypes.php:89
+msgid "Select to \"show\" the post type data within the WordPress REST API."
+msgstr ""
+
+#: templates/posttypes.php:92
+msgid "REST API Slug"
+msgstr ""
+
+#: templates/posttypes.php:94
+msgid ""
+"The base slug this post type will use for the WordPress REST API. Defaults "
+"to Post Type singular name."
+msgstr ""
+
+#: templates/posttypes.php:97
+msgid "Menu Position"
+msgstr ""
+
+#: templates/posttypes.php:100
+msgid "Select An Option"
+msgstr ""
+
+#: templates/posttypes.php:101
+msgid "5 - Below Posts"
+msgstr ""
+
+#: templates/posttypes.php:102
+msgid "10 - Below Media"
+msgstr ""
+
+#: templates/posttypes.php:103
+msgid "15 - Below Links"
+msgstr ""
+
+#: templates/posttypes.php:104
+msgid "20 - Below Pages"
+msgstr ""
+
+#: templates/posttypes.php:105
+msgid "25 - Below Comments (default)"
+msgstr ""
+
+#: templates/posttypes.php:106
+msgid "60 - Below 1st Separator"
+msgstr ""
+
+#: templates/posttypes.php:107
+msgid "65 - Below Plugins"
+msgstr ""
+
+#: templates/posttypes.php:108
+msgid "70 - Below Users"
+msgstr ""
+
+#: templates/posttypes.php:109
+msgid "75 - Below Tools"
+msgstr ""
+
+#: templates/posttypes.php:110
+msgid "80 - Below Settings"
+msgstr ""
+
+#: templates/posttypes.php:111
+msgid "100 - Below last Separator"
+msgstr ""
+
+#: templates/posttypes.php:113
+msgid "Where to show the post type menu on the WP Admin Area Menu."
+msgstr ""
+
+#: templates/posttypes.php:116
+msgid "Meta Boxes"
+msgstr ""
+
+#: templates/posttypes.php:117
+msgid ""
+"Check to \"exclude\" support for meta boxes displayed on the editor (add/"
+"edit post type) page."
+msgstr ""
+
+#: templates/posttypes.php:118
+msgid "Authors"
+msgstr ""
+
+#: templates/posttypes.php:120
+msgid "Custom Fields"
+msgstr ""
+
+#: templates/posttypes.php:121
+msgid "Editor"
+msgstr ""
+
+#: templates/posttypes.php:122
+msgid "Excerpt"
+msgstr ""
+
+#: templates/posttypes.php:123
+msgid "Page Attributes"
+msgstr ""
+
+#: templates/posttypes.php:124
+msgid "Revisions"
+msgstr ""
+
+#: templates/posttypes.php:125
+msgid "Post Formats"
+msgstr ""
+
+#: templates/posttypes.php:126
+msgid "Thumbnails"
+msgstr ""
+
+#: templates/posttypes.php:127
+msgid "Title"
+msgstr ""
+
+#: templates/posttypes.php:128
+msgid "Trackbacks"
+msgstr ""
+
+#: templates/posttypes.php:136 templates/taxonomies.php:68
+msgid "Delete This Record"
+msgstr ""
+
+#: templates/sidebar.php:10
+msgid "Plugin Home Page"
+msgstr ""
+
+#: templates/sidebar.php:11
+msgid "Bugs & Feature Request"
+msgstr ""
+
+#: templates/sidebar.php:12
+msgid "Contact Support"
+msgstr ""
+
+#: templates/sidebar.php:13
+msgid "Submit Feedback"
+msgstr ""
+
+#: templates/sidebar.php:14
+msgid "More Plugins!"
+msgstr ""
+
+#: templates/taxonomies.php:8
+msgid "Edit Taxonomy"
+msgstr ""
+
+#: templates/taxonomies.php:9
+msgid ""
+"Edit your custom taxonomy. Taxonomies are categories, helping you organize "
+"content within Post Types."
+msgstr ""
+
+#: templates/taxonomies.php:11
+msgid "Add Taxonomy"
+msgstr ""
+
+#: templates/taxonomies.php:12
+msgid ""
+"Create a custom taxonomy. Taxonomies are categories, helping you organize "
+"content within Post Types."
+msgstr ""
+
+#: templates/taxonomies.php:25
+msgid ""
+"The singular (non-plural) name for the taxonomy. Alphanumeric, "
+"capitalization, spaces, max 32 character length!"
+msgstr ""
+
+#: templates/taxonomies.php:30
+msgid ""
+"The plural (more than one) name for the taxonomy. Alphanumeric, "
+"capitalization, spaces, max 32 character length!"
+msgstr ""
+
+#: templates/taxonomies.php:35
+msgid ""
+"The permalink slug name for this taxonomy. Alphanumeric, lowercase, dashes, "
+"no spaces, max 32 character length!"
+msgstr ""
+
+#: templates/taxonomies.php:38
+msgid "Post Type Support"
+msgstr ""
+
+#: templates/taxonomies.php:39
+msgid ""
+"Attach core & registered post types to this taxonomy. Default is \"Page\" if "
+"none are selected."
+msgstr ""
+
+#: templates/taxonomies.php:49
+msgid ""
+"Describe what the taxonomy is about. The description will appear on archive "
+"page, if the archive page displays descriptions."
+msgstr ""
+
+#: templates/taxonomies.php:53
+msgid ""
+"Select to \"not\" have the taxonomy visible/useable for visitors and authors "
+"on the website front-end."
+msgstr ""
+
+#: templates/taxonomies.php:56
+msgid "Hierarchical"
+msgstr ""
+
+#: templates/taxonomies.php:57
+msgid ""
+"Select to \"not\" allow the taxonomy to have parent->child relationships."
+msgstr ""
+
+#: templates/taxonomies.php:61
+msgid ""
+"Select to \"remove\" the taxonomy from the WP Admin Area menus & editor page."
+msgstr ""
+
+#: templates/tools.php:6
+msgid ""
+"Export / Import & PHP Output Tools for the Post Types & Taxonomies Manager "
+"WordPress Plugin."
+msgstr ""
+
+#: templates/tools.php:12 templates/tools.php:28
+msgid "Export / Import Post Types"
+msgstr ""
+
+#: templates/tools.php:13 templates/tools.php:55
+msgid "Export / Import Taxonomies"
+msgstr ""
+
+#: templates/tools.php:14
+msgid "List All Saved Settings"
+msgstr ""
+
+#: templates/tools.php:17 templates/tools.php:82
+msgid "PHP Output Post Types"
+msgstr ""
+
+#: templates/tools.php:18 templates/tools.php:100
+msgid "PHP Output Taxonomies"
+msgstr ""
+
+#: templates/tools.php:19
+msgid "How To Use Within Templates"
+msgstr ""
+
+#: templates/tools.php:29
+msgid ""
+"Export and import post type data for the Post Types & Taxonomies Manager "
+"plugin. Export does not include presets! Importing will override saved Post "
+"Type data from this plugin only!"
+msgstr ""
+
+#: templates/tools.php:38
+msgid "Post Types Export"
+msgstr ""
+
+#: templates/tools.php:40 templates/tools.php:67
+msgid "JSON encoded export data for saved taxonomies."
+msgstr ""
+
+#: templates/tools.php:43
+msgid "Import Post Types"
+msgstr ""
+
+#: templates/tools.php:56
+msgid ""
+"Export and import taxonomy data for the Post Types & Taxonomies Manager "
+"plugin. Export does not include presets! Importing will override saved "
+"Taxonomy data from this plugin only!"
+msgstr ""
+
+#: templates/tools.php:65
+msgid "Taxonomies Export"
+msgstr ""
+
+#: templates/tools.php:70
+msgid "Import Taxonomies"
+msgstr ""
+
+#: templates/tools.php:83
+msgid ""
+"Post Type PHP code snips used by the Post Type & Taxonomy Manager plugin. "
+"Does not include presets!"
+msgstr ""
+
+#: templates/tools.php:101
+msgid ""
+"Taxonomy PHP code snips used by the Post Type & Taxonomy Manager plugin. "
+"Does not include presets!"
+msgstr ""
+
+#: templates/tools.php:118
+msgid "All Saved Options"
+msgstr ""
+
+#: templates/tools.php:119
+msgid ""
+"Below is a listing of every setting saved by the Post Type & Taxonomy "
+"Manager plugin."
+msgstr ""
+
+#: templates/tools.php:136
+msgid "Using Post Types Within Templates"
+msgstr ""
+
+#: templates/tools.php:138 templates/tools.php:165
+msgid "More Information"
+msgstr ""
+
+#: templates/tools.php:140 templates/tools.php:167
+msgid "Templates"
+msgstr ""
+
+#: templates/tools.php:140
+msgid ""
+"Post types use the theme templates, archive.php, single.php or index.php as "
+"the default templates if no custom template has been defined. To define a "
+"custom post type template, simply include the post type name at the end of "
+"the file name, such as: single-<b>posttypename</b>.php and archive-"
+"<b>posttypename</b>.php. Use the single.php template as your base template "
+"to copy, as it works best for post types."
+msgstr ""
+
+#: templates/tools.php:142
+msgid "Categories / Post Tags"
+msgstr ""
+
+#: templates/tools.php:142
+msgid ""
+"If your template(s) display categories & post tags with the single/archive "
+"templates, they may not work (appear) if you have not selected Categories / "
+"Tags under \"Taxonomy Support\" within the Post Types tab. If your post type "
+"does not use categories and tags, then you will need to remove them from the "
+"custom post type template."
+msgstr ""
+
+#: templates/tools.php:144
+msgid "Post Type Description"
+msgstr ""
+
+#: templates/tools.php:144
+msgid ""
+"To display the post type description within a template, first create a "
+"custom post type template. Then modify the PHP snip below to include your "
+"custom post type name and add it where you would like the description to "
+"appear within the template."
+msgstr ""
+
+#: templates/tools.php:146 templates/tools.php:173
+msgid "The example below will get the taxonomy description."
+msgstr ""
+
+#: templates/tools.php:147 templates/tools.php:152 templates/tools.php:155
+msgid "your_post_type_name"
+msgstr ""
+
+#: templates/tools.php:149
+msgid "Other Post Type Fields"
+msgstr ""
+
+#: templates/tools.php:149
+msgid ""
+"The get_post_type_object() function allows you to retrieve saved post type "
+"information, it can be used to get to retrieve all post type settings for a "
+"unique post type, such as the post types singular or plural name."
+msgstr ""
+
+#: templates/tools.php:151
+msgid ""
+"The example below will get the singular name, with the first letter "
+"capitalized."
+msgstr ""
+
+#: templates/tools.php:154
+msgid ""
+"The example below will get the plural name, with the first letter "
+"capitalized."
+msgstr ""
+
+#: templates/tools.php:157 templates/tools.php:182
+msgid ""
+"The difference between the last two examples, and the first example, is the "
+"inclusion \"labels\" array being called within the echo statement."
+msgstr ""
+
+#: templates/tools.php:159 templates/tools.php:184
+msgid "More Settings"
+msgstr ""
+
+#: templates/tools.php:163
+msgid "Using Taxonomies Within Templates"
+msgstr ""
+
+#: templates/tools.php:167
+msgid ""
+"Taxonomies use the category.php, tag.php, and taxonomy.php templates, as the "
+"default templates if no custom template has been defined. To define a custom "
+"taxonomy template, simply include the taxonomy name at the end of the file "
+"name, such as: category-<b>posttypename</b>.php and taxonomy-"
+"<b>posttypename</b>.php. Most themes do not have a taxonomy.php template, "
+"however in my opinion it is the best template to create/use for all "
+"taxonomies. Use the categories.php template as your base template to copy, "
+"as it works best for taxonomies."
+msgstr ""
+
+#: templates/tools.php:169
+msgid "PHP Code Snips"
+msgstr ""
+
+#: templates/tools.php:169
+msgid ""
+"Outside of the basic usage (shown below) manipulating taxonomy data for "
+"display is not easy, and not the same depending on your needs. It is also "
+"outside the scope of these instructions."
+msgstr ""
+
+#: templates/tools.php:171
+msgid "Taxonomy Description"
+msgstr ""
+
+#: templates/tools.php:171
+msgid ""
+"To display the taxonomy description within a template, first create a custom "
+"taxonomy template. Then modify the PHP snip below to include your custom "
+"taxonomy name and add it where you would like the description to appear "
+"within the template."
+msgstr ""
+
+#: templates/tools.php:174 templates/tools.php:177 templates/tools.php:180
+msgid "your_taxonomy_name"
+msgstr ""
+
+#: templates/tools.php:176
+msgid ""
+"The example below will get the singular name of the taxonomy, with the first "
+"letter capitalized."
+msgstr ""
+
+#: templates/tools.php:179
+msgid ""
+"The example below will get the plural name of the taxonomy, with the first "
+"letter capitalized."
+msgstr ""
+
+#: templates/tools.php:188
+msgid ""
+"If you get stuck, or wish to display additional information and are unable "
+"to figure it out, Google resources like Stack Exchange using the search "
+"term: \"<a href=\"https://www.google.com/search?q=site%3Astackexchange.com"
+"+wordpress+taxonomy+terms\" target=\"_blank\">site:stackexchange.com "
+"wordpress taxonomy terms</a>\" with whatever your question is. Chances are, "
+"someone else has asked the same question as you, and some other nice person "
+"has provided an answer."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/tribalNerd/ptt-manager"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Post Type & Taxonomy Manager for WordPress Themes"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "tribalNerd, Chris Winters"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://techNerdia.com/"
+msgstr ""
+
+#. Tags of the plugin/theme
+msgid ""
+"post type, post types, custom-post-type, custom post types, taxonomy, "
+"taxonomies, custom taxonomy, custom taxonomies"
+msgstr ""

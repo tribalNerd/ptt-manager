@@ -1,12 +1,12 @@
 # Post Type & Taxonomy Manager / PT & T Manager / PTT Manager #
-**Plugin Name:** Post Type & Taxonomy Manager
-**Contributors:** tribalNerd, Chris Winters
-**Tags:** post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
-**Requires at least:** 4.6
-**Tested up to:** 4.7.3
-**Stable tag:** 0.1.0
-**License:** GNU GPL
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
+* **Plugin Name:** Post Type & Taxonomy Manager
+* **Contributors:** tribalNerd, Chris Winters
+* **Tags:** post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
+* **Requires at least:** 4.6
+* **Tested up to:** 4.7.3
+* **Stable tag:** 0.1.0
+* **License:** GNU GPL
+* **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 Post Type & Taxonomy Manager, featuring pre-created and custom post types and taxonomies.
 
@@ -26,6 +26,17 @@ The Post Type & Taxonomy Manager Wordpress Plugin allows you to register your cu
 * Complete menu placement control of custom post types
 * Full control over all provided post type and taxonomy features
 * Date created/updated and author of custom post types and taxonomies
+
+
+#### Credits
+[Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by [bradvin](https://github.com/bradvin)
+
+
+#### To Do
+1. Adjust isActive() method within class-extended.php to include presets
+2. Dashicons to display next to input on selection
+3. Delete all saved settings under Tools > List All Saved Settings
+4. Disable Post Type / Taxonomy within Plugin under Tools > PHP Output
 
 
 ### Installation

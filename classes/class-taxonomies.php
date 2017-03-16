@@ -76,42 +76,42 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
             if ( ! $data || empty( $data ) ) { return; }
 
             // Books
-            if ( isset( $data['book'] ) ) {
+            if ( isset( $data['books'] ) || isset( $data['books-posts'] ) || isset( $data['books-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_books' ) ) {
                 $this->registerPreset( 'book', 'books', $data );
             }
 
             // Docs
-            if ( isset( $data['docs'] ) ) {
+            if ( isset( $data['docs'] ) || isset( $data['docs-posts'] ) || isset( $data['docs-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_docs' ) ) {
                 $this->registerPreset( 'docs', 'docs', $data );
             }
 
             // FAQ
-            if ( isset( $data['faq'] ) ) {
+            if ( isset( $data['faq'] ) || isset( $data['faq-posts'] ) || isset( $data['faq-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_' ) && ! get_option( $this->plugin_name . '_taxonomy_faq' ) ) {
                 $this->registerPreset( 'faq', 'faq', $data );
             }
 
             // Music
-            if ( isset( $data['music'] ) ) {
+            if ( isset( $data['music'] ) || isset( $data['music-posts'] ) || isset( $data['music-pages'] ) || isset( $data['-posts'] ) || isset( $data['-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_music' ) ) {
                 $this->registerPreset( 'music', 'music', $data );
             }
 
             // Portfolio
-            if ( isset( $data['portfolio'] ) ) {
+            if ( isset( $data['portfolio'] ) || isset( $data['portfolio-posts'] ) || isset( $data['portfolio-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_portfolio' ) ) {
                 $this->registerPreset( 'portfolio', 'portfolio', $data );
             }
 
             // Teams
-            if ( isset( $data['team'] ) ) {
+            if ( isset( $data['teams'] ) || isset( $data['teams-posts'] ) || isset( $data['teams-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_teams' ) ) {
                 $this->registerPreset( 'team', 'teams', $data );
             }
 
             // Testimonials
-            if ( isset( $data['testimonial'] ) ) {
+            if ( isset( $data['testimonials'] ) || isset( $data['testimonials-posts'] ) || isset( $data['testimonials-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_testimonials' ) ) {
                 $this->registerPreset( 'testimonial', 'testimonials', $data );
             }
 
             // Videos
-            if ( isset( $data['video'] ) ) {
+            if ( isset( $data['videos'] ) || isset( $data['videos-posts'] ) || isset( $data['videos-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_videos' ) ) {
                 $this->registerPreset( 'video', 'videos', $data );
             }
         }
@@ -171,42 +171,39 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
             $args = $this->args( $single, $plural, $data );
 
             // Presets: Add to Posts
-            if ( isset( $data[$single . '-posts'] ) ) {
+            if ( isset( $data[$plural . '-posts'] ) ) {
                 $post_type = array( 'post' );
             } else {
                 $post_type = array();
             }
 
             // Presets: Add to Pages
-            if ( isset( $data[$single . '-pages'] ) ) {
+            if ( isset( $data[$plural . '-pages'] ) ) {
                 $page_type = array( 'page' );
             } else {
                 $page_type = array();
             }
 
             // Presets: Add to Selected Post Type
-            if ( isset( $data[$single] ) ) {
+            if ( isset( $data[$plural] ) ) {
                 $selected_type = array( $plural );
             } else {
                 $selected_type = array();
             }
  
-            // If Arrays Are Set
-            //if ( ! empty( $post_type ) || ! empty( $page_type ) || ! empty( $selected_type ) ) {
-                // Merge Arrays
-                $object_types = array_merge( $post_type, $page_type, $selected_type );
+            // Merge Arrays
+            $object_types = array_merge( $post_type, $page_type, $selected_type );
 
-                // Create Taxonomy
-                register_taxonomy( $this->sanitizeName( $single ), $object_types, $args );
+            // Create Taxonomy
+            register_taxonomy( $this->sanitizeName( $plural ), $object_types, $args );
 
-                // Add Taxonomy To Post Type
-                foreach( $object_types as $key => $type ) {
-                    if ( isset( $key ) ) {
-                        register_taxonomy_for_object_type( 'category', $type );
-                        register_taxonomy_for_object_type( 'post_tag', $type );
-                    }
+            // Add Taxonomy To Post Type
+            foreach( $object_types as $key => $type ) {
+                if ( isset( $key ) ) {
+                    register_taxonomy_for_object_type( 'category', $type );
+                    register_taxonomy_for_object_type( 'post_tag', $type );
                 }
-            //}
+            }
         }
 
 

@@ -41,20 +41,11 @@ if ( ! class_exists( 'PTTManager_Process' ) )
             // Edit Post Types / Taxonomies Dropdown
             add_filter( $this->plugin_name . '_dashicon', array( $this, 'dashiconString' ), 10, 1 );
 
-            // Get Post Type Data for Input Fields
-            add_filter( $this->plugin_name . '_posttype_field', array( $this, 'getPosttype' ), 10, 1 );
-
             // Get Post Type / Taxonomy Data for Input Fields
             add_filter( $this->plugin_name . '_field', array( $this, 'field' ), 10, 2 );
 
-            // Get Taxonomy Data for Input Fields
-            add_filter( $this->plugin_name . '_taxonomy_field', array( $this, 'getTaxonomy' ), 10, 1 );
-
             // Export Filter
             add_filter( $this->plugin_name . '_export', array( $this, 'export' ), 10, 1 );
-
-            // Checkbox Listing of Taxonomies
-            add_filter( $this->plugin_name . '_list_taxonomies', array( $this, 'listTaxonomies' ), 10, 1 );
         }
 
 
@@ -85,11 +76,8 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 // Get Post Data
                 $post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
 
-                // Rebuild Dashicons Name for New Records
-                $data = $this->dashiconName( $post );
-
                 // Update Option
-                $this->updatePreset( $data );
+                $this->updatePreset( $post );
 
             // Update Post Types
             } elseif ( filter_input( INPUT_POST, 'type' ) == "posttype" && filter_input( INPUT_POST, 'delete' ) != "1" ) {
@@ -380,75 +368,12 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 // Remove All Empty Fields
                 foreach ( $post as $name => $field ) {
                     if ( empty( $field ) || ! isset( $field ) ) { unset( $post[$name] ); }
+                    if ( isset( $field ) && $field == 'dashicons-' ) { unset( $post[$name] ); }
                 }
-
-                // Clear Dashicons If Not Set
-                if ( empty( $post['dashicons_picker_add'] ) ) { unset( $post['dashicons_picker_add'] ); }
-                if ( empty( $post['dashicons_picker_' . $name] ) ) { unset( $post['dashicons_picker_' . $name] ); }
-                if ( empty( $post['dashicons_picker_book'] ) ) { unset( $post['dashicons_picker_book'] ); }
-                if ( empty( $post['dashicons_picker_docs'] ) ) { unset( $post['dashicons_picker_docs'] ); }
-                if ( empty( $post['dashicons_picker_faq'] ) ) { unset( $post['dashicons_picker_faq'] ); }
-                if ( empty( $post['dashicons_picker_music'] ) ) { unset( $post['dashicons_picker_music'] ); }
-                if ( empty( $post['dashicons_picker_portfolio'] ) ) { unset( $post['dashicons_picker_portfolio'] ); }
-                if ( empty( $post['dashicons_picker_team'] ) ) { unset( $post['dashicons_picker_team'] ); }
-                if ( empty( $post['dashicons_picker_testimonial'] ) ) { unset( $post['dashicons_picker_testimonial'] ); }
-                if ( empty( $post['dashicons_picker_video'] ) ) { unset( $post['dashicons_picker_video'] ); }
 
                 return $post;
             }
 
-        }
-
-
-        /**
-         * @about Checkbox Listing of Taxonomies
-         * @location templates/posttypes.php
-         * @call apply_filters( $this->plugin_name . '_list_taxonomies', 'posttype' );
-         * @param string $type Should always be 'posttype'
-         * @return string $html Checkboxes of Taxonomy Names
-         */
-        final public function listTaxonomies( $type = '' )
-        {
-            if ( ! empty( $type ) && $type == 'posttype' ) {
-                // Get Selected Taxonomies from Post Type Option for Checked Item
-                $data = get_option( $this->plugin_name . '_' . $type . '_' . parent::inputGet( $type ) );
-                $selected_taxonomies = ( ! empty( $data ) && isset( $data['tn'] ) && is_array( $data['tn'] ) ) ? $data['tn'] : '';
-
-                // Not Included Items
-                $skip = array(
-                    'link_category' => 'link_category',
-                    'post_format' => 'post_format',
-                    'nav_menu' => 'nav_menu',
-                    'taxslug' => 'taxslug'
-                );
-
-                // No Form If No Post Types
-                $html = '';
-
-                // Build List of Taxonomies
-                foreach ( get_taxonomies() as $taxonomy ) {
-                    if ( in_array( $taxonomy, $skip ) ){ continue; }
-
-                    // Set Checked
-                    $checked = ( isset( $selected_taxonomies[$taxonomy] ) && $taxonomy == $selected_taxonomies[$taxonomy] ) ? ' checked="checked"' : '';
-
-                    // Build Taxonomy Name
-                    if ( $taxonomy == "post_tag" ) {
-                        $name = esc_attr__( 'Tags (core)', 'ptt-manager' );
-
-                    } elseif ( $taxonomy == "category" ) {
-                        $name = esc_attr__( 'Categories (core)', 'ptt-manager' );
-
-                    } else {
-                        $name = esc_attr( ucfirst( $taxonomy ) );
-                    }
-
-                    // Build List
-                    $html .= '<p><label for="' . esc_attr( $taxonomy ) . '"><input name="tn[' . esc_attr( $taxonomy ) . ']" type="checkbox" id="' . esc_attr( $taxonomy ) . '" value="' . esc_attr( $taxonomy ) . '" ' . $checked . '/> ' . $name . '</label></p>';
-                }
-
-                echo $html;
-            }
         }
 
 
@@ -460,18 +385,13 @@ if ( ! class_exists( 'PTTManager_Process' ) )
         final public function dashiconName( $post )
         {
             // Rebuild Dashicon If New Record, then Rebuild $data Array
-            if ( isset( $post['singular'], $post['dashicons_picker_add'] ) && ! empty( $post['dashicons_picker_add'] ) ) {
-                // Remove -add add Singular Name
-                $name = str_replace( 'add', $post['singular'], 'dashicons_picker_add' );
+            if ( isset( $post['plural'], $post['dashicons_picker_add'] ) ) {
 
-                // Get the Icon
-                $icon = $post['dashicons_picker_add'];
+                // Rebuild Icon Array
+                $icon_data = array( 'dashicons_picker_' . $post['plural'] => $post['dashicons_picker_add'] );
 
-                // Remove From Array
+                // Unset Add Icon Marker
                 unset( $post['dashicons_picker_add'] );
-
-                // Icon Array
-                $icon_data = array( $name => $icon );
 
                 // Rebuilt $data Array
                 $data = array_merge( $icon_data, $post );
@@ -490,24 +410,30 @@ if ( ! class_exists( 'PTTManager_Process' ) )
          */
         final public function dashiconString( $string )
         {
-            return ( filter_input( INPUT_GET, "posttype" ) ) ? $string . esc_attr( parent::inputGet( 'posttype' ) ) : $string . esc_attr( 'add' );
+            return ( filter_input( INPUT_GET, "posttype" ) ) ? $string . esc_attr( parent::filterInputGet( 'posttype' ) ) : $string . esc_attr( 'add' );
         }
 
 
         /**
          * @about Get Post Type / Taxonomy Data from Option
-         * @location templates/posttypes.php
+         * @location templates/posttypes.php & templates/taxonomies.php
          * @call apply_filters( $this->plugin_name . '_field', 'posttype', 'singular' );
          * @call apply_filters( $this->plugin_name . '_field', 'taxonomy', 'singular' );
          * @param string $type  Either 'posttype' or 'taxonomy'
          * @param string $field The field to get data for
          * @return string Input Field Data
          */
-        final public function field( $type, $field )
+        final public function field( $type = '', $field = '' )
         {
-            if ( isset( $type ) && isset( $field ) ) {
-                // Get Option Data
-                $data = get_option( $this->plugin_name . '_' . $type . '_' . parent::inputGet( $type ) );
+            if ( ! empty( $type ) && ! empty( $field ) ) {
+                // Get Saved Option Data
+                if ( $type == "preset_posttypes" || $type == "preset_taxonomies" ) {
+                    // Preset Data
+                    $data = get_option( $this->plugin_name . '_' . $type );
+                } else {
+                    // Post Type/Taxonomy Data
+                    $data = get_option( $this->plugin_name . '_' . $type . '_' . parent::filterInputGet( $type ) );
+                }
 
                 // Return Data From Field
                 if ( ! empty( $data[$field] ) ) {

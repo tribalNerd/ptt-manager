@@ -38,7 +38,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <tr>
         <td class="td"><label><?php _e( 'Taxonomy Support', 'ptt-manager' );?></label></td>
         <td><p class="description"><?php _e( 'Select to use core & registered taxonomies with this post type.', 'ptt-manager' );?></p>
-            <?php apply_filters( $this->plugin_name . '_list_taxonomies', 'posttype' );?></td>
+            <?php echo parent::listTaxonomies();?></td>
     </tr>
     </table>
 

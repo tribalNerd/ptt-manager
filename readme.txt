@@ -25,6 +25,16 @@ The Post Type & Taxonomy Manager Wordpress Plugin allows you to register custom 
 * Full control over all provided post type and taxonomy features
 * Date created/updated and author of custom post types and taxonomies
 
+= Credits =
+[Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by [bradvin](https://github.com/bradvin)
+
+
+= To Do =
+1) Adjust isActive() method within class-extended.php to include presets
+2) Dashicons to display next to input on selection
+3) Delete all saved settings under Tools > List All Saved Settings
+4) Disable Post Type / Taxonomy within Plugin under Tools > PHP Output
+
 
 == Installation ==
 

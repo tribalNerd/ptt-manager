@@ -93,8 +93,8 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
         final public function enqueue()
         {
             // Post Type & Taxonomy Manager
-            wp_enqueue_style( $this->plugin_name, plugins_url( '/assets/style.css', $this->plugin_file ), '', date( 'YmdHis', time() ), 'all' );
-            wp_enqueue_script( $this->plugin_name, plugins_url( '/assets/jquery.js', $this->plugin_file ), array( 'jquery' ), date( 'YmdHis', time() ), true  );
+            wp_enqueue_style( $this->plugin_name, plugins_url( '/assets/css/style.css', $this->plugin_file ), '', date( 'YmdHis', time() ), 'all' );
+            wp_enqueue_script( $this->plugin_name, plugins_url( '/assets/js/jquery.js', $this->plugin_file ), array( 'jquery' ), date( 'YmdHis', time() ), true  );
 
             // Wordpress Dashicons Picker
             wp_enqueue_style( 'dashicons-picker',  plugins_url( '/vendors/dashicons-picker/css/dashicons-picker.css', $this->plugin_file ), array( 'dashicons' ), '1.0', false );
@@ -129,7 +129,7 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
         {
             if( filter_input( INPUT_GET, "page" ) && ! empty( $this->tabs ) && is_array( $this->tabs ) ) {
                 // Set current tab
-                $current = ( filter_input( INPUT_GET, "tab" ) ) ? parent::inputGet( 'tab' ) : key( $this->tabs );
+                $current = ( filter_input( INPUT_GET, "tab" ) ) ? parent::filterInputGet( 'tab' ) : key( $this->tabs );
 
                 // Tabs html
                 $html = '<h2 class="nav-tab-wrapper">';
@@ -138,7 +138,7 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                         $class = ( $tab == $current ) ? ' nav-tab-active' : '';
 
                         // Tab links
-                        $html .= '<a href="?page='. parent::inputGet( 'page' ) .'&tab='. $tab .'" class="nav-tab'. $class .'">'. $name .'</a>';
+                        $html .= '<a href="?page='. parent::filterInputGet( 'page' ) .'&tab='. $tab .'" class="nav-tab'. $class .'">'. $name .'</a>';
                     }
                 $html .= '</h2><br />';
 

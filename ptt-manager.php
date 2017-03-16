@@ -10,7 +10,6 @@
  * Author: tribalNerd, Chris Winters
  * Author URI: http://techNerdia.com/
  * Text Domain: ptt-manager
- * Domain Path: /languages/
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( count( get_included_files() ) == 1 ){ exit(); }
