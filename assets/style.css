@@ -1,0 +1,15 @@
+.wrap h2 .dashicons{color:#0073aa;font-size:30px;margin:0 12px 0 0;}
+table{border:1px solid #eeeeee;margin:25px auto;width:100%;}
+.form-table th{background:#f7f7f7;border:1px solid #eeeeee;color:#333333;font-size:11px;padding:10px 6px;text-align:left;}
+.form-table td{background:#fefefe;border:1px solid #eeeeee;color:#333333;font-size:14px;padding:10px 6px;vertical-align:top;}
+#poststuff {min-width: 320px;}
+textarea {margin:0 auto 0 0;height:250px;width:80%;}
+textarea.description {margin:0 auto 0 0;height:70px;width:65%;}
+.td{font-weight:bold;width:20%;}
+.td10{width:10%;}
+.textcenter{text-align:center;}
+.textcenter p.submit{text-align:center;}
+.dashicons-picker{float:right;}
+.wrap-left{float:left;width:48%;}
+.wrap-right{float:right;width:48%;}
+.wp-core-ui .button.linkbutton, .wp-core-ui .button-primary.linkbutton {font-size:20px; height:40px;line-height:36px;padding:0 15px;}
