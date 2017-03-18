@@ -10,6 +10,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method init()           Init Admin Actions
  * @method update()         Start Update/Delete Steps
  * @method deleteOption()   Delete Posttypes & Taxonomies
+ * @method deleteSettings() Delete All Saved Settings
+ * @method updateBlocker()  Block Plugin From Rendering Post Types / Taxonomies
  * @method removePosttype() Unregister a Post Type
  * @method updatePreset()   Update or Remove Presets
  * @method updatePosttype() Update the Posttype Options
@@ -46,6 +48,9 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
             // Export Filter
             add_filter( $this->plugin_name . '_export', array( $this, 'export' ), 10, 1 );
+
+            // Saved Settings
+            add_action( $this->plugin_name . '_settings', array( $this, 'settings' ) );
         }
 
 
@@ -71,7 +76,23 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 // Delete Option
                 $this->deleteOption( $post['type'], $post );
 
-            // Update Presets
+            // Delete All Saved Settings
+            } elseif ( filter_input( INPUT_POST, 'type' ) == "deletesettings" ) {
+                // Get Post Data
+                $post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
+
+                // Delete Settings
+                $this->deleteSettings( $post );
+
+            // Update Post Types
+            } elseif ( filter_input( INPUT_POST, 'type' ) == "posttype_block" || filter_input( INPUT_POST, 'type' ) == "taxonomy_block" ) {
+                // Get Post Data
+                $post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
+
+                // Update Option
+                $this->updateBlocker( $post );
+
+            // Update Post Types
             } elseif ( filter_input( INPUT_POST, 'type' ) == "preset-posttype" || filter_input( INPUT_POST, 'type' ) == "preset-taxonomy" ) {
                 // Get Post Data
                 $post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
@@ -175,10 +196,60 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
 
         /**
+         * @about Delete All Saved Settings
+         * @param array $data $_POST data array
+         */
+        final private function deleteSettings()
+        {
+            // Delete Settings
+            foreach( wp_load_alloptions() as $option => $value ) {
+                if ( strpos( $option, $this->plugin_name ) === 0 ) {
+                    delete_option( $option );
+                }
+            }
+
+            // Display Message
+            parent::message( 'settingsupdate', 'updated' );
+        }
+
+
+        /**
+         * @about Block Plugin From Rendering Post Types / Taxonomies
+         * @param array $data $_POST data array
+         */
+        final private function updateBlocker( $data = array() )
+        {
+            // Unset Values That Are Not Needed
+            $post = $this->cleanup( '', $data );
+
+            // Remove Option If Not Checked
+            if ( ! $post && isset( $data['type'] ) && $data['type'] == "posttype_block" ) {
+                delete_option( $this->plugin_name . '_posttype_block' );
+
+            // Else Add Option
+            } elseif ( $post && isset( $data['type'] ) && $data['type'] == "posttype_block" ) {
+                update_option( $this->plugin_name . '_posttype_block', $post, '', true );
+            }
+
+            // Remove Option If Not Checked
+            if ( ! $post && isset( $data['type'] ) && $data['type'] == "taxonomy_block" ) {
+                delete_option( $this->plugin_name . '_taxonomy_block' );
+
+            // Else Add Option
+            } elseif ( $post && isset( $data['type'] ) && $data['type'] == "taxonomy_block" ) {
+                update_option( $this->plugin_name . '_taxonomy_block', $post, '', true );
+            }
+
+            // Display Message
+            parent::message( 'blockerupdate', 'updated' );
+        }
+
+
+        /**
          * @about Unregister a Post Type
          * @param string $posttype Post Type Name
          */
-        final public function removePosttype( $posttype = '' ) {
+        final private function removePosttype( $posttype = '' ) {
             // Required
             if ( empty( $posttype ) ) { return; }
 
@@ -202,6 +273,12 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
             // Else Add / Update Preset Post Type Option
             } elseif ( $post && isset( $data['type'] ) && $data['type'] == "preset-posttype" ) {
+                // Make Sure Post Type Isn't Already Active
+                if ( ! parent::isActive( 'preset-posttype', $post ) ) {
+                    parent::message( 'duplicate', 'error' );
+                    return;
+                }
+
                 update_option( $this->plugin_name . '_preset_posttypes', $post, '', true );
             }
 
@@ -419,20 +496,25 @@ if ( ! class_exists( 'PTTManager_Process' ) )
          * @location templates/posttypes.php & templates/taxonomies.php
          * @call apply_filters( $this->plugin_name . '_field', 'posttype', 'singular' );
          * @call apply_filters( $this->plugin_name . '_field', 'taxonomy', 'singular' );
-         * @param string $type  Either 'posttype' or 'taxonomy'
+         * @param string $option The option name to look up
          * @param string $field The field to get data for
          * @return string Input Field Data
          */
-        final public function field( $type = '', $field = '' )
+        final public function field( $option = '', $field = '' )
         {
-            if ( ! empty( $type ) && ! empty( $field ) ) {
+            if ( ! empty( $option ) && ! empty( $field ) ) {
                 // Get Saved Option Data
-                if ( $type == "preset_posttypes" || $type == "preset_taxonomies" ) {
+                if ( $option == "preset_posttypes" || $option == "preset_taxonomies" ) {
                     // Preset Data
-                    $data = get_option( $this->plugin_name . '_' . $type );
+                    $data = get_option( $this->plugin_name . '_' . $option );
+
+                // Get Saved Option Data
+                } elseif ( $option == "posttype_block" || $option == "taxonomy_block" ) {
+                    // Preset Data
+                    $data = get_option( $this->plugin_name . '_' . $option );
                 } else {
                     // Post Type/Taxonomy Data
-                    $data = get_option( $this->plugin_name . '_' . $type . '_' . parent::filterInputGet( $type ) );
+                    $data = get_option( $this->plugin_name . '_' . $option . '_' . parent::filterInputGet( $option ) );
                 }
 
                 // Return Data From Field

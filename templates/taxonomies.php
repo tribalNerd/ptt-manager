@@ -20,14 +20,14 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 
     <table class="form-table">
     <tr>
-        <td class="td"><label for="singular"><?php _e( 'Singular Name', 'ptt-manager' );?></label><span class="required">*</span></td>
-        <td><input name="singular" type="text" id="singular" value="<?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'singular' );?>" class="regular-text" placeholder="(e.g. Mystery Genre, Classic, Local Event)" required="true" />
-            <p class="description"><?php _e( 'The singular (non-plural) name for the taxonomy. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
-    </tr>
-    <tr>
         <td class="td"><label for="plural"><?php _e( 'Plural Name', 'ptt-manager' );?></label><span class="required">*</span></td>
         <td><input name="plural" type="text" id="plural" value="<?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'plural' );?>" class="regular-text" placeholder="(e.g. Mysteries Genre, Classics, Local Events)" required="true" />
             <p class="description"><?php _e( 'The plural (more than one) name for the taxonomy. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
+    </tr>
+    <tr>
+        <td class="td"><label for="singular"><?php _e( 'Singular Name', 'ptt-manager' );?></label><span class="required">*</span></td>
+        <td><input name="singular" type="text" id="singular" value="<?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'singular' );?>" class="regular-text" placeholder="(e.g. Mystery Genre, Classic, Local Event)" required="true" />
+            <p class="description"><?php _e( 'The singular (non-plural) name for the taxonomy. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
         <td class="td"><label for="slug"><?php _e( 'Slug Name', 'ptt-manager' );?></label><span class="required">*</span></td>

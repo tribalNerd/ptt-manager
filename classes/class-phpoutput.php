@@ -91,12 +91,12 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
             if( ! isset( $single, $plural ) || ! $data || ! is_array( $data ) ) { return; }
 
             // Add New Dashicons Picker
-            if ( isset( $data['dashicons_picker_posttype-add'] ) && $data['dashicons_picker_posttype-add'] != '' ) {
+            if ( isset( $data['dashicons_picker_posttype-add'] ) ) {
                 $icon = esc_attr( $data['dashicons_picker_posttype-add'] );
 
             // Set / Update Icon
-            } elseif ( isset( $data['dashicons_picker_posttype-' . $single] ) && $data['dashicons_picker_posttype-' . $single] != '' ) {
-                $icon = esc_attr( $data['dashicons_picker_posttype-' . $single] );
+            } elseif ( isset( $data['dashicons_picker_posttype-' . $plural] ) ) {
+                $icon = esc_attr( $data['dashicons_picker_posttype-' . $plural] );
 
             // Else No Icon
             } else {
@@ -128,18 +128,24 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
             $archiveslug = ( ! empty( $data['archiveslug'] ) ) ? $this->sanitize( $data['archiveslug'] ) : 'false';
             $archive = ( empty( $data['archive'] ) ) ? $archiveslug : 'false';
 
-            // If a post type slug is defined, enable for rewrite, else use $single as default
-            $rewrite = ( ! empty( $data['slug'] ) ) ? "array( 'slug' => '" . $this->sanitize( $data['slug'] ) . "', 'with_front' => 'true' )" : 'true';
+            // Slug
+            $slug = ( ! empty( $data['slug'] ) ) ? $this->sanitizeName( $data['slug'] ) : $this->sanitizeName( $plural );
+
+            // Rewrite Slug
+            $rewrite = "array( 'slug' => '" . $slug . "', 'with_front' => 'true' )";
 
             // If a menu position has been defined, use it, else use the default
-            $position = ( ! empty( $data['position'] ) ) ? absint( $data['position'] ) : 25;
+            $position = ( ! empty( $data['position'] ) ) ? absint( $data['position'] ) : 'false';
 
             // Set the post type description if it has been defined
-            $description = ( ! empty( $data['description'] ) ) ? esc_html( $this->sanitize( $data['description'] ) ) : '';
+            $description = ( ! empty( $data['description'] ) ) ? esc_html( $this->sanitize( $data['description'] ) ) : 'false';
 
-            // Support For Registered Taxonomies
+            // If checked add support for Registered Taxonomies
             if ( ( isset( $data['tn'] ) && is_array( $data['tn'] ) ) ) {
+                // Create empty array
                 $posttype_array = array();
+
+                // Define selected taxonomies
                 foreach ( $data['tn'] as $key => $taxonomy ) {
                     $posttype_array[$key] = $taxonomy;
                 }
@@ -163,27 +169,11 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
 ?>
 
 /**
- * <?php echo ucfirst( $single );?> Post Type
+ * <?php echo ucfirst( $plural );?> Post Type
  */
-function pttmanger_posttype_<?php echo $single;?>() {
-    // Arguments For <?php echo ucfirst( $single );?> Post Type
+function pttmanger_posttype_<?php echo $plural;?>() {
+    // Arguments For <?php echo ucfirst( $plural );?> Post Type
     $args = array(
-        'labels' => array(
-            'name' => sprintf( esc_attr_x( '%1$s', 'post type general name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'singular_name' => sprintf( esc_attr_x( '%1$s', 'post type singular name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'menu_name' => sprintf( esc_attr_x( '%1$s', 'admin menu', '<?php echo $this->textdomain();?>' ), '<?php echo $menuname;?>' ),
-            'name_admin_bar' => sprintf( esc_attr_x( '%1$s', 'add new on admin bar', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'add_new' => sprintf( esc_attr_x( 'Add %1$s', '<?php echo $single;?>', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'add_new_item' => sprintf( esc_attr__( 'Add New %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'new_item' => sprintf( esc_attr__( 'New %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'edit_item' => sprintf( esc_attr__( 'Edit %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'view_item' => sprintf( esc_attr__( 'View %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
-            'all_items' => sprintf( esc_attr__( '%1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
-            'search_items' => sprintf( esc_attr__( 'Search %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
-            'parent_item_colon' => sprintf( esc_attr__( 'Parent %1$s:', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
-            'not_found' => sprintf( esc_attr__( 'No %1$s Found.', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
-            'not_found_in_trash' => sprintf( esc_attr__( 'No %1$s Found in Trash.', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
-        ),
         'public' => <?php echo $public;?>,
         'show_in_nav_menus' => <?php echo $public;?>,
         'exclude_from_search' => <?php echo $search;?>,
@@ -203,13 +193,29 @@ function pttmanger_posttype_<?php echo $single;?>() {
         'menu_icon' => <?php echo $icon;?>,
         'taxonomies' => array( <?php echo implode( ', ', array_map( array( $this, 'addQuotes' ), $taxonomies ) );?> ),
         'supports' => array( <?php echo implode( ', ', array_map( array( $this, 'addQuotes' ), $supports ) );?> ),
+        'labels' => array(
+            'name' => sprintf( esc_attr_x( '%1$s', 'post type general name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
+            'singular_name' => sprintf( esc_attr_x( '%1$s', 'post type singular name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'menu_name' => sprintf( esc_attr_x( '%1$s', 'admin menu', '<?php echo $this->textdomain();?>' ), '<?php echo $menuname;?>' ),
+            'name_admin_bar' => sprintf( esc_attr_x( '%1$s', 'add new on admin bar', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'add_new' => sprintf( esc_attr_x( 'Add %1$s', '<?php echo $single;?>', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'add_new_item' => sprintf( esc_attr__( 'Add New %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'new_item' => sprintf( esc_attr__( 'New %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'edit_item' => sprintf( esc_attr__( 'Edit %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'view_item' => sprintf( esc_attr__( 'View %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'all_items' => sprintf( esc_attr__( '%1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
+            'search_items' => sprintf( esc_attr__( 'Search %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
+            'parent_item_colon' => sprintf( esc_attr__( 'Parent %1$s:', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
+            'not_found' => sprintf( esc_attr__( 'No %1$s Found.', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
+            'not_found_in_trash' => sprintf( esc_attr__( 'No %1$s Found in Trash.', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
+        ),
     );
 
     // Register Post Type
-    register_post_type( '<?php echo $single;?>', $args );
+    register_post_type( '<?php echo $plural;?>', $args );
 }
 
-add_action( 'init', 'pttmanger_posttype_<?php echo $single;?>' );
+add_action( 'init', 'pttmanger_posttype_<?php echo $plural;?>' );
 
 
 
@@ -235,14 +241,17 @@ add_action( 'init', 'pttmanger_posttype_<?php echo $single;?>' );
             $hierarchical = ( ! empty( $data['hierarchical'] ) ) ? 'false' : 'true';
             
             // Taxonomy Description
-            $description = ( ! empty( $data['description'] ) ) ? esc_html( $this->sanitize( $data['description'] ) ) : '';
+            $description = ( ! empty( $data['description'] ) ) ? esc_html( $this->sanitize( $data['description'] ) ) : 'false';
+
+            // Taxonomy Slug
+            $slug = ( ! empty( $data['slug'] ) ) ? $this->sanitizeName( $data['slug'] ) : $this->sanitizeName( $single );
 ?>
 
 /**
- * <?php echo ucfirst( $single );?> Taxonomy
+ * <?php echo ucfirst( $plural );?> Taxonomy
  */
-function pttmanger_taxonomy_<?php echo $single;?>() {
-    // Arguments For <?php echo ucfirst( $single );?> Taxonomy
+function pttmanger_taxonomy_<?php echo $plural;?>() {
+    // Arguments For <?php echo ucfirst( $plural );?> Taxonomy
     $args = array(
         'public' => <?php echo $public;?>,
         'show_in_nav_menus' => <?php echo $public;?>,
@@ -250,9 +259,9 @@ function pttmanger_taxonomy_<?php echo $single;?>() {
         'show_ui' => <?php echo $showui;?>,
         'hierarchical' => <?php echo $hierarchical;?>,
         'description' => '<?php echo $description;?>',
-        'rewrite' => array( 'slug' => '<?php echo $single;?>', 'with_front' => true ),
+        'rewrite' => array( 'slug' => '<?php echo $slug;?>', 'with_front' => true ),
         'labels' => array(
-            'name' => sprintf( esc_attr_x( '%1$s', 'taxonomy general name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
+            'name' => sprintf( esc_attr_x( '%1$s', 'taxonomy general name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
             'singular_name' => sprintf(esc_attr_x( '%1$s', 'taxonomy singular name', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
             'new_item_name' => sprintf( esc_attr__( 'New %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $single;?>' ) ),
             'edit_item' => sprintf( esc_attr__( 'Edit %1$s', '<?php echo $this->textdomain();?>' ), ucfirst( '<?php echo $plural;?>' ) ),
@@ -281,14 +290,14 @@ function pttmanger_taxonomy_<?php echo $single;?>() {
             // Merge Post Type Arrays
             if ( ! empty( $posttype_array ) ) {?>
 
-    // Register <?php echo ucfirst( $single );?> Taxonomy 
-    register_taxonomy( '<?php echo $single;?>', array( <?php echo implode( ', ', array_map( array( $this, 'addQuotes' ), $posttype_array ) );?> ), $args );
+    // Register <?php echo ucfirst( $plural );?> Taxonomy 
+    register_taxonomy( '<?php echo $plural;?>', array( <?php echo implode( ', ', array_map( array( $this, 'addQuotes' ), $posttype_array ) );?> ), $args );
 <?php
                 // Add Taxonomy To Post Type
                 foreach( $posttype_array as $key => $type ) {
                     if ( isset( $key ) ) {?>
 
-    // Add Registered Taxonomy <?php echo ucfirst( $single );?> To Object Type
+    // Add Registered Taxonomy <?php echo ucfirst( $plural );?> To Object Type
     register_taxonomy_for_object_type( 'category', '<?php echo $type;?>' );
     register_taxonomy_for_object_type( 'post_tag', '<?php echo $type;?>' );
 <?php                        
@@ -296,16 +305,16 @@ function pttmanger_taxonomy_<?php echo $single;?>() {
                 }
             } else {?>
 
-    // Create <?php echo ucfirst( $single );?> Taxonomy
-    register_taxonomy( '<?php echo $single;?>', '', $args );
+    // Create <?php echo ucfirst( $plural );?> Taxonomy
+    register_taxonomy( '<?php echo $plural;?>', '', $args );
 
-    // Add Registered Taxonomy <?php echo ucfirst( $single );?> To Object Type
-    register_taxonomy_for_object_type( 'category', '<?php echo $single;?>' );
-    register_taxonomy_for_object_type( 'post_tag', '<?php echo $single;?>' );
+    // Add Registered Taxonomy <?php echo ucfirst( $plural );?> To Object Type
+    register_taxonomy_for_object_type( 'category', '<?php echo $plural;?>' );
+    register_taxonomy_for_object_type( 'post_tag', '<?php echo $plural;?>' );
 <?php }?>
 }
 
-add_action( 'init', 'pttmanger_taxonomy_<?php echo $single;?>' );
+add_action( 'init', 'pttmanger_taxonomy_<?php echo $plural;?>' );
 
 
 

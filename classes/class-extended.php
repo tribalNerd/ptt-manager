@@ -69,7 +69,10 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 'home'          => esc_html__( 'Home', 'ptt-manager' ),
                 'posttypes'     => esc_html__( 'Post Types', 'ptt-manager' ),
                 'taxonomies'    => esc_html__( 'Taxonomies', 'ptt-manager' ),
-                'tools'         => esc_html__( 'Tools', 'ptt-manager' ),
+                'importexport'  => esc_html__( 'Import/Export', 'ptt-manager' ),
+                'phpoutput'     => esc_html__( 'PHP Output', 'ptt-manager' ),
+                'settings'      => esc_html__( 'Saved Settings', 'ptt-manager' ),
+                'templates'     => esc_html__( 'Templates', 'ptt-manager' ),
             );
         }
 
@@ -98,8 +101,16 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                     $message = esc_html__( 'Taxonomy Settings Updated!' );
                 break;
 
+                case 'blockerupdate':
+                    $message = esc_html__( 'Blocker Settings Updated!' );
+                break;
+
                 case 'importupdate':
                     $message = esc_html__( 'Settings Imported!' );
+                break;
+
+                case 'settingsupdate':
+                    $message = esc_html__( 'Settings Deleted!' );
                 break;
 
                 case 'preseterror':
@@ -112,6 +123,10 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
                 case 'taxonomyerror':
                     $message = esc_html__( 'Taxonomy Settings Failed To Update! ' );
+                break;
+
+                case 'blockererror':
+                    $message = esc_html__( 'Blocker Settings Failed To Update!' );
                 break;
 
                 case 'importerror':
@@ -174,6 +189,23 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 }
             }
 
+            // Check Preset Post Type
+            if ( $return && $type == "preset-posttype" ) {
+                foreach ( $data as $name => $field ) {
+                    if ( empty( $field ) ) { continue; }
+ 
+                    // Name is Reserved
+                    if ( in_array( $this->sanitizeName( $name ), $reserved ) ) {
+                        $return = (bool) false;
+                    }
+
+                    // If Post Type Exists
+                    if ( get_post_type_object( $this->sanitizeName( $name ) ) ) {
+                        $return = (bool) false;
+                    }
+                }
+            }
+
             // Check Taxonomy
             if ( $return && $type == "taxonomy" ) {
                 // Name is Reserved
@@ -184,6 +216,23 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 // If Taxonomy Exists
                 if ( ! isset( $data['updated'] ) && get_taxonomy( $this->sanitizeName( $data['plural'] ) ) ) {
                     $return = (bool) false;
+                }
+            }
+
+            // Check Preset Taxonomy
+            if ( $return && $type == "preset-taxonomy" ) {
+                foreach ( $data as $name => $field ) {
+                    if ( empty( $field ) ) { continue; }
+ 
+                    // Name is Reserved
+                    if ( in_array( $this->sanitizeName( $name ), $reserved ) ) {
+                        $return = (bool) false;
+                    }
+
+                    // If Post Type Exists
+                    if ( get_post_type_object( $this->sanitizeName( $name ) ) ) {
+                        $return = (bool) false;
+                    }
                 }
             }
 
@@ -462,12 +511,19 @@ if( ! class_exists( 'PTTManager_Extended' ) )
          */
         final public function settings()
         {
+            $html = '';
+
+            // Saved Settings
             foreach ( wp_load_alloptions() as $option => $value ) {
                 if ( strpos( $option, $this->plugin_name ) === 0 ) {
-                    $this->settings = true;?>
-                    <p><label><b>Option Name</b>: <?php echo esc_attr( $option );?></label> <input name="<?php echo esc_attr( $option );?>" type="text" value="<?php echo esc_attr( $value );?>" class="regular-text" readonly="readonly" /></p>
-                <?php }
+                    $html .= '<tr>';
+                    $html .= '<td><label>' . esc_attr( $option ) . '</label></td>';
+                    $html .= '<td><input name="' . esc_attr( $option ) . '" type="text" value="' . esc_attr( $value ) . '" class="regular-text" readonly="readonly" /></td>';
+                    $html .= '</tr>';
+                }
             }
+
+            return $html;
         }
 
 

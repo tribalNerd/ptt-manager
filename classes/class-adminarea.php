@@ -69,16 +69,28 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                     require_once( $this->templates .'/home.php' );
                 break;
 
+                case 'importexport':
+                    require_once( $this->templates .'/importexport.php' );
+                break;
+
                 case 'posttypes':
                     require_once( $this->templates .'/posttypes.php' );
+                break;
+
+                case 'phpoutput':
+                    require_once( $this->templates .'/phpoutput.php' );
+                break;
+
+                case 'settings':
+                    require_once( $this->templates .'/settings.php' );
                 break;
 
                 case 'taxonomies':
                     require_once( $this->templates .'/taxonomies.php' );
                 break;
 
-                case 'tools':
-                    require_once( $this->templates .'/tools.php' );
+                case 'templates':
+                    require_once( $this->templates .'/templates.php' );
                 break;
             }
 
@@ -94,7 +106,6 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
         {
             // Post Type & Taxonomy Manager
             wp_enqueue_style( $this->plugin_name, plugins_url( '/assets/css/style.css', $this->plugin_file ), '', date( 'YmdHis', time() ), 'all' );
-            wp_enqueue_script( $this->plugin_name, plugins_url( '/assets/js/jquery.js', $this->plugin_file ), array( 'jquery' ), date( 'YmdHis', time() ), true  );
 
             // Wordpress Dashicons Picker
             wp_enqueue_style( 'dashicons-picker',  plugins_url( '/vendors/dashicons-picker/css/dashicons-picker.css', $this->plugin_file ), array( 'dashicons' ), '1.0', false );

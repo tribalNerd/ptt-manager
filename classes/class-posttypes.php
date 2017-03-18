@@ -37,11 +37,14 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
          */
         final public function init()
         {
-            // Start Preset Post Type Register
-            $this->presets();
+            // Register if not blocked
+            if ( ! get_option( $this->plugin_name . '_posttype_block' ) ) {
+                // Start Preset Post Type Register
+                $this->presets();
 
-            // Start Post Type Register
-            $this->posttype();
+                // Start Post Type Register
+                $this->posttype();
+            }
         }
 
 
@@ -247,117 +250,8 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
                 ),
             );
 
-            // Set Vars For Filter/Actions
-            $this->single = '';
-            $this->single = $single;
-  
-            $this->plural = '';
-            $this->plural = $plural;
-
-            // Add Column Name to UI
-            //add_filter( 'manage_' . $single . '_posts_columns', array( $this, 'setColumns' ) );
-
-            // Add Column Content to UI
-            //add_action( 'manage_' . $single . '_posts_custom_column' , array( $this, 'setColumnContent' ), 10, 2 );
-
-            // Add Categories Dropdown to UI
-            //add_action( 'restrict_manage_posts', array( $this, 'categoryFilter' ) );
-
             // Create Post Type
             register_post_type( $this->sanitizeName( $plural ), $args );
-        }
-
-
-        /**
-         * @about Set Column Names
-         */
-        final public function setColumns( $columns )
-        {
-            // Required
-            if ( ! taxonomy_exists( $this->single ) ) { return; }
-
-            global $post;
-
-            // Remove Columns
-            unset( $columns['title'] );
-            
-            // Strip the Post Type Name from the Filter Name
-            $replace = str_replace( 'manage_', '', current_filter() );
-            $posttype = str_replace( '_posts_columns', '', $replace );
-
-            // Reset Column Order
-            $new_columns['cb'] = '<label class="screen-reader-text" for="cb-select-' . $post->ID . '">' . 
-                                    sprintf( esc_attr__( 'Select %s', 'ptt-manager' ), _draft_or_post_title() ) . '</label>' .
-                                    '<input type="checkbox" name="media[]" id="cb-select-' . $post->ID . '" value="' . $post->ID . '" />';
-            $new_columns['title'] = sprintf( esc_attr__( '%1$s Title', 'ptt-manager' ), ucfirst( $posttype ) );
-
-            if ( taxonomy_exists( $this->single ) ) {
-                $new_columns[$this->single] = get_taxonomy( $this->single )->labels->name;
-            }
-
-            $new_columns['author']      = esc_attr__( 'Author', 'ptt-manager' );
-            $new_columns['tags']        = esc_attr__( 'Tags', 'ptt-manager' );
-            $new_columns['comments']    = '<span class="vers comment-grey-bubble" title="' . esc_attr__( 'Comments', 'ptt-manager' ) . '"></span>';
-            $new_columns['date']        = esc_attr_x( 'Date', 'column name', 'ptt-manager' );
-
-            return $new_columns;
-        }
-
-
-        /**
-         * @about Set The Content Within Columns
-         */
-        final public function setColumnContent( $column, $post_id )
-        {
-            // Required
-            if ( ! taxonomy_exists( $this->single ) || ! isset( $column, $post_id ) ) { return; }
-
-            // Categories for Columns
-            $categories = get_terms( array(
-                'taxonomy'      => esc_attr( $this->single ),
-                'hide_empty'    => false
-            ) );
-
-            $html = array();
-
-            foreach ( $categories as $category ) {
-                if ( $category->count == 0 ) { continue; }
-
-                $html[] = '<a href="edit.php?post_type=' . esc_attr( $this->single ) . '&' . esc_attr( $this->plural ) . '=' . esc_attr( $category->name ) . '">' . esc_attr( $category->name ) . '</a>';
-            }
-
-            echo join( ', ', $html );
-        }
-
-
-        /**
-         * @about Filter By Category Dropdown
-         */
-        final public function categoryFilter()
-        {
-            // Required
-            if ( ! taxonomy_exists( $this->single ) ) { return; }
-
-            global $typenow;
-            global $wp_query;
-
-            if ( $typenow == $this->single ) {
-                // Include Taxonomy
-                $taxonomy = get_taxonomy( $this->single );
-                $term = isset( $wp_query->query['term'] ) ? $wp_query->query['term'] : '';
-
-                wp_dropdown_categories( array(
-                    'show_option_all' => sprintf( esc_attr__( 'Show All %1$s', 'ptt-manager' ), $taxonomy->label ),
-                    'taxonomy'        =>  $this->single,
-                    'name'            =>  $this->single,
-                    'orderby'         =>  'name',
-                    'selected'        =>  $term,
-                    'hierarchical'    =>  true,
-                    'show_count'      =>  true,
-                    'hide_empty'      =>  true,
-                    'depth'           =>  3,
-                ));
-            }
         }
 
 

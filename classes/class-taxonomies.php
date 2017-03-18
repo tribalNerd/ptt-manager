@@ -29,14 +29,17 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
          */
         final public function init()
         {
-            // Load Presets
-            $this->presets();
+            // Register if not blocked
+            if ( ! get_option( $this->plugin_name . '_taxonomy_block' ) ) {
+                // Load Presets
+                $this->presets();
 
-            // Load Taxonomies
-            $this->taxonomies();
-            
-            // Checkbox Listing of Post Types
-            add_filter( $this->plugin_name . '_list_posttypes', array( $this, 'listPosttypes' ), 10, 1 );
+                // Load Taxonomies
+                $this->taxonomies();
+
+                // Checkbox Listing of Post Types
+                add_filter( $this->plugin_name . '_list_posttypes', array( $this, 'listPosttypes' ), 10, 1 );
+            }
         }
 
 
@@ -122,6 +125,9 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
          */
         final public function args( $single, $plural, $data = array() )
         {
+            // Required
+            if( ! isset( $single, $plural ) || ! $data || ! is_array( $data ) ) { return; }
+
             // If checked, the taxonomy is not publicly viewable
             $public = ( ! empty( $data['public'] ) ) ? (bool) false : (bool) true;
 
@@ -145,6 +151,7 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
                 'show_ui'           => $showui,
                 'hierarchical'      => $hierarchical,
                 'description'       => $description,
+                'show_admin_column' => true,
                 'rewrite'           => array( 'slug' => esc_attr( $slug ), 'with_front' => true ),
                 'labels'            => array(
                     'name'              => sprintf( esc_attr_x( '%1$s', 'taxonomy general name', 'ptt-manager' ), ucfirst( $plural ) ),
