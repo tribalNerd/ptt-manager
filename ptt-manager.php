@@ -81,7 +81,7 @@ if( ! class_exists( 'ptt_manager' ) )
         /**
          * @about Initiate Plugin
          */
-        public function init()
+        final public function init()
         {
             // Activate Plugin
             register_activation_hook( __FILE__, array( $this, 'activate' ) );
@@ -92,17 +92,19 @@ if( ! class_exists( 'ptt_manager' ) )
             // Load Admin Area
             add_action( 'wp_loaded', array( 'PTTManager_AdminArea', 'instance' ) );
 
-            // Update Post Type & Taxonomy Options
-            add_action( 'init', array( 'PTTManager_Process', 'instance' ) );
-
             // Register Post Types
             add_action( 'init', array( 'PTTManager_Posttypes', 'instance' ) );
 
             // Register Taxonomies
             add_action( 'init', array( 'PTTManager_Taxonomies', 'instance' ) );
 
+            // Update Settings
+            add_action( 'init', array( 'PTTManager_Process', 'instance' ) );
+
             // Output PHP For Post Types and Taxonomies
-            add_action( 'init', array( 'PTTManager_PHPOutput', 'instance' ) );
+            if ( filter_input( INPUT_GET, 'tab' ) == 'phpoutput' ) {
+                add_action( 'init', array( 'PTTManager_PHPOutput', 'instance' ) );
+            }
 
             // Inject Plugin Links
             add_filter( 'plugin_row_meta', array( $this, 'links' ), 10, 2 );
@@ -119,7 +121,7 @@ if( ! class_exists( 'ptt_manager' ) )
 
             // Version Check
             if( version_compare( $wp_version, PTT_MANAGER_WP_MIN_VERSION, "<" ) ) {
-                wp_die( __( '<b>Activation Failed</b>: The ' . PTT_MANAGER_PAGE_NAME . ' plugin requires WordPress ' . PTT_MANAGER_WP_MIN_VERSION . ' or higher. Please Upgrade Wordpress, then try activating this plugin again.', 'ptt-manager' ) );
+                wp_die( __( '<b>Activation Failed</b>: The ' . PTT_MANAGER_PAGE_NAME . ' plugin requires WordPress version ' . PTT_MANAGER_WP_MIN_VERSION . ' or higher. Please Upgrade Wordpress, then try activating this plugin again.', 'ptt-manager' ) );
             }
 
             // Flush Rewrite Rules
@@ -166,7 +168,7 @@ if( ! class_exists( 'ptt_manager' ) )
         /**
         * @about Create Instance
         */
-        public static function instance()
+        final public static function instance()
         {
             if ( ! self::$instance ) {
                 self::$instance = new self();

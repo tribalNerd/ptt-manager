@@ -3,8 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( count( get_included_files() ) == 1 ){ exit(); }?>
 
 <h3><?php _e( 'Preset Post Types', 'ptt-manager' );?></h3>
-<p><?php _e( 'Post Types are a unique form of "Posts" content, displayed below the Comments menu. Post Types can be used in conjunction with a related taxonomy, which provides categories under that post type.', 'ptt-manager' );?></p>
-<p><?php _e( 'Dashicon: To use a custom icon, select the Icon button, then an icon, afterward scroll down and click the Save Changes button. To remove an icon, select the Icon button, press the < back link in the window, select a blank icon, then scroll down and click the Save Changes button.', 'ptt-manager' );?></p>
+<p><?php _e( 'Post Types are a unique form of "Posts" content, displayed below the Comments menu. Post Types can be used in conjunction with a related taxonomy, which provides a way to categorize post type content.', 'ptt-manager' );?></p>
+<p><?php _e( 'Dashicon: To use, select the Icon button, then an icon. To remove, select the Icon button, press the < back link in the window and select the blank icon.', 'ptt-manager' );?></p>
 
 <form enctype="multipart/form-data" method="post" action="options.php">
 <?php settings_fields( $this->plugin_name );?>
@@ -66,8 +66,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 </form>
 
 
-    <h3><?php _e( 'Preset Taxonomies', 'ptt-manager' );?></h3>
-    <p><?php _e( 'Use taxonomies with either selected Post Types, or with your Posts or Pages, helping you better categorized your content. You do not have to select Posts/Pages if the taxonomy is being used with a Post Type.', 'ptt-manager' );?></p>
+<h3><?php _e( 'Preset Taxonomies', 'ptt-manager' );?></h3>
+<p><?php _e( 'Use taxonomies with either selected Post Types, or with your Posts or Pages, helping you better categorized your content. You do not have to select Posts/Pages if the taxonomy is being used with a Post Type.', 'ptt-manager' );?></p>
 
 <form enctype="multipart/form-data" method="post" action="options.php">
 <?php settings_fields( $this->plugin_name );?>

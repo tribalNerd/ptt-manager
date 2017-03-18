@@ -50,7 +50,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     </tr>
     <tr>
         <td class="td"><label for="public"><?php _e( 'Public Access', 'ptt-manager' );?></label></td>
-        <td><fieldset><label for="public"><input name="public" type="checkbox" id="public" value="1" <?php checked( apply_filters( $this->plugin_name . '_field', 'taxonomy', 'public' ), 1 );?>/><span class="description"><?php _e( 'Select to "not" have the taxonomy visible/useable for visitors and authors on the website front-end.', 'ptt-manager' );?></span></label></fieldset></td>
+        <td><fieldset><label for="public"><input name="public" type="checkbox" id="public" value="1" <?php checked( apply_filters( $this->plugin_name . '_field', 'taxonomy', 'public' ), 1 );?>/><span class="description"><?php _e( 'Select to "not" have the taxonomy visible/usable for visitors and authors on the website front-end.', 'ptt-manager' );?></span></label></fieldset></td>
     </tr>
     <tr>
         <td class="td"><label for="hierarchical"><?php _e( 'Hierarchical', 'ptt-manager' );?></label></td>

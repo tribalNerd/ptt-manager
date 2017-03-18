@@ -29,8 +29,11 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         // Website URL
         public $base_url;
 
-        // The plugin-root-name
+        // The plugin-slug-name
         public $plugin_name;
+        
+        // Plugin Page Title
+        public $plugin_title;
         
         // Plugin filename.php
         public $plugin_file;
@@ -59,6 +62,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             // Set Vars
             $this->base_url         = PTT_MANAGER_BASE_URL;
             $this->plugin_name      = PTT_MANAGER_PLUGIN_NAME;
+            $this->plugin_title     = PTT_MANAGER_PAGE_NAME;
             $this->plugin_file      = PTT_MANAGER_PLUGIN_FILE;
             $this->plugin_version   = PTT_MANAGER_VERSION;
             $this->menu_name        = PTT_MANAGER_MENU_NAME;
@@ -189,23 +193,6 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 }
             }
 
-            // Check Preset Post Type
-            if ( $return && $type == "preset-posttype" ) {
-                foreach ( $data as $name => $field ) {
-                    if ( empty( $field ) ) { continue; }
- 
-                    // Name is Reserved
-                    if ( in_array( $this->sanitizeName( $name ), $reserved ) ) {
-                        $return = (bool) false;
-                    }
-
-                    // If Post Type Exists
-                    if ( get_post_type_object( $this->sanitizeName( $name ) ) ) {
-                        $return = (bool) false;
-                    }
-                }
-            }
-
             // Check Taxonomy
             if ( $return && $type == "taxonomy" ) {
                 // Name is Reserved
@@ -216,23 +203,6 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 // If Taxonomy Exists
                 if ( ! isset( $data['updated'] ) && get_taxonomy( $this->sanitizeName( $data['plural'] ) ) ) {
                     $return = (bool) false;
-                }
-            }
-
-            // Check Preset Taxonomy
-            if ( $return && $type == "preset-taxonomy" ) {
-                foreach ( $data as $name => $field ) {
-                    if ( empty( $field ) ) { continue; }
- 
-                    // Name is Reserved
-                    if ( in_array( $this->sanitizeName( $name ), $reserved ) ) {
-                        $return = (bool) false;
-                    }
-
-                    // If Post Type Exists
-                    if ( get_post_type_object( $this->sanitizeName( $name ) ) ) {
-                        $return = (bool) false;
-                    }
                 }
             }
 

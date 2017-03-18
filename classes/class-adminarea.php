@@ -9,6 +9,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * 
  * @method init()       Init Admin Actions
  * @method display()    Include Admin Area Templates
+ * @method rules()      Update Check, Flush Rewrite Rules
  * @method enqueue()    Load Stylesheets & jQuery
  * @method menu()       Load Admin Area Menu
  * @method tabs()       Load Admin Area Tabs
@@ -46,19 +47,6 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
          */
         final public function display()
         {
-            // Remove Temp Option Set With register_setting() 
-            unregister_setting( $this->plugin_name, $this->plugin_name );
-
-            // Created by register_setting()
-            if ( null !== get_option( PTT_MANAGER_PLUGIN_NAME . '_active' ) ) {
-
-                // Flush Rules
-                flush_rewrite_rules();
-
-                // Remove To Reset
-                delete_option( PTT_MANAGER_PLUGIN_NAME . '_active' );
-            }
-
             // Admin Header
             require_once( $this->templates .'/header.php' );
 
@@ -66,6 +54,9 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
             switch ( filter_input( INPUT_GET, 'tab' ) ) {
                 case 'home':
                 default:
+                    // Flush Rewrite Rules
+                    $this->rules();
+   
                     require_once( $this->templates .'/home.php' );
                 break;
 
@@ -74,6 +65,9 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                 break;
 
                 case 'posttypes':
+                    // Flush Rewrite Rules
+                    $this->rules();
+
                     require_once( $this->templates .'/posttypes.php' );
                 break;
 
@@ -86,6 +80,9 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                 break;
 
                 case 'taxonomies':
+                    // Flush Rewrite Rules
+                    $this->rules();
+  
                     require_once( $this->templates .'/taxonomies.php' );
                 break;
 
@@ -96,6 +93,25 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
 
             // Admin Footer
             require_once( $this->templates .'/footer.php' );
+        }
+
+
+        /**
+         * @about Update Check, Flush Rewrite Rules
+         */
+        final private function rules()
+        {
+            // Created by register_setting()
+            if ( get_option( PTT_MANAGER_PLUGIN_NAME . '_active' ) !== false ) {
+                // Remove Temp Option Set With register_setting() 
+                unregister_setting( $this->plugin_name, $this->plugin_name );
+
+                // Flush Rules
+                flush_rewrite_rules();
+
+                // Remove To Reset
+                delete_option( PTT_MANAGER_PLUGIN_NAME . '_active' );
+            }
         }
 
 
@@ -122,12 +138,13 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
             if( ! is_user_logged_in() && ! is_user_member_of_blog() ) { return; }
 
             // Settings Menu
-            add_options_page(
-                $this->menu_name,
+            add_submenu_page(
+                'options-general.php',
+                $this->plugin_title,
                 $this->menu_name,
                 'manage_options',
                 $this->plugin_name,
-                array( &$this, 'display' )
+                array( $this, 'display' )
             );
         }
 

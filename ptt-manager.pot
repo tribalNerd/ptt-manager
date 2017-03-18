@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Post Type & Taxonomy Manager 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ptt-manager\n"
-"POT-Creation-Date: 2017-03-16 14:40:58+00:00\n"
+"POT-Creation-Date: 2017-03-18 15:57:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,206 +12,204 @@ msgstr ""
 "Last-Translator: tribalNerd <tribalnerd@technerdia.com>\n"
 "Language-Team: tribalNerd <tribalnerd@technerdia.com>\n"
 
-#: classes/class-extended.php:68
+#: classes/class-extended.php:73
 msgid "Home"
 msgstr ""
 
-#: classes/class-extended.php:69 templates/tools.php:89
+#: classes/class-extended.php:74 templates/phpoutput.php:12
+#: templates/tools.php:89
 msgid "Post Types"
 msgstr ""
 
-#: classes/class-extended.php:70 templates/tools.php:107
+#: classes/class-extended.php:75 templates/phpoutput.php:48
+#: templates/tools.php:126
 msgid "Taxonomies"
 msgstr ""
 
-#: classes/class-extended.php:71 templates/tools.php:5
-msgid "Tools"
+#: classes/class-extended.php:76
+msgid "Import/Export"
 msgstr ""
 
-#: classes/class-extended.php:89
-msgid "Preset Settings Updated!"
+#: classes/class-extended.php:77
+msgid "PHP Output"
 msgstr ""
 
-#: classes/class-extended.php:93
-msgid "Post Type Settings Updated!"
+#: classes/class-extended.php:78
+msgid "Saved Settings"
+msgstr ""
+
+#: classes/class-extended.php:79 templates/templates.php:12
+#: templates/templates.php:39 templates/tools.php:178 templates/tools.php:205
+msgid "Templates"
 msgstr ""
 
 #: classes/class-extended.php:97
-msgid "Taxonomy Settings Updated!"
+msgid "Preset Settings Updated!"
 msgstr ""
 
 #: classes/class-extended.php:101
-msgid "Settings Imported!"
+msgid "Post Type Settings Updated!"
 msgstr ""
 
 #: classes/class-extended.php:105
-msgid "Preset Settings Failed To Update!"
+msgid "Taxonomy Settings Updated!"
 msgstr ""
 
 #: classes/class-extended.php:109
-msgid "Post Type Settings Failed To Update!"
+msgid "Blocker Settings Updated!"
 msgstr ""
 
 #: classes/class-extended.php:113
-msgid "Taxonomy Settings Failed To Update! "
+msgid "Settings Imported!"
 msgstr ""
 
 #: classes/class-extended.php:117
-msgid "Import Failed!"
+msgid "Settings Deleted!"
 msgstr ""
 
 #: classes/class-extended.php:121
+msgid "Preset Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:125
+msgid "Post Type Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:129
+msgid "Taxonomy Settings Failed To Update! "
+msgstr ""
+
+#: classes/class-extended.php:133
+msgid "Blocker Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:137
+msgid "Import Failed!"
+msgstr ""
+
+#: classes/class-extended.php:141
 msgid "The Post Type / Taxonomy Is Already Registered or Reserved!"
 msgstr ""
 
-#: classes/class-extended.php:217
+#: classes/class-extended.php:237
 msgid "Select To Add"
 msgstr ""
 
-#: classes/class-extended.php:219
+#: classes/class-extended.php:239
 msgid "Select To Edit"
 msgstr ""
 
-#: classes/class-extended.php:302 classes/class-extended.php:307
+#: classes/class-extended.php:322 classes/class-extended.php:327
 msgid "You are not authorized to perform this action."
 msgstr ""
 
-#: classes/class-extended.php:329
+#: classes/class-extended.php:349
 msgid "Created on"
 msgstr ""
 
-#: classes/class-extended.php:329
+#: classes/class-extended.php:349
 msgid "and lasted updated on"
 msgstr ""
 
-#: classes/class-extended.php:329
+#: classes/class-extended.php:349
 msgid "by"
 msgstr ""
 
-#: classes/class-extended.php:373
+#: classes/class-extended.php:393
 msgid "Post (core)"
 msgstr ""
 
-#: classes/class-extended.php:376
+#: classes/class-extended.php:396
 msgid "Page (core)"
 msgstr ""
 
-#: classes/class-posttypes.php:233
+#: classes/class-extended.php:443
+msgid "Tags (core)"
+msgstr ""
+
+#: classes/class-extended.php:446
+msgid "Categories (core)"
+msgstr ""
+
+#: classes/class-posttypes.php:236
 msgctxt "post type general name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:234
+#: classes/class-posttypes.php:237
 msgctxt "post type singular name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:235
+#: classes/class-posttypes.php:238
 msgctxt "admin menu"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:236
+#: classes/class-posttypes.php:239
 msgctxt "add new on admin bar"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:238 classes/class-taxonomies.php:155
+#: classes/class-posttypes.php:241 classes/class-taxonomies.php:162
 msgid "Add New %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:239 classes/class-taxonomies.php:152
+#: classes/class-posttypes.php:242 classes/class-taxonomies.php:159
 msgid "New %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:240 classes/class-taxonomies.php:153
+#: classes/class-posttypes.php:243 classes/class-taxonomies.php:160
 msgid "Edit %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:241
+#: classes/class-posttypes.php:244
 msgid "View %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:242
+#: classes/class-posttypes.php:245
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:243 classes/class-taxonomies.php:156
+#: classes/class-posttypes.php:246 classes/class-taxonomies.php:163
 msgid "Search %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:244 classes/class-taxonomies.php:159
+#: classes/class-posttypes.php:247 classes/class-taxonomies.php:166
 msgid "Parent %1$s:"
 msgstr ""
 
-#: classes/class-posttypes.php:245
+#: classes/class-posttypes.php:248
 msgid "No %1$s Found."
 msgstr ""
 
-#: classes/class-posttypes.php:246
+#: classes/class-posttypes.php:249
 msgid "No %1$s Found in Trash."
 msgstr ""
 
-#: classes/class-posttypes.php:290
-msgid "Select %s"
-msgstr ""
-
-#: classes/class-posttypes.php:292
-msgid "%1$s Title"
-msgstr ""
-
-#: classes/class-posttypes.php:298
-msgid "Author"
-msgstr ""
-
-#: classes/class-posttypes.php:299
-msgid "Tags"
-msgstr ""
-
-#: classes/class-posttypes.php:300 templates/posttypes.php:119
-msgid "Comments"
-msgstr ""
-
-#: classes/class-posttypes.php:301
-msgctxt "column name"
-msgid "Date"
-msgstr ""
-
-#: classes/class-posttypes.php:350
-msgid "Show All %1$s"
-msgstr ""
-
-#: classes/class-process.php:437
-msgid "Tags (core)"
-msgstr ""
-
-#: classes/class-process.php:440
-msgid "Categories (core)"
-msgstr ""
-
-#: classes/class-taxonomies.php:150
+#: classes/class-taxonomies.php:157
 msgctxt "taxonomy general name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:151
+#: classes/class-taxonomies.php:158
 msgctxt "taxonomy singular name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:154
+#: classes/class-taxonomies.php:161
 msgid "Update %1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:157
+#: classes/class-taxonomies.php:164
 msgid "All %1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:158
+#: classes/class-taxonomies.php:165
 msgid "Parent %1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:160
+#: classes/class-taxonomies.php:167
 msgid "No %1$s Found"
 msgstr ""
 
@@ -229,27 +227,27 @@ msgstr ""
 msgid "Post Type & Taxonomy Manager For Wordpress Themes"
 msgstr ""
 
-#: ptt-manager.php:154
+#: ptt-manager.php:156
 msgid "Settings"
 msgstr ""
 
-#: ptt-manager.php:155
+#: ptt-manager.php:157
 msgid "F.A.Q."
 msgstr ""
 
-#: ptt-manager.php:156
+#: ptt-manager.php:158
 msgid "Support"
 msgstr ""
 
-#: ptt-manager.php:157
+#: ptt-manager.php:159
 msgid "Feedback"
 msgstr ""
 
-#: ptt-manager.php:158
+#: ptt-manager.php:160
 msgid "Donations"
 msgstr ""
 
-#: ptt-manager.php:159
+#: ptt-manager.php:161
 msgid "Plugin Home"
 msgstr ""
 
@@ -257,223 +255,253 @@ msgstr ""
 msgid "Created by"
 msgstr ""
 
-#: templates/home.php:18
+#: templates/home.php:5
 msgid "Preset Post Types"
 msgstr ""
 
-#: templates/home.php:19
+#: templates/home.php:6
 msgid ""
 "Post Types are a unique form of \"Posts\" content, displayed below the "
 "Comments menu. Post Types can be used in conjunction with a related "
-"taxonomy, which provides categories under that post type."
+"taxonomy, which provides a way to categorize post type content."
 msgstr ""
 
-#: templates/home.php:20
+#: templates/home.php:7
 msgid ""
-"Dashicon: To use a custom icon, select the Icon button, then an icon, "
-"afterward scroll down and click the Save Changes button. To remove an icon, "
-"select the Icon button, press the < back link in the window, select a blank "
-"icon, then scroll down and click the Save Changes button."
+"Dashicon: To use, select the Icon button, then an icon. To remove, select "
+"the Icon button, press the < back link in the window and select the blank "
+"icon."
 msgstr ""
 
-#: templates/home.php:29
-msgid "Post Type"
+#: templates/home.php:16
+msgid "Post Type Name and Description"
 msgstr ""
 
-#: templates/home.php:30 templates/home.php:92
-msgid "Select To Use"
+#: templates/home.php:17 templates/home.php:80
+msgid "Activate"
 msgstr ""
 
-#: templates/home.php:31
-msgid "Dashicon"
+#: templates/home.php:18
+msgid "Icon"
 msgstr ""
 
-#: templates/home.php:34 templates/home.php:97
+#: templates/home.php:19
+msgid "Select"
+msgstr ""
+
+#: templates/home.php:22 templates/home.php:85
 msgid "Books"
 msgstr ""
 
-#: templates/home.php:35
-msgid "Book Post Type"
+#: templates/home.php:22
+msgid "Retail, display, review books."
 msgstr ""
 
-#: templates/home.php:36
-msgid "Book Post Type for selling or displaying books."
-msgstr ""
-
-#: templates/home.php:39 templates/home.php:103
+#: templates/home.php:27 templates/home.php:90
 msgid "Docs"
 msgstr ""
 
-#: templates/home.php:40
-msgid "Docs Post Type"
+#: templates/home.php:27
+msgid "Display help/user documents."
 msgstr ""
 
-#: templates/home.php:41
-msgid "Docs Post Type for display help/user documents."
+#: templates/home.php:32
+msgid "FAQ"
 msgstr ""
 
-#: templates/home.php:44 templates/home.php:109
-msgid "F.A.Q.'s"
+#: templates/home.php:32
+msgid "Provide frequently asked questions."
 msgstr ""
 
-#: templates/home.php:45
-msgid "FAQ Post Type"
-msgstr ""
-
-#: templates/home.php:46
-msgid "F.A.Q. Post Type for displaying frequently asked questions."
-msgstr ""
-
-#: templates/home.php:49 templates/home.php:115
+#: templates/home.php:37 templates/home.php:100
 msgid "Music"
 msgstr ""
 
-#: templates/home.php:50
-msgid "Music Post Type"
+#: templates/home.php:37
+msgid "Selling, playing, downloading or displaying music."
 msgstr ""
 
-#: templates/home.php:51
-msgid "Music Post Type for selling, playing, downloading or displaying music."
-msgstr ""
-
-#: templates/home.php:54 templates/home.php:121
+#: templates/home.php:42 templates/home.php:105
 msgid "Portfolio"
 msgstr ""
 
-#: templates/home.php:55
-msgid "Portfolio Post Type"
+#: templates/home.php:42
+msgid "Showing off creatives, designs, photography and more."
 msgstr ""
 
-#: templates/home.php:56
-msgid ""
-"Portfolio Post Type for displaying creatives, designs, photography and more."
-msgstr ""
-
-#: templates/home.php:59 templates/home.php:127
+#: templates/home.php:47 templates/home.php:110
 msgid "Teams"
 msgstr ""
 
-#: templates/home.php:60
-msgid "Team Post Type"
+#: templates/home.php:47
+msgid "Display your company/department team members."
 msgstr ""
 
-#: templates/home.php:61
-msgid "Team Post Type for displaying your team members."
-msgstr ""
-
-#: templates/home.php:64 templates/home.php:133
+#: templates/home.php:52 templates/home.php:115
 msgid "Testimonials"
 msgstr ""
 
-#: templates/home.php:65
-msgid "Testimonial Post Type"
+#: templates/home.php:52
+msgid "Testimonials from your visitors, clients or customers."
 msgstr ""
 
-#: templates/home.php:66
-msgid ""
-"Testimonial Post Type for testimonials to your visitors, clients or "
-"customers."
-msgstr ""
-
-#: templates/home.php:69 templates/home.php:139
+#: templates/home.php:57 templates/home.php:120
 msgid "Videos"
 msgstr ""
 
-#: templates/home.php:70
-msgid "Video Post Type"
+#: templates/home.php:57
+msgid "Provide videos to your visitors."
 msgstr ""
 
-#: templates/home.php:71
-msgid "Video Post Type for displaying videos to your visitors."
-msgstr ""
-
-#: templates/home.php:81
+#: templates/home.php:69
 msgid "Preset Taxonomies"
 msgstr ""
 
-#: templates/home.php:82
+#: templates/home.php:70
 msgid ""
 "Use taxonomies with either selected Post Types, or with your Posts or Pages, "
 "helping you better categorized your content. You do not have to select Posts/"
 "Pages if the taxonomy is being used with a Post Type."
 msgstr ""
 
-#: templates/home.php:91
-msgid "Taxonomy"
+#: templates/home.php:79
+msgid "Taxonomy Name and Description"
 msgstr ""
 
-#: templates/home.php:93
+#: templates/home.php:81
 msgid "Posts"
 msgstr ""
 
-#: templates/home.php:94
+#: templates/home.php:82
 msgid "Pages"
 msgstr ""
 
-#: templates/home.php:98
-msgid "Book Taxonomy"
+#: templates/home.php:85
+msgid "Categories for selling or displaying books."
 msgstr ""
 
-#: templates/home.php:99
-msgid "Book categories for selling or displaying books."
+#: templates/home.php:90
+msgid "Categories for providing help/user documents."
 msgstr ""
 
-#: templates/home.php:104
-msgid "Docs Taxonomy"
+#: templates/home.php:95
+msgid "F.A.Q.'s"
+msgstr ""
+
+#: templates/home.php:95
+msgid "Categories for displaying frequently asked questions."
+msgstr ""
+
+#: templates/home.php:100
+msgid "Categories for selling, playing, downloading or displaying music."
 msgstr ""
 
 #: templates/home.php:105
-msgid "Docs categories for providing help/user documents."
+msgid "Categories for creative professionals and businesses."
 msgstr ""
 
 #: templates/home.php:110
-msgid "FAQ Taxonomy"
+msgid "Categories for displaying your team members."
 msgstr ""
 
-#: templates/home.php:111
-msgid "F.A.Q. categories for displaying frequently asked questions."
+#: templates/home.php:115
+msgid "Categories for testimonials to your visitors, clients or customers."
 msgstr ""
 
-#: templates/home.php:116
-msgid "Music Taxonomy"
+#: templates/home.php:120
+msgid "Categories for displaying videos to your visitors."
 msgstr ""
 
-#: templates/home.php:117
-msgid "Music categories for selling, playing, downloading or displaying music."
+#: templates/importexport.php:5 templates/tools.php:12 templates/tools.php:28
+msgid "Export / Import Post Types"
 msgstr ""
 
-#: templates/home.php:122
-msgid "Portfolio Taxonomy"
-msgstr ""
-
-#: templates/home.php:123
-msgid "Portfolio categories for creative professionals and businesses."
-msgstr ""
-
-#: templates/home.php:128
-msgid "Team Taxonomy"
-msgstr ""
-
-#: templates/home.php:129
-msgid "Team categories for displaying your team members."
-msgstr ""
-
-#: templates/home.php:134
-msgid "Testimonial Taxonomy"
-msgstr ""
-
-#: templates/home.php:135
+#: templates/importexport.php:6 templates/tools.php:29
 msgid ""
-"Testimonial categories for testimonials to your visitors, clients or "
-"customers."
+"Export and import post type data for the Post Types & Taxonomies Manager "
+"plugin. Export does not include presets! Importing will override saved Post "
+"Type data from this plugin only!"
 msgstr ""
 
-#: templates/home.php:140
-msgid "Video Taxonomy"
+#: templates/importexport.php:15 templates/tools.php:38
+msgid "Post Types Export"
 msgstr ""
 
-#: templates/home.php:141
-msgid "Video categories for displaying videos to your visitors."
+#: templates/importexport.php:17 templates/importexport.php:41
+#: templates/tools.php:40 templates/tools.php:67
+msgid "JSON encoded export data for saved taxonomies."
+msgstr ""
+
+#: templates/importexport.php:20 templates/tools.php:43
+msgid "Import Post Types"
+msgstr ""
+
+#: templates/importexport.php:29 templates/tools.php:13 templates/tools.php:55
+msgid "Export / Import Taxonomies"
+msgstr ""
+
+#: templates/importexport.php:30 templates/tools.php:56
+msgid ""
+"Export and import taxonomy data for the Post Types & Taxonomies Manager "
+"plugin. Export does not include presets! Importing will override saved "
+"Taxonomy data from this plugin only!"
+msgstr ""
+
+#: templates/importexport.php:39 templates/tools.php:65
+msgid "Taxonomies Export"
+msgstr ""
+
+#: templates/importexport.php:44 templates/tools.php:70
+msgid "Import Taxonomies"
+msgstr ""
+
+#: templates/phpoutput.php:5 templates/tools.php:17 templates/tools.php:82
+msgid "PHP Output Post Types"
+msgstr ""
+
+#: templates/phpoutput.php:6 templates/tools.php:83
+msgid ""
+"Post Type PHP code snips used by the Post Type & Taxonomy Manager plugin. "
+"Does not include presets!"
+msgstr ""
+
+#: templates/phpoutput.php:14 templates/phpoutput.php:50
+#: templates/tools.php:91 templates/tools.php:128
+msgid "PHP Code Output for the themes functions.php file."
+msgstr ""
+
+#: templates/phpoutput.php:29 templates/tools.php:106
+msgid "Block Post Type Rendering"
+msgstr ""
+
+#: templates/phpoutput.php:31 templates/tools.php:108
+msgid ""
+"Stop the Post Type & Taxonomy Manager plugin from rendering saved Post "
+"Types. All other features work. This allows you to use the plugin to store "
+"post types, thus using the PHP output code within your themes functions.php "
+"file to render the post types."
+msgstr ""
+
+#: templates/phpoutput.php:41 templates/tools.php:18 templates/tools.php:119
+msgid "PHP Output Taxonomies"
+msgstr ""
+
+#: templates/phpoutput.php:42 templates/tools.php:120
+msgid ""
+"Taxonomy PHP code snips used by the Post Type & Taxonomy Manager plugin. "
+"Does not include presets!"
+msgstr ""
+
+#: templates/phpoutput.php:65 templates/tools.php:143
+msgid "Block Taxonomy Rendering"
+msgstr ""
+
+#: templates/phpoutput.php:67 templates/tools.php:145
+msgid ""
+"Stop the Post Type & Taxonomy Manager plugin from rendering saved "
+"Taxonomies. All other features work. This allows you to use the plugin to "
+"store taxonomies, thus using the PHP output code within your themes "
+"functions.php file to render the taxonomies."
 msgstr ""
 
 #: templates/posttypes.php:8
@@ -496,7 +524,7 @@ msgid ""
 "display on the admin area menu, and support all editor features."
 msgstr ""
 
-#: templates/posttypes.php:23 templates/taxonomies.php:28
+#: templates/posttypes.php:23 templates/taxonomies.php:23
 msgid "Plural Name"
 msgstr ""
 
@@ -506,7 +534,7 @@ msgid ""
 "capitalization, spaces, max 32 character length!"
 msgstr ""
 
-#: templates/posttypes.php:28 templates/taxonomies.php:23
+#: templates/posttypes.php:28 templates/taxonomies.php:28
 msgid "Singular Name"
 msgstr ""
 
@@ -711,6 +739,10 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
+#: templates/posttypes.php:119
+msgid "Comments"
+msgstr ""
+
 #: templates/posttypes.php:120
 msgid "Custom Fields"
 msgstr ""
@@ -749,6 +781,32 @@ msgstr ""
 
 #: templates/posttypes.php:136 templates/taxonomies.php:68
 msgid "Delete This Record"
+msgstr ""
+
+#: templates/settings.php:5 templates/tools.php:156
+msgid "All Saved Options"
+msgstr ""
+
+#: templates/settings.php:6 templates/tools.php:157
+msgid ""
+"Below is a listing of every setting saved by the Post Type & Taxonomy "
+"Manager plugin."
+msgstr ""
+
+#: templates/settings.php:10
+msgid "Option Name"
+msgstr ""
+
+#: templates/settings.php:11
+msgid "Saved Setting"
+msgstr ""
+
+#: templates/settings.php:20
+msgid "No Saved Settings To View!"
+msgstr ""
+
+#: templates/settings.php:35
+msgid "Warning! This Can Not Be Undone!"
 msgstr ""
 
 #: templates/sidebar.php:10
@@ -793,13 +851,13 @@ msgstr ""
 
 #: templates/taxonomies.php:25
 msgid ""
-"The singular (non-plural) name for the taxonomy. Alphanumeric, "
+"The plural (more than one) name for the taxonomy. Alphanumeric, "
 "capitalization, spaces, max 32 character length!"
 msgstr ""
 
 #: templates/taxonomies.php:30
 msgid ""
-"The plural (more than one) name for the taxonomy. Alphanumeric, "
+"The singular (non-plural) name for the taxonomy. Alphanumeric, "
 "capitalization, spaces, max 32 character length!"
 msgstr ""
 
@@ -827,7 +885,7 @@ msgstr ""
 
 #: templates/taxonomies.php:53
 msgid ""
-"Select to \"not\" have the taxonomy visible/useable for visitors and authors "
+"Select to \"not\" have the taxonomy visible/usable for visitors and authors "
 "on the website front-end."
 msgstr ""
 
@@ -845,105 +903,24 @@ msgid ""
 "Select to \"remove\" the taxonomy from the WP Admin Area menus & editor page."
 msgstr ""
 
-#: templates/tools.php:6
-msgid ""
-"Export / Import & PHP Output Tools for the Post Types & Taxonomies Manager "
-"WordPress Plugin."
+#: templates/templates.php:5
+msgid "Using Within Templates"
 msgstr ""
 
-#: templates/tools.php:12 templates/tools.php:28
-msgid "Export / Import Post Types"
+#: templates/templates.php:6
+msgid "How to use Post Types & Taxonomies within theme templates."
 msgstr ""
 
-#: templates/tools.php:13 templates/tools.php:55
-msgid "Export / Import Taxonomies"
-msgstr ""
-
-#: templates/tools.php:14
-msgid "List All Saved Settings"
-msgstr ""
-
-#: templates/tools.php:17 templates/tools.php:82
-msgid "PHP Output Post Types"
-msgstr ""
-
-#: templates/tools.php:18 templates/tools.php:100
-msgid "PHP Output Taxonomies"
-msgstr ""
-
-#: templates/tools.php:19
-msgid "How To Use Within Templates"
-msgstr ""
-
-#: templates/tools.php:29
-msgid ""
-"Export and import post type data for the Post Types & Taxonomies Manager "
-"plugin. Export does not include presets! Importing will override saved Post "
-"Type data from this plugin only!"
-msgstr ""
-
-#: templates/tools.php:38
-msgid "Post Types Export"
-msgstr ""
-
-#: templates/tools.php:40 templates/tools.php:67
-msgid "JSON encoded export data for saved taxonomies."
-msgstr ""
-
-#: templates/tools.php:43
-msgid "Import Post Types"
-msgstr ""
-
-#: templates/tools.php:56
-msgid ""
-"Export and import taxonomy data for the Post Types & Taxonomies Manager "
-"plugin. Export does not include presets! Importing will override saved "
-"Taxonomy data from this plugin only!"
-msgstr ""
-
-#: templates/tools.php:65
-msgid "Taxonomies Export"
-msgstr ""
-
-#: templates/tools.php:70
-msgid "Import Taxonomies"
-msgstr ""
-
-#: templates/tools.php:83
-msgid ""
-"Post Type PHP code snips used by the Post Type & Taxonomy Manager plugin. "
-"Does not include presets!"
-msgstr ""
-
-#: templates/tools.php:101
-msgid ""
-"Taxonomy PHP code snips used by the Post Type & Taxonomy Manager plugin. "
-"Does not include presets!"
-msgstr ""
-
-#: templates/tools.php:118
-msgid "All Saved Options"
-msgstr ""
-
-#: templates/tools.php:119
-msgid ""
-"Below is a listing of every setting saved by the Post Type & Taxonomy "
-"Manager plugin."
-msgstr ""
-
-#: templates/tools.php:136
+#: templates/templates.php:8 templates/tools.php:174
 msgid "Using Post Types Within Templates"
 msgstr ""
 
-#: templates/tools.php:138 templates/tools.php:165
+#: templates/templates.php:10 templates/templates.php:37
+#: templates/tools.php:176 templates/tools.php:203
 msgid "More Information"
 msgstr ""
 
-#: templates/tools.php:140 templates/tools.php:167
-msgid "Templates"
-msgstr ""
-
-#: templates/tools.php:140
+#: templates/templates.php:12 templates/tools.php:178
 msgid ""
 "Post types use the theme templates, archive.php, single.php or index.php as "
 "the default templates if no custom template has been defined. To define a "
@@ -953,11 +930,11 @@ msgid ""
 "to copy, as it works best for post types."
 msgstr ""
 
-#: templates/tools.php:142
+#: templates/templates.php:14 templates/tools.php:180
 msgid "Categories / Post Tags"
 msgstr ""
 
-#: templates/tools.php:142
+#: templates/templates.php:14 templates/tools.php:180
 msgid ""
 "If your template(s) display categories & post tags with the single/archive "
 "templates, they may not work (appear) if you have not selected Categories / "
@@ -966,11 +943,11 @@ msgid ""
 "custom post type template."
 msgstr ""
 
-#: templates/tools.php:144
+#: templates/templates.php:16 templates/tools.php:182
 msgid "Post Type Description"
 msgstr ""
 
-#: templates/tools.php:144
+#: templates/templates.php:16 templates/tools.php:182
 msgid ""
 "To display the post type description within a template, first create a "
 "custom post type template. Then modify the PHP snip below to include your "
@@ -978,52 +955,57 @@ msgid ""
 "appear within the template."
 msgstr ""
 
-#: templates/tools.php:146 templates/tools.php:173
+#: templates/templates.php:18 templates/templates.php:45
+#: templates/tools.php:184 templates/tools.php:211
 msgid "The example below will get the taxonomy description."
 msgstr ""
 
-#: templates/tools.php:147 templates/tools.php:152 templates/tools.php:155
+#: templates/templates.php:19 templates/templates.php:24
+#: templates/templates.php:27 templates/tools.php:185 templates/tools.php:190
+#: templates/tools.php:193
 msgid "your_post_type_name"
 msgstr ""
 
-#: templates/tools.php:149
+#: templates/templates.php:21 templates/tools.php:187
 msgid "Other Post Type Fields"
 msgstr ""
 
-#: templates/tools.php:149
+#: templates/templates.php:21 templates/tools.php:187
 msgid ""
 "The get_post_type_object() function allows you to retrieve saved post type "
 "information, it can be used to get to retrieve all post type settings for a "
 "unique post type, such as the post types singular or plural name."
 msgstr ""
 
-#: templates/tools.php:151
+#: templates/templates.php:23 templates/tools.php:189
 msgid ""
 "The example below will get the singular name, with the first letter "
 "capitalized."
 msgstr ""
 
-#: templates/tools.php:154
+#: templates/templates.php:26 templates/tools.php:192
 msgid ""
 "The example below will get the plural name, with the first letter "
 "capitalized."
 msgstr ""
 
-#: templates/tools.php:157 templates/tools.php:182
+#: templates/templates.php:29 templates/templates.php:54
+#: templates/tools.php:195 templates/tools.php:220
 msgid ""
 "The difference between the last two examples, and the first example, is the "
 "inclusion \"labels\" array being called within the echo statement."
 msgstr ""
 
-#: templates/tools.php:159 templates/tools.php:184
+#: templates/templates.php:31 templates/templates.php:56
+#: templates/tools.php:197 templates/tools.php:222
 msgid "More Settings"
 msgstr ""
 
-#: templates/tools.php:163
+#: templates/templates.php:35 templates/tools.php:201
 msgid "Using Taxonomies Within Templates"
 msgstr ""
 
-#: templates/tools.php:167
+#: templates/templates.php:39 templates/tools.php:205
 msgid ""
 "Taxonomies use the category.php, tag.php, and taxonomy.php templates, as the "
 "default templates if no custom template has been defined. To define a custom "
@@ -1035,22 +1017,22 @@ msgid ""
 "as it works best for taxonomies."
 msgstr ""
 
-#: templates/tools.php:169
+#: templates/templates.php:41 templates/tools.php:207
 msgid "PHP Code Snips"
 msgstr ""
 
-#: templates/tools.php:169
+#: templates/templates.php:41 templates/tools.php:207
 msgid ""
 "Outside of the basic usage (shown below) manipulating taxonomy data for "
 "display is not easy, and not the same depending on your needs. It is also "
 "outside the scope of these instructions."
 msgstr ""
 
-#: templates/tools.php:171
+#: templates/templates.php:43 templates/tools.php:209
 msgid "Taxonomy Description"
 msgstr ""
 
-#: templates/tools.php:171
+#: templates/templates.php:43 templates/tools.php:209
 msgid ""
 "To display the taxonomy description within a template, first create a custom "
 "taxonomy template. Then modify the PHP snip below to include your custom "
@@ -1058,23 +1040,25 @@ msgid ""
 "within the template."
 msgstr ""
 
-#: templates/tools.php:174 templates/tools.php:177 templates/tools.php:180
+#: templates/templates.php:46 templates/templates.php:49
+#: templates/templates.php:52 templates/tools.php:212 templates/tools.php:215
+#: templates/tools.php:218
 msgid "your_taxonomy_name"
 msgstr ""
 
-#: templates/tools.php:176
+#: templates/templates.php:48 templates/tools.php:214
 msgid ""
 "The example below will get the singular name of the taxonomy, with the first "
 "letter capitalized."
 msgstr ""
 
-#: templates/tools.php:179
+#: templates/templates.php:51 templates/tools.php:217
 msgid ""
 "The example below will get the plural name of the taxonomy, with the first "
 "letter capitalized."
 msgstr ""
 
-#: templates/tools.php:188
+#: templates/templates.php:60 templates/tools.php:226
 msgid ""
 "If you get stuck, or wish to display additional information and are unable "
 "to figure it out, Google resources like Stack Exchange using the search "
@@ -1083,6 +1067,24 @@ msgid ""
 "wordpress taxonomy terms</a>\" with whatever your question is. Chances are, "
 "someone else has asked the same question as you, and some other nice person "
 "has provided an answer."
+msgstr ""
+
+#: templates/tools.php:5
+msgid "Tools"
+msgstr ""
+
+#: templates/tools.php:6
+msgid ""
+"Export / Import & PHP Output Tools for the Post Types & Taxonomies Manager "
+"WordPress Plugin."
+msgstr ""
+
+#: templates/tools.php:14
+msgid "List All Saved Settings"
+msgstr ""
+
+#: templates/tools.php:19
+msgid "How To Use Within Templates"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

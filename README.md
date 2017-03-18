@@ -37,10 +37,8 @@ The Post Type & Taxonomy Manager Wordpress Plugin allows you to register your cu
 
 #### To Do
 1. Retest everything again
-2. Check spelling/grammar
-3. Create fresh pot file
-4. Take new screenshots of plugin
-5. Release to Wordpress Repo
+2. Take new screenshots of plugin
+3. Release to Wordpress Repo
 
 
 ### Installation
