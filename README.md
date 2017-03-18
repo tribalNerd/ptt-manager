@@ -19,12 +19,15 @@ The Post Type & Taxonomy Manager Wordpress Plugin allows you to register your cu
 ### Features
 * A simple to use and clutter free admin area
 * 8 pre-created post types & taxonomies
+* Assign posttypes/taxonomies to each other, categories and post tags
+* Full control over all provided post type and taxonomy features
 * Import & export of custom post types & taxonomies
-* PHP output of custom post types & taxonomies
+* PHP output of custom post types & taxonomies, ready for themes functions.php use
+* Block plugin from rendering post types & taxonomies, using php outputs instead
 * Instructions (and code snips) for your theme template files
 * Assign WordPress Dashicons to all post types
+* View saved plugin settings and mass delete of settings
 * Complete menu placement control of custom post types
-* Full control over all provided post type and taxonomy features
 * Date created/updated and author of custom post types and taxonomies
 
 
@@ -33,10 +36,11 @@ The Post Type & Taxonomy Manager Wordpress Plugin allows you to register your cu
 
 
 #### To Do
-1. Adjust isActive() method within class-extended.php to include presets
-2. Dashicons to display next to input on selection
-3. Delete all saved settings under Tools > List All Saved Settings
-4. Disable Post Type / Taxonomy within Plugin under Tools > PHP Output
+1. Retest everything again
+2. Check spelling/grammar
+3. Create fresh pot file
+4. Take new screenshots of plugin
+5. Release to Wordpress Repo
 
 
 ### Installation
