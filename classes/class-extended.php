@@ -8,6 +8,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method __construct()    Set Parent Variables
  * @method message()        Display Messages To User
  * @method isActive()       Post Type / Taxonomy Active Check
+ * @method presetPosttype() Preset Post Type Fields
+ * @method presetTaxonomy() Preset Taxonomy Fields
  * @method editDropdown()   Get Saved Options For Edit Dropdown
  * @method filterInputGet() INPUT_GET Filter
  * @method sanitize()       Sanitize Text Strings
@@ -93,10 +95,6 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
             // Message Switch
             switch ( $slug ) {
-                case 'presetsupdate':
-                    $message = esc_html__( 'Preset Settings Updated!' );
-                break;
-
                 case 'posttypeupdate':
                     $message = esc_html__( 'Post Type Settings Updated!' );
                 break;
@@ -117,8 +115,8 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                     $message = esc_html__( 'Settings Deleted!' );
                 break;
 
-                case 'preseterror':
-                    $message = esc_html__( 'Preset Settings Failed To Update!' );
+                case 'duplicate':
+                    $message = esc_html__( 'The Post Type / Taxonomy Is Already Registered or Reserved!' );
                 break;
 
                 case 'posttypeerror':
@@ -137,9 +135,10 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                     $message = esc_html__( 'Import Failed!' );
                 break;
 
-                case 'duplicate':
-                    $message = esc_html__( 'The Post Type / Taxonomy Is Already Registered or Reserved!' );
+                case 'unknownerror':
+                    $message = esc_html__( 'Error: No Post Data!' );
                 break;
+
             }
 
             // Throw Message
@@ -155,7 +154,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
         /**
          * @about Make sure the post type / taxonomy isn't active already
-         * @return 
+         * @return bool $return True if Post Type / Taxonomy is not active
          */
         final public function isActive( $type, $data = array() )
         {
@@ -207,6 +206,93 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             }
 
             return ( false === $return ) ? false : true;
+        }
+
+
+        /**
+         * @about Display Preset Post Type Fields
+         * @param string $plural    Plural Post Type Name
+         * @param string $single    Single Post Type Name
+         * @param string $about     About Preset Post Type
+         */
+        final public function presetPosttype( $plural, $singular, $about )
+        {
+            if ( ! get_post_type_object( $this->sanitizeName( $plural ) ) ) {?>
+                <form enctype="multipart/form-data" method="post" action="options.php">
+                <?php settings_fields( $this->plugin_name );?>
+                <?php do_settings_sections( $this->plugin_name );?>
+                <input type="hidden" name="type" value="posttype" />
+                <input type="hidden" name="plural" value="<?php echo $plural;?>" />
+                <input type="hidden" name="singular" value="<?php echo $singular;?>" />
+                <input id="dashicons_picker_<?php echo $plural;?>" name="dashicons_picker_<?php echo $plural;?>" type="hidden" value="" />
+                    <tr>
+                        <td><label for="<?php echo $plural;?>"><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
+                        <td class="td10 textcenter"><input class="button dashicons-picker" type="button" value="Icon" data-target="#dashicons_picker_<?php echo $plural;?>" /></td>
+                        <td class="td10 textcenter"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate"></td>
+                    </tr>
+                </form>
+            <?php } else {
+                // Get Taxonomy Data
+                if ( get_option( $this->plugin_name . '_posttype_' . $plural ) ) {
+                    $data = get_option( $this->plugin_name . '_posttype_' . $plural );
+                }
+
+                // Dashicon
+                $dashicon = ( $data && isset( $data['dashicons_picker_' . $plural] ) ) ? $data['dashicons_picker_' . $plural] : '';
+                ?>
+                    <tr>
+                        <td><label for="<?php echo $plural;?>"><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
+                        <td class="td10 textcenter"><span class="dashicons <?php echo $dashicon;?>"></span></td>
+                        <td class="td10 textcenter"><a href="<?php echo admin_url();?>options-general.php?page=ptt-manager&tab=posttypes&posttype=<?php echo $plural;?>" class="button">Modify</a></td>
+                    </tr>
+            <?php }
+        }
+
+
+        /**
+         * @about Display Preset Taxonomy Fields
+         * @param string $plural    Plural Post Type Name
+         * @param string $single    Single Post Type Name
+         * @param string $about     About Preset Taxonomy
+         */
+
+        final public function presetTaxonomy( $plural, $singular, $about )
+        {
+            if ( ! get_taxonomy( $this->sanitizeName( $plural ) ) ) {?>
+                <form enctype="multipart/form-data" method="post" action="options.php">
+                <?php settings_fields( $this->plugin_name );?>
+                <?php do_settings_sections( $this->plugin_name );?>
+                <input type="hidden" name="type" value="taxonomy" />
+                <input type="hidden" name="plural" value="<?php echo $plural;?>" />
+                <input type="hidden" name="singular" value="<?php echo $singular;?>" />
+                <input type="hidden" name="slug" value="<?php echo $plural;?>" />
+                    <tr>
+                        <td><label><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
+                        <td class="td10 textcenter"><input name="pt[<?php echo $plural;?>]" type="checkbox" id="books" value="<?php echo $plural;?>" /></td>
+                        <td class="td10 textcenter"><input name="pt[post]" type="checkbox" value="post" /></td>
+                        <td class="td10 textcenter"><input name="pt[page]" type="checkbox" value="page" /></td>
+                        <td class="td10 textcenter"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate"></td>
+                    </tr>
+                </form>
+            <?php } else {
+                // Get Taxonomy Data
+                if ( get_option( $this->plugin_name . '_taxonomy_' . $plural ) ) {
+                    $data = get_option( $this->plugin_name . '_taxonomy_' . $plural );
+                }
+
+                // Set Checked Items
+                $checked_plural = ( $data && ! empty( $data['pt'] ) && isset( $data['pt'][$plural] ) ) ? 'checked="checked"' : '';
+                $checked_post = ( $data && ! empty( $data['pt'] ) && isset( $data['pt']['post'] ) ) ? 'checked="checked"' : '';
+                $checked_page = ( $data && ! empty( $data['pt'] ) && isset( $data['pt']['page'] ) ) ? 'checked="checked"' : '';
+                ?>
+                    <tr>
+                        <td><label><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
+                        <td class="td10 textcenter"><input name="<?php echo $plural;?>" type="checkbox" value="1" <?php echo $checked_plural;?>/></td>
+                        <td class="td10 textcenter"><input name="post" type="checkbox" value="1" <?php echo $checked_post;?>/></td>
+                        <td class="td10 textcenter"><input name="page" type="checkbox" value="1" <?php echo $checked_page;?>/></td>
+                        <td class="td10 textcenter"><a href="<?php echo admin_url();?>options-general.php?page=ptt-manager&tab=taxonomies&taxonomy=<?php echo $plural;?>" class="button">Modify</a></td>
+                    </tr>
+            <?php }
         }
 
 
@@ -417,7 +503,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         final public function listTaxonomies()
         {
             // Get Selected Taxonomies from Post Type Option for Checked Item
-            $data = get_option( $this->plugin_name . '_taxonomy_' . $this->filterInputGet( 'taxonomy' ) );
+            $data = get_option( $this->plugin_name . '_posttype_' . $this->filterInputGet( 'posttype' ) );
             $selected_taxonomies = ( ! empty( $data ) && isset( $data['tn'] ) && is_array( $data['tn'] ) ) ? $data['tn'] : '';
 
             // Not Included Items

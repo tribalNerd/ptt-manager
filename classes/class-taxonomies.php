@@ -9,10 +9,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @action add_action( 'init', array( 'tNtePTTManager_Taxonomy', 'instance' ) );
  * 
  * @method init()           Init Class Methods
- * @method taxonomies()     Start Taxonomy Register
- * @method presets()        Start Presets Register
+ * @method options()        Get Taxonomy Options
  * @method args()           Args for Taxonomies
- * @method registerPreset() Register Preset Taxonomies
  * @method register()       Register Taxonomies
  * @method instance()       Class Instance
  */
@@ -31,9 +29,6 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
         {
             // Register if not blocked
             if ( ! get_option( $this->plugin_name . '_taxonomy_block' ) ) {
-                // Load Presets
-                $this->presets();
-
                 // Load Taxonomies
                 $this->taxonomies();
 
@@ -46,7 +41,7 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
         /**
          * @about Start Taxonomy Register
          */
-        final public function taxonomies()
+        final public function options()
         {
             // Get Taxonomy Markers
             $markers = get_option( $this->plugin_name . '_taxonomy' );
@@ -60,73 +55,23 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
                 $data = get_option( $this->plugin_name . '_taxonomy_' . $marker );
 
                 // Start Registration
-                if ( isset( $data['singular'], $data['plural'] ) && ! empty( $data ) && is_array( $data ) ) {
-                    $this->register( $this->sanitize( $data['singular'] ), $this->sanitize( $data['plural'] ), $data );
+                if ( isset( $data['plural'], $data['singular'] ) && ! empty( $data ) && is_array( $data ) ) {
+                    $this->register( $this->sanitize( $data['plural'] ), $this->sanitize( $data['singular'] ), $data );
                 }
             }
         }
 
 
         /**
-         * @about Start Presets Register
-         */
-        final public function presets()
-        {
-            // Get Option Data
-            $data = get_option( $this->plugin_name . '_preset_taxonomies' );
-
-            // Ignore if No Preset Data
-            if ( ! $data || empty( $data ) ) { return; }
-
-            // Books
-            if ( isset( $data['books'] ) || isset( $data['books-posts'] ) || isset( $data['books-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_books' ) ) {
-                $this->registerPreset( 'book', 'books', $data );
-            }
-
-            // Docs
-            if ( isset( $data['docs'] ) || isset( $data['docs-posts'] ) || isset( $data['docs-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_docs' ) ) {
-                $this->registerPreset( 'docs', 'docs', $data );
-            }
-
-            // FAQ
-            if ( isset( $data['faq'] ) || isset( $data['faq-posts'] ) || isset( $data['faq-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_' ) && ! get_option( $this->plugin_name . '_taxonomy_faq' ) ) {
-                $this->registerPreset( 'faq', 'faq', $data );
-            }
-
-            // Music
-            if ( isset( $data['music'] ) || isset( $data['music-posts'] ) || isset( $data['music-pages'] ) || isset( $data['-posts'] ) || isset( $data['-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_music' ) ) {
-                $this->registerPreset( 'music', 'music', $data );
-            }
-
-            // Portfolio
-            if ( isset( $data['portfolio'] ) || isset( $data['portfolio-posts'] ) || isset( $data['portfolio-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_portfolio' ) ) {
-                $this->registerPreset( 'portfolio', 'portfolio', $data );
-            }
-
-            // Teams
-            if ( isset( $data['teams'] ) || isset( $data['teams-posts'] ) || isset( $data['teams-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_teams' ) ) {
-                $this->registerPreset( 'team', 'teams', $data );
-            }
-
-            // Testimonials
-            if ( isset( $data['testimonials'] ) || isset( $data['testimonials-posts'] ) || isset( $data['testimonials-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_testimonials' ) ) {
-                $this->registerPreset( 'testimonial', 'testimonials', $data );
-            }
-
-            // Videos
-            if ( isset( $data['videos'] ) || isset( $data['videos-posts'] ) || isset( $data['videos-pages'] ) && ! get_option( $this->plugin_name . '_taxonomy_videos' ) ) {
-                $this->registerPreset( 'video', 'videos', $data );
-            }
-        }
-
-
-        /**
          * @about Args for Taxonomies
+         * @param string $plural    Plural Post Type Name
+         * @param string $single    Single Post Type Name
+         * @param array $data       Option Data
          */
-        final public function args( $single, $plural, $data = array() )
+        final private function args( $plural, $single, $data = array() )
         {
             // Required
-            if( ! isset( $single, $plural ) || ! $data || ! is_array( $data ) ) { return; }
+            if( ! isset( $plural, $single ) || ! $data || ! is_array( $data ) ) { return; }
 
             // If checked, the taxonomy is not publicly viewable
             $public = ( ! empty( $data['public'] ) ) ? (bool) false : (bool) true;
@@ -152,7 +97,7 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
                 'hierarchical'      => $hierarchical,
                 'description'       => $description,
                 'show_admin_column' => true,
-                'rewrite'           => array( 'slug' => esc_attr( $slug ), 'with_front' => true ),
+                'rewrite'           => array( 'slug' => $slug, 'with_front' => true ),
                 'labels'            => array(
                     'name'              => sprintf( esc_attr_x( '%1$s', 'taxonomy general name', 'ptt-manager' ), ucfirst( $plural ) ),
                     'singular_name'     => sprintf( esc_attr_x( '%1$s', 'taxonomy singular name', 'ptt-manager' ), ucfirst( $single ) ),
@@ -170,57 +115,15 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
 
 
         /**
-         * @about Register Preset Taxonomies
-         */
-        final public function registerPreset( $single, $plural, $data = array() )
-        {
-            // Get Array Args
-            $args = $this->args( $single, $plural, $data );
-
-            // Presets: Add to Posts
-            if ( isset( $data[$plural . '-posts'] ) ) {
-                $post_type = array( 'post' );
-            } else {
-                $post_type = array();
-            }
-
-            // Presets: Add to Pages
-            if ( isset( $data[$plural . '-pages'] ) ) {
-                $page_type = array( 'page' );
-            } else {
-                $page_type = array();
-            }
-
-            // Presets: Add to Selected Post Type
-            if ( isset( $data[$plural] ) ) {
-                $selected_type = array( $plural );
-            } else {
-                $selected_type = array();
-            }
- 
-            // Merge Arrays
-            $object_types = array_merge( $post_type, $page_type, $selected_type );
-
-            // Create Taxonomy
-            register_taxonomy( $this->sanitizeName( $plural ), $object_types, $args );
-
-            // Add Taxonomy To Post Type
-            foreach( $object_types as $key => $type ) {
-                if ( isset( $key ) ) {
-                    register_taxonomy_for_object_type( 'category', $type );
-                    register_taxonomy_for_object_type( 'post_tag', $type );
-                }
-            }
-        }
-
-
-        /**
          * @about Register Taxonomies
+         * @param string $plural    Plural Post Type Name
+         * @param string $single    Single Post Type Name
+         * @param array $data       Option Data
          */
-        final public function register( $single, $plural, $data = array() )
+        final public function register( $plural, $single, $data = array() )
         {
             // Get Array Args
-            $args = $this->args( $single, $plural, $data );
+            $args = $this->args( $plural, $single, $data );
 
             // For Post Types Tab
             $posttype_array = array();

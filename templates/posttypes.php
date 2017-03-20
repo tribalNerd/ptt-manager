@@ -57,7 +57,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     </tr>
     <tr>
         <td class="td"><label for="description"><?php _e( 'Description', 'ptt-manager' );?></label></td>
-        <td><fieldset><label for="description"><textarea name="description" id="description" class="description"><?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'description' );?></textarea><br /><span class="description"><?php _e( 'Describe what the post type is about. Not natively used by templates or within the admin area.', 'ptt-manager' );?></span></label></fieldset></td>
+        <td><fieldset><label for="description"><textarea name="description" id="description" class="description"><?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'description' );?></textarea><br /><span class="description"><?php _e( 'Describe what the post type is about. Not natively used by templates or within the admin area.', 'ptt-manager' );?></span></label></fieldset></td>
     </tr>
     <tr>
         <td class="td"><label for="public"><?php _e( 'Public Access', 'ptt-manager' );?></label></td>
@@ -78,7 +78,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <tr>
         <td class="td"><label for="archiveslug"><?php _e( 'Archive Slug', 'ptt-manager' );?></label></td>
         <td><fieldset><label for="archiveslug"><input name="archiveslug" type="text" id="archiveslug" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'archiveslug' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
-            <p class="description"><?php _e( 'If Archive Items is selected, then optionally set an Archive Slug to be used instead of the default Post Type singular name.', 'ptt-manager' );?></p></label></fieldset></td>
+            <p class="description"><?php _e( 'If Archive URL is selected, then optionally set an Archive Slug to be used instead of the default Post Type plural name.', 'ptt-manager' );?></p></label></fieldset></td>
     </tr>
     <tr>
         <td class="td"><label for="showui"><?php _e( 'Admin Area Viewable', 'ptt-manager' );?></label></td>
@@ -91,7 +91,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <tr>
         <td class="td"><label for="restbase"><?php _e( 'REST API Slug', 'ptt-manager' );?></label></td>
         <td><fieldset><label for="restbase"><input name="restbase" type="text" id="restbase" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'restbase' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
-            <p class="description"><?php _e( 'The base slug this post type will use for the WordPress REST API. Defaults to Post Type singular name.', 'ptt-manager' );?></p></label></fieldset></td>
+            <p class="description"><?php _e( 'The slug name for the WordPress REST API. Defaults to Post Type plural name.', 'ptt-manager' );?></p></label></fieldset></td>
     </tr>
     <tr>
         <td class="td"><label for="position"><?php _e( 'Menu Position', 'ptt-manager' );?></label></td>

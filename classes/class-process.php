@@ -13,7 +13,6 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method deleteSettings() Delete All Saved Settings
  * @method updateBlocker()  Block Plugin From Rendering Post Types / Taxonomies
  * @method removePosttype() Unregister a Post Type
- * @method updatePreset()   Update or Remove Presets
  * @method updatePosttype() Update the Posttype Options
  * @method updateTaxonomy() Update the Taxonomy Options
  * @method cleanup()        Run unset() on $_POST
@@ -93,14 +92,6 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 $this->updateBlocker( $post );
 
             // Update Post Types
-            } elseif ( filter_input( INPUT_POST, 'type' ) == "preset-posttype" || filter_input( INPUT_POST, 'type' ) == "preset-taxonomy" ) {
-                // Get Post Data
-                $post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
-
-                // Update Option
-                $this->updatePreset( $post );
-
-            // Update Post Types
             } elseif ( filter_input( INPUT_POST, 'type' ) == "posttype" && filter_input( INPUT_POST, 'delete' ) != "1" ) {
                 // Get Post Data
                 $post = filter_input_array( INPUT_POST, FILTER_SANITIZE_STRING );
@@ -132,8 +123,11 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 }
 
                 // Process Import
-                if ( ! empty( $post ) ) {
+                if ( ! $post ) {
                     $this->import( $post);
+                } else {
+                    // Display Message
+                    parent::message( 'importerror', 'error' );
                 }
             }
         }
@@ -197,7 +191,6 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
         /**
          * @about Delete All Saved Settings
-         * @param array $data $_POST data array
          */
         final private function deleteSettings()
         {
@@ -255,44 +248,6 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
             // Unregister The Post Type
             unregister_post_type( $posttype );
-        }
-
-
-        /**
-         * @about Update Presets or Remove if Array is Empty
-         * @param array $data $_POST data array
-         */
-        final private function updatePreset( $data = array() )
-        {
-            // Unset Values That Are Not Needed
-            $post = $this->cleanup( '', $data );
-
-            // Remove Option If Array is Empty
-            if ( ! $post && isset( $data['type'] ) && $data['type'] == "preset-posttype" ) {
-                delete_option( $this->plugin_name . '_preset_posttypes' );
-
-            // Else Add / Update Preset Post Type Option
-            } elseif ( $post && isset( $data['type'] ) && $data['type'] == "preset-posttype" ) {
-                // Make Sure Post Type Isn't Already Active
-                if ( ! parent::isActive( 'preset-posttype', $post ) ) {
-                    parent::message( 'duplicate', 'error' );
-                    return;
-                }
-
-                update_option( $this->plugin_name . '_preset_posttypes', $post, '', true );
-            }
-
-            // Remove Option If Array is Empty
-            if ( ! $post && isset( $data['type'] ) && $data['type'] == "preset-taxonomy" ) {
-                delete_option( $this->plugin_name . '_preset_taxonomies' );
-
-            // Else Add / Update Preset Taxonomy Option
-            } elseif ( $post && isset( $data['type'] ) && $data['type'] == "preset-taxonomy" ) {
-                update_option( $this->plugin_name . '_preset_taxonomies', $post, '', true );
-            }
-
-            // Display Message
-            parent::message( 'presetsupdate', 'updated' );
         }
 
 
@@ -465,7 +420,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
             if ( isset( $post['plural'], $post['dashicons_picker_add'] ) ) {
 
                 // Rebuild Icon Array
-                $icon_data = array( 'dashicons_picker_' . $post['plural'] => $post['dashicons_picker_add'] );
+                $icon_data = array( 'dashicons_picker_' . parent::sanitizeName( $post['plural'] ) => $post['dashicons_picker_add'] );
 
                 // Unset Add Icon Marker
                 unset( $post['dashicons_picker_add'] );
@@ -503,23 +458,19 @@ if ( ! class_exists( 'PTTManager_Process' ) )
         final public function field( $option = '', $field = '' )
         {
             if ( ! empty( $option ) && ! empty( $field ) ) {
-                // Get Saved Option Data
-                if ( $option == "preset_posttypes" || $option == "preset_taxonomies" ) {
-                    // Preset Data
+                // Block Post Type / Taxonomy
+                if ( $option == "posttype_block" || $option == "taxonomy_block" ) {
                     $data = get_option( $this->plugin_name . '_' . $option );
 
-                // Get Saved Option Data
-                } elseif ( $option == "posttype_block" || $option == "taxonomy_block" ) {
-                    // Preset Data
-                    $data = get_option( $this->plugin_name . '_' . $option );
+                // Post Type/Taxonomy Data
                 } else {
-                    // Post Type/Taxonomy Data
                     $data = get_option( $this->plugin_name . '_' . $option . '_' . parent::filterInputGet( $option ) );
                 }
 
                 // Return Data From Field
-                if ( ! empty( $data[$field] ) ) {
+                if ( isset( $data[$field] ) ) {
                     return esc_attr( $data[$field] );
+
                 }
             }
         }
@@ -539,22 +490,28 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 return;
             }
 
-            // Get Type (posttype/taxonomy)
-            $type = $this->sanitize( filter_input( INPUT_POST, 'import' ) ) ;
+            // Post Type Import
+            if ( filter_input( INPUT_POST, 'posttypes' ) ) {
+                $type = 'posttype';
+
+            // Taxonomy Import
+            } elseif ( filter_input( INPUT_POST, 'taxonomies' ) ) {
+                $type = 'taxonomy';
+            }
 
             // Decode The Import
             $decoded = json_decode( trim( $post ), true );
 
-            if ( isset(  $decoded ) ) {
+            if ( isset( $type, $decoded ) ) {
                 // Loop/Find Marker Records
                 foreach ( $decoded as $key => $data ) {
                     if ( ! is_numeric( $key ) ) {
-                        $markers[$this->sanitize( $key )] = $this->sanitize( $data );
+                        $markers[$this->sanitizeName( $key )] = $data;
                     }
                 }
 
                 // Update Marker Record
-                update_option( $this->plugin_name . '_' . $type, $markers, '', false );
+                update_option( $this->plugin_name . '_' . $this->sanitizeName( $type ), $markers, '', false );
 
                 // Loop Through Records
                 foreach ( $decoded as $key => $data ) {
@@ -562,7 +519,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                         $data = filter_var_array( $data, FILTER_SANITIZE_STRING );
 
                         // Save Postt Type Record
-                        update_option( $this->plugin_name . '_' . $type . '_'. $data['singular'], $data, '', true );
+                        update_option( $this->plugin_name . '_' . $this->sanitizeName( $type ) . '_' . $this->sanitizeName( $data['plural'] ), $data, '', true );
                     }
                 }
 
@@ -592,7 +549,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 // Get Saved Post Type Data
                 foreach( $markers as $record ) {
                     // Get Records
-                    $data[] = get_option( $this->plugin_name . '_' . $type . '_' . $record );
+                    $data[] = get_option( $this->plugin_name . '_' . $this->sanitizeName( $type ) . '_' . $this->sanitizeName( $record ) );
                 }
 
                 // Merge Makers and Records

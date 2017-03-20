@@ -9,14 +9,11 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @url https://codex.wordpress.org/Plugin_API/Action_Reference/manage_$post_type_posts_custom_column
  * @action add_action( 'init', array( 'tNtePTTManager_Posttypes', 'instance' ) );
  * 
- * @method init()               Init Class Methods
- * @method posttypes()          Start Post Types Register
- * @method presets()            Start Presets Register
- * @method register()           Register Post Types
- * @method setColumns()         Set Column Names
- * @method setColumnContent()   Content Within Columns
- * @method categoryFilter()     Filter By Category Dropdown
- * @method instance()           Class Instance
+ * @method init()       Init Class Methods
+ * @method options()    Get Post Type Options
+ * @method args()       Args for Taxonomies
+ * @method register()   Register Post Types
+ * @method instance()   Class Instance
  */
 if ( ! class_exists( 'PTTManager_Posttypes' ) )
 {
@@ -24,12 +21,6 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
     {
         // Holds Instance Object
         protected static $instance = NULL;
-
-        // Post Type Single Name
-        private $single = '';
-
-        // Post Type Plural Name
-        private $plural = '';
 
 
         /**
@@ -39,9 +30,6 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
         {
             // Register if not blocked
             if ( ! get_option( $this->plugin_name . '_posttype_block' ) ) {
-                // Start Preset Post Type Register
-                $this->presets();
-
                 // Start Post Type Register
                 $this->posttype();
             }
@@ -51,7 +39,7 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
         /**
          * @about Start Post Types Register
          */
-        final public function posttype()
+        final public function options()
         {
             // Get Post Type Markers
             $markers = get_option( $this->plugin_name . '_posttype' );
@@ -65,81 +53,27 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
                 $data = get_option( $this->plugin_name . '_posttype_' . $marker );
 
                 // Start Registration
-                if ( isset( $data['singular'], $data['plural'] ) && ! empty( $data ) && is_array( $data ) ) {
-                    $this->register( $this->sanitize( $data['singular'] ), $this->sanitize( $data['plural'] ), $data );
+                if ( isset( $data['plural'], $data['singular'] ) && ! empty( $data ) && is_array( $data ) ) {
+                    $this->register( $this->sanitize( $data['plural'] ), $this->sanitize( $data['singular'] ), $data );
                 }
             }
         }
 
 
         /**
-         * @about Start Presets Register
+         * @about Args for Post Types
+         * @param string $plural    Plural Post Type Name
+         * @param string $single    Single Post Type Name
+         * @param array $data       Option Data
          */
-        final public function presets()
-        {
-            // Get Option Data
-            $data = get_option( $this->plugin_name . '_preset_posttypes' );
-
-            // Ignore if No Preset Data
-            if ( ! $data || empty( $data ) || ! is_array( $data ) ) { return; }
-
-            // Books
-            if ( isset( $data['books'] ) && ! get_option( $this->plugin_name . '_posttype_books' ) ) {
-                $this->register( 'book', 'books', $data );
-            }
-
-            // Docs
-            if ( isset( $data['docs'] ) && ! get_option( $this->plugin_name . '_posttype_docs' ) ) {
-                $this->register( 'docs', 'docs', $data );
-            }
-
-            // FAQ
-            if ( isset( $data['faq'] ) && ! get_option( $this->plugin_name . '_posttype_faq' ) ) {
-                $this->register( 'faq', 'faq', $data );
-            }
-
-            // Music
-            if ( isset( $data['music'] ) && ! get_option( $this->plugin_name . '_posttype_music' ) ) {
-                $this->register( 'music', 'music', $data );
-            }
-
-            // Portfolio
-            if ( isset( $data['portfolio'] ) && ! get_option( $this->plugin_name . '_posttype_portfolio' ) ) {
-                $this->register( 'portfolio', 'portfolio', $data );
-            }
-
-            // Teams
-            if ( isset( $data['teams'] ) && ! get_option( $this->plugin_name . '_posttype_teams' ) ) {
-                $this->register( 'team', 'teams', $data );
-            }
-
-            // Testimonials
-            if ( isset( $data['testimonials'] ) && ! get_option( $this->plugin_name . '_posttype_testimonials' )  ) {
-                $this->register( 'testimonial', 'testimonials', $data );
-            }
-
-            // Videos
-            if ( isset( $data['videos'] ) && ! get_option( $this->plugin_name . '_posttype_videos' ) ) {
-                $this->register( 'video', 'videos', $data );
-            }
-        }
-
-
-        /**
-         * @about Register Post Type
-         */
-        final public function register( $single, $plural, $data = array() )
+        final private function args( $plural, $single, $data = array() )
         {
             // Required
-            if( ! isset( $single, $plural ) || ! $data || ! is_array( $data ) ) { return; }
+            if( ! isset( $plural, $single ) || ! $data || ! is_array( $data ) ) { return; }
 
             // Add New Dashicons Picker
-            if ( isset( $data['dashicons_picker_add'] ) ) {
-                $icon = esc_attr( $data['dashicons_picker_add'] );
-
-            // Set / Update Icon
-            } elseif ( isset( $data['dashicons_picker_' . $plural] ) ) {
-                $icon = esc_attr( $data['dashicons_picker_' . $plural] );
+            if ( isset( $data['dashicons_picker_' . $this->sanitizeName( $plural )] ) ) {
+                $icon = esc_attr( $data['dashicons_picker_' . $this->sanitizeName( $plural )] );
 
             // Else No Icon
             } else {
@@ -165,10 +99,10 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
             $showrest = ( ! empty( $data['showrest'] ) ) ? (bool) true : (bool) false;
 
             // REST API Slug
-            $restbase = ( $showrest && ! empty( $data['showrest'] ) && ! empty( $data['restbase'] ) ) ? $this->sanitize( $data['restbase'] ) : (bool) false;
+            $restbase = ( $showrest && ! empty( $data['showrest'] ) && ! empty( $data['restbase'] ) ) ? $this->sanitizeName( $data['restbase'] ) : (bool) false;
 
             // Archive Slug
-            $archiveslug = ( ! empty( $data['archiveslug'] ) ) ? $this->sanitize( $data['archiveslug'] ) : (bool) false;
+            $archiveslug = ( ! empty( $data['archiveslug'] ) ) ? $this->sanitizeName( $data['archiveslug'] ) : (bool) false;
             $archive = ( empty( $data['archive'] ) ) ? $archiveslug : (bool) false;
 
             // Slug
@@ -209,7 +143,8 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
             $thumbnail      = ( ! isset( $data['thumbnail'] ) ) ? array( 'thumbnail' => 'thumbnail' ) : array();
             $title          = ( ! isset( $data['title'] ) ) ? array( 'title' => 'title' ) : array();
             $trackbacks     = ( ! isset( $data['trackbacks'] ) ) ? array( 'trackbacks' => 'trackbacks' ) : array();
-            $supports       = array_merge( $author, $comments, $customfields, $editor, $excerpt, $pageattributes, $revisions, $postformats, $thumbnail, $title, $trackbacks );
+            $support        = array_merge( $author, $comments, $customfields, $editor, $excerpt, $pageattributes, $revisions, $postformats, $thumbnail, $title, $trackbacks );
+            $supports       = ( empty( $support ) ) ? (bool) false : $support;
 
             // Arguments for this post type
             $args = array(
@@ -224,9 +159,10 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
                 'show_in_rest'          => $showrest,
                 'rest_base'             => $restbase,
                 'rewrite'               => $rewrite,
-                'capability_type'       => 'post',
                 'has_archive'           => $archive,
+                'capability_type'       => 'post',
                 'hierarchical'          => true,
+                'map_meta_cap'          => true,
                 'description'           => $description,
                 'menu_position'         => $position,
                 'menu_icon'             => $icon,
@@ -237,7 +173,7 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
                     'singular_name'         => sprintf( esc_attr_x( '%1$s', 'post type singular name', 'ptt-manager' ), ucfirst( $single ) ),
                     'menu_name'             => sprintf( esc_attr_x( '%1$s', 'admin menu', 'ptt-manager' ), $menuname ),
                     'name_admin_bar'        => sprintf( esc_attr_x( '%1$s', 'add new on admin bar', 'ptt-manager' ), ucfirst( $single ) ),
-                    'add_new'               => sprintf( esc_attr_x( 'Add %1$s', $single, 'ptt-manager' ), ucfirst( $single ) ),
+                    'add_new'               => sprintf( esc_attr_x( 'Add %1$s', $this->sanitizeName( $single ), 'ptt-manager' ), ucfirst( $single ) ),
                     'add_new_item'          => sprintf( esc_attr__( 'Add New %1$s', 'ptt-manager' ), ucfirst( $single ) ),
                     'new_item'              => sprintf( esc_attr__( 'New %1$s', 'ptt-manager' ), ucfirst( $single ) ),
                     'edit_item'             => sprintf( esc_attr__( 'Edit %1$s', 'ptt-manager' ), ucfirst( $single ) ),
@@ -247,9 +183,33 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
                     'parent_item_colon'     => sprintf( esc_attr__( 'Parent %1$s:', 'ptt-manager' ), ucfirst( $plural ) ),
                     'not_found'             => sprintf( esc_attr__( 'No %1$s Found.', 'ptt-manager' ), ucfirst( $plural ) ),
                     'not_found_in_trash'    => sprintf( esc_attr__( 'No %1$s Found in Trash.', 'ptt-manager' ), ucfirst( $plural ) ),
+                    'archives'              => sprintf( esc_attr__( '%1$s Archives', 'ptt-manager' ), ucfirst( $single ) ),
+                    'attributes'            => sprintf( esc_attr__( '%1$s Attributes', 'ptt-manager' ), ucfirst( $single ) ),
+                    'featured_image'        => sprintf( esc_attr__( 'Featured %1$s Image', 'ptt-manager' ), ucfirst( $single ) ),
+                    'set_featured_image'    => sprintf( esc_attr__( 'Set Featured %1$s Image', 'ptt-manager' ), ucfirst( $single ) ),
+                    'remove_featured_image' => sprintf( esc_attr__( 'Remove Featured %1$s Image', 'ptt-manager' ), ucfirst( $single ) ),
+                    'use_featured_image'    => sprintf( esc_attr__( 'Use As Featured %1$s Image', 'ptt-manager' ), ucfirst( $single ) ),
+                    'items_list'            => sprintf( esc_attr__( '%1$s List', 'ptt-manager' ), ucfirst( $plural ) ),
+                    'items_list_navigation' => sprintf( esc_attr__( '%1$s List Navigation', 'ptt-manager' ), ucfirst( $plural ) ),
+                    'insert_into_item'      => sprintf( esc_attr__( 'Insert Into %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
+                    'uploaded_to_this_item' => sprintf( esc_attr__( 'Uploaded To %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
+                    'filter_items_list'     => sprintf( esc_attr__( 'Filter %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
                 ),
             );
+        }
 
+
+        /**
+         * @about Register Post Type
+         * @param string $plural    Plural Post Type Name
+         * @param string $single    Single Post Type Name
+         * @param array $data       Option Data
+         */
+        final public function register( $plural, $single, $data = array() )
+        {
+            // Get Array Args
+            $args = $this->args( $plural, $single, $data );
+            
             // Create Post Type
             register_post_type( $this->sanitizeName( $plural ), $args );
         }

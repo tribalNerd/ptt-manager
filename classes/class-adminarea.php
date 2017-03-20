@@ -9,7 +9,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * 
  * @method init()       Init Admin Actions
  * @method display()    Include Admin Area Templates
- * @method rules()      Update Check, Flush Rewrite Rules
+ * @method rules()      Flush Rewrite Rules
  * @method enqueue()    Load Stylesheets & jQuery
  * @method menu()       Load Admin Area Menu
  * @method tabs()       Load Admin Area Tabs
@@ -47,6 +47,9 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
          */
         final public function display()
         {
+            // Flush Rewrite Rules
+            $this->rules();
+
             // Admin Header
             require_once( $this->templates .'/header.php' );
 
@@ -54,9 +57,6 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
             switch ( filter_input( INPUT_GET, 'tab' ) ) {
                 case 'home':
                 default:
-                    // Flush Rewrite Rules
-                    $this->rules();
-   
                     require_once( $this->templates .'/home.php' );
                 break;
 
@@ -65,9 +65,6 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                 break;
 
                 case 'posttypes':
-                    // Flush Rewrite Rules
-                    $this->rules();
-
                     require_once( $this->templates .'/posttypes.php' );
                 break;
 
@@ -80,9 +77,6 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                 break;
 
                 case 'taxonomies':
-                    // Flush Rewrite Rules
-                    $this->rules();
-  
                     require_once( $this->templates .'/taxonomies.php' );
                 break;
 
@@ -109,8 +103,8 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                 // Flush Rules
                 flush_rewrite_rules();
 
-                // Remove To Reset
-                delete_option( PTT_MANAGER_PLUGIN_NAME . '_active' );
+                // Clear Setting
+                delete_option( $this->plugin_name . '_active' );
             }
         }
 

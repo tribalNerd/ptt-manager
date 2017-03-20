@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Post Type & Taxonomy Manager 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ptt-manager\n"
-"POT-Creation-Date: 2017-03-18 15:57:39+00:00\n"
+"POT-Creation-Date: 2017-03-20 01:43:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,204 +12,244 @@ msgstr ""
 "Last-Translator: tribalNerd <tribalnerd@technerdia.com>\n"
 "Language-Team: tribalNerd <tribalnerd@technerdia.com>\n"
 
-#: classes/class-extended.php:73
+#: classes/class-extended.php:75
 msgid "Home"
 msgstr ""
 
-#: classes/class-extended.php:74 templates/phpoutput.php:12
+#: classes/class-extended.php:76 templates/phpoutput.php:12
 #: templates/tools.php:89
 msgid "Post Types"
 msgstr ""
 
-#: classes/class-extended.php:75 templates/phpoutput.php:48
+#: classes/class-extended.php:77 templates/phpoutput.php:48
 #: templates/tools.php:126
 msgid "Taxonomies"
 msgstr ""
 
-#: classes/class-extended.php:76
+#: classes/class-extended.php:78
 msgid "Import/Export"
 msgstr ""
 
-#: classes/class-extended.php:77
+#: classes/class-extended.php:79
 msgid "PHP Output"
 msgstr ""
 
-#: classes/class-extended.php:78
+#: classes/class-extended.php:80
 msgid "Saved Settings"
 msgstr ""
 
-#: classes/class-extended.php:79 templates/templates.php:12
+#: classes/class-extended.php:81 templates/templates.php:12
 #: templates/templates.php:39 templates/tools.php:178 templates/tools.php:205
 msgid "Templates"
 msgstr ""
 
-#: classes/class-extended.php:97
-msgid "Preset Settings Updated!"
-msgstr ""
-
-#: classes/class-extended.php:101
+#: classes/class-extended.php:99
 msgid "Post Type Settings Updated!"
 msgstr ""
 
-#: classes/class-extended.php:105
+#: classes/class-extended.php:103
 msgid "Taxonomy Settings Updated!"
 msgstr ""
 
-#: classes/class-extended.php:109
+#: classes/class-extended.php:107
 msgid "Blocker Settings Updated!"
 msgstr ""
 
-#: classes/class-extended.php:113
+#: classes/class-extended.php:111
 msgid "Settings Imported!"
 msgstr ""
 
-#: classes/class-extended.php:117
+#: classes/class-extended.php:115
 msgid "Settings Deleted!"
 msgstr ""
 
-#: classes/class-extended.php:121
-msgid "Preset Settings Failed To Update!"
-msgstr ""
-
-#: classes/class-extended.php:125
-msgid "Post Type Settings Failed To Update!"
-msgstr ""
-
-#: classes/class-extended.php:129
-msgid "Taxonomy Settings Failed To Update! "
-msgstr ""
-
-#: classes/class-extended.php:133
-msgid "Blocker Settings Failed To Update!"
-msgstr ""
-
-#: classes/class-extended.php:137
-msgid "Import Failed!"
-msgstr ""
-
-#: classes/class-extended.php:141
+#: classes/class-extended.php:119
 msgid "The Post Type / Taxonomy Is Already Registered or Reserved!"
 msgstr ""
 
-#: classes/class-extended.php:237
+#: classes/class-extended.php:123
+msgid "Post Type Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:127
+msgid "Taxonomy Settings Failed To Update! "
+msgstr ""
+
+#: classes/class-extended.php:131
+msgid "Blocker Settings Failed To Update!"
+msgstr ""
+
+#: classes/class-extended.php:135
+msgid "Import Failed!"
+msgstr ""
+
+#: classes/class-extended.php:139
+msgid "Error: No Post Data!"
+msgstr ""
+
+#: classes/class-extended.php:323
 msgid "Select To Add"
 msgstr ""
 
-#: classes/class-extended.php:239
+#: classes/class-extended.php:325
 msgid "Select To Edit"
 msgstr ""
 
-#: classes/class-extended.php:322 classes/class-extended.php:327
+#: classes/class-extended.php:408 classes/class-extended.php:413
 msgid "You are not authorized to perform this action."
 msgstr ""
 
-#: classes/class-extended.php:349
+#: classes/class-extended.php:435
 msgid "Created on"
 msgstr ""
 
-#: classes/class-extended.php:349
+#: classes/class-extended.php:435
 msgid "and lasted updated on"
 msgstr ""
 
-#: classes/class-extended.php:349
+#: classes/class-extended.php:435
 msgid "by"
 msgstr ""
 
-#: classes/class-extended.php:393
+#: classes/class-extended.php:479
 msgid "Post (core)"
 msgstr ""
 
-#: classes/class-extended.php:396
+#: classes/class-extended.php:482
 msgid "Page (core)"
 msgstr ""
 
-#: classes/class-extended.php:443
+#: classes/class-extended.php:529
 msgid "Tags (core)"
 msgstr ""
 
-#: classes/class-extended.php:446
+#: classes/class-extended.php:532
 msgid "Categories (core)"
 msgstr ""
 
-#: classes/class-posttypes.php:236
+#: classes/class-posttypes.php:172
 msgctxt "post type general name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:237
+#: classes/class-posttypes.php:173
 msgctxt "post type singular name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:238
+#: classes/class-posttypes.php:174
 msgctxt "admin menu"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:239
+#: classes/class-posttypes.php:175
 msgctxt "add new on admin bar"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:241 classes/class-taxonomies.php:162
+#: classes/class-posttypes.php:177 classes/class-taxonomies.php:107
 msgid "Add New %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:242 classes/class-taxonomies.php:159
+#: classes/class-posttypes.php:178 classes/class-taxonomies.php:104
 msgid "New %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:243 classes/class-taxonomies.php:160
+#: classes/class-posttypes.php:179 classes/class-taxonomies.php:105
 msgid "Edit %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:244
+#: classes/class-posttypes.php:180
 msgid "View %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:245
+#: classes/class-posttypes.php:181
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:246 classes/class-taxonomies.php:163
+#: classes/class-posttypes.php:182 classes/class-taxonomies.php:108
 msgid "Search %1$s"
 msgstr ""
 
-#: classes/class-posttypes.php:247 classes/class-taxonomies.php:166
+#: classes/class-posttypes.php:183 classes/class-taxonomies.php:111
 msgid "Parent %1$s:"
 msgstr ""
 
-#: classes/class-posttypes.php:248
+#: classes/class-posttypes.php:184
 msgid "No %1$s Found."
 msgstr ""
 
-#: classes/class-posttypes.php:249
+#: classes/class-posttypes.php:185
 msgid "No %1$s Found in Trash."
 msgstr ""
 
-#: classes/class-taxonomies.php:157
+#: classes/class-posttypes.php:186
+msgid "%1$s Archives"
+msgstr ""
+
+#: classes/class-posttypes.php:187
+msgid "%1$s Attributes"
+msgstr ""
+
+#: classes/class-posttypes.php:188
+msgid "Featured %1$s Image"
+msgstr ""
+
+#: classes/class-posttypes.php:189
+msgid "Set Featured %1$s Image"
+msgstr ""
+
+#: classes/class-posttypes.php:190
+msgid "Remove Featured %1$s Image"
+msgstr ""
+
+#: classes/class-posttypes.php:191
+msgid "Use As Featured %1$s Image"
+msgstr ""
+
+#: classes/class-posttypes.php:192
+msgid "%1$s List"
+msgstr ""
+
+#: classes/class-posttypes.php:193
+msgid "%1$s List Navigation"
+msgstr ""
+
+#: classes/class-posttypes.php:194
+msgid "Insert Into %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:195
+msgid "Uploaded To %1$s"
+msgstr ""
+
+#: classes/class-posttypes.php:196
+msgid "Filter %1$s"
+msgstr ""
+
+#: classes/class-taxonomies.php:102
 msgctxt "taxonomy general name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:158
+#: classes/class-taxonomies.php:103
 msgctxt "taxonomy singular name"
 msgid "%1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:161
+#: classes/class-taxonomies.php:106
 msgid "Update %1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:164
+#: classes/class-taxonomies.php:109
 msgid "All %1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:165
+#: classes/class-taxonomies.php:110
 msgid "Parent %1$s"
 msgstr ""
 
-#: classes/class-taxonomies.php:167
+#: classes/class-taxonomies.php:112
 msgid "No %1$s Found"
 msgstr ""
 
@@ -261,154 +301,160 @@ msgstr ""
 
 #: templates/home.php:6
 msgid ""
-"Post Types are a unique form of \"Posts\" content, displayed below the "
-"Comments menu. Post Types can be used in conjunction with a related "
-"taxonomy, which provides a way to categorize post type content."
+"Use the pre-cretaed post types below to quickly create a custom post type, "
+"which can be used in conjunction with a related taxonomy, providing you with "
+"a way categorize post type content. You can edit activated post type presets "
+"within the Post Types tab above."
 msgstr ""
 
-#: templates/home.php:7
-msgid ""
-"Dashicon: To use, select the Icon button, then an icon. To remove, select "
-"the Icon button, press the < back link in the window and select the blank "
-"icon."
-msgstr ""
-
-#: templates/home.php:16
+#: templates/home.php:10
 msgid "Post Type Name and Description"
 msgstr ""
 
-#: templates/home.php:17 templates/home.php:80
-msgid "Activate"
-msgstr ""
-
-#: templates/home.php:18
+#: templates/home.php:11
 msgid "Icon"
 msgstr ""
 
-#: templates/home.php:19
-msgid "Select"
+#: templates/home.php:12 templates/home.php:38
+msgid "Set/Edit"
 msgstr ""
 
-#: templates/home.php:22 templates/home.php:85
-msgid "Books"
+#: templates/home.php:16 templates/home.php:42
+msgid "books"
 msgstr ""
 
-#: templates/home.php:22
+#: templates/home.php:16 templates/home.php:42
+msgid "book"
+msgstr ""
+
+#: templates/home.php:16
 msgid "Retail, display, review books."
 msgstr ""
 
-#: templates/home.php:27 templates/home.php:90
-msgid "Docs"
+#: templates/home.php:17 templates/home.php:43
+msgid "docs"
 msgstr ""
 
-#: templates/home.php:27
+#: templates/home.php:17
 msgid "Display help/user documents."
 msgstr ""
 
-#: templates/home.php:32
-msgid "FAQ"
+#: templates/home.php:18 templates/home.php:44
+msgid "faq"
 msgstr ""
 
-#: templates/home.php:32
+#: templates/home.php:18
 msgid "Provide frequently asked questions."
 msgstr ""
 
-#: templates/home.php:37 templates/home.php:100
-msgid "Music"
+#: templates/home.php:19 templates/home.php:45
+msgid "music"
 msgstr ""
 
-#: templates/home.php:37
+#: templates/home.php:19
 msgid "Selling, playing, downloading or displaying music."
 msgstr ""
 
-#: templates/home.php:42 templates/home.php:105
-msgid "Portfolio"
+#: templates/home.php:20 templates/home.php:46
+msgid "portfolio"
 msgstr ""
 
-#: templates/home.php:42
+#: templates/home.php:20
 msgid "Showing off creatives, designs, photography and more."
 msgstr ""
 
-#: templates/home.php:47 templates/home.php:110
-msgid "Teams"
+#: templates/home.php:21 templates/home.php:47
+msgid "teams"
 msgstr ""
 
-#: templates/home.php:47
+#: templates/home.php:21 templates/home.php:47
+msgid "team"
+msgstr ""
+
+#: templates/home.php:21
 msgid "Display your company/department team members."
 msgstr ""
 
-#: templates/home.php:52 templates/home.php:115
-msgid "Testimonials"
+#: templates/home.php:22 templates/home.php:48
+msgid "testimonials"
 msgstr ""
 
-#: templates/home.php:52
+#: templates/home.php:22 templates/home.php:48
+msgid "testimonial"
+msgstr ""
+
+#: templates/home.php:22
 msgid "Testimonials from your visitors, clients or customers."
 msgstr ""
 
-#: templates/home.php:57 templates/home.php:120
-msgid "Videos"
+#: templates/home.php:23 templates/home.php:49
+msgid "videos"
 msgstr ""
 
-#: templates/home.php:57
+#: templates/home.php:23 templates/home.php:49
+msgid "video"
+msgstr ""
+
+#: templates/home.php:23
 msgid "Provide videos to your visitors."
 msgstr ""
 
-#: templates/home.php:69
+#: templates/home.php:29
 msgid "Preset Taxonomies"
 msgstr ""
 
-#: templates/home.php:70
+#: templates/home.php:30
 msgid ""
-"Use taxonomies with either selected Post Types, or with your Posts or Pages, "
-"helping you better categorized your content. You do not have to select Posts/"
-"Pages if the taxonomy is being used with a Post Type."
+"Use the pre-created taxonomies below to quickly create a custom taxonomy. "
+"Assoicate the taxonomy with a custom preset post type, posts or pages. You "
+"can edit activated taxonomy presets within the Taxonomies tab above."
 msgstr ""
 
-#: templates/home.php:79
+#: templates/home.php:34
 msgid "Taxonomy Name and Description"
 msgstr ""
 
-#: templates/home.php:81
+#: templates/home.php:35
+msgid "Post Type"
+msgstr ""
+
+#: templates/home.php:36
 msgid "Posts"
 msgstr ""
 
-#: templates/home.php:82
+#: templates/home.php:37
 msgid "Pages"
 msgstr ""
 
-#: templates/home.php:85
+#: templates/home.php:42
 msgid "Categories for selling or displaying books."
 msgstr ""
 
-#: templates/home.php:90
+#: templates/home.php:43
 msgid "Categories for providing help/user documents."
 msgstr ""
 
-#: templates/home.php:95
-msgid "F.A.Q.'s"
-msgstr ""
-
-#: templates/home.php:95
+#: templates/home.php:44
 msgid "Categories for displaying frequently asked questions."
 msgstr ""
 
-#: templates/home.php:100
+#: templates/home.php:45
 msgid "Categories for selling, playing, downloading or displaying music."
 msgstr ""
 
-#: templates/home.php:105
+#: templates/home.php:46
 msgid "Categories for creative professionals and businesses."
 msgstr ""
 
-#: templates/home.php:110
+#: templates/home.php:47
 msgid "Categories for displaying your team members."
 msgstr ""
 
-#: templates/home.php:115
+#: templates/home.php:48
 msgid "Categories for testimonials to your visitors, clients or customers."
 msgstr ""
 
-#: templates/home.php:120
+#: templates/home.php:49
 msgid "Categories for displaying videos to your visitors."
 msgstr ""
 
@@ -637,8 +683,8 @@ msgstr ""
 
 #: templates/posttypes.php:81
 msgid ""
-"If Archive Items is selected, then optionally set an Archive Slug to be used "
-"instead of the default Post Type singular name."
+"If Archive URL is selected, then optionally set an Archive Slug to be used "
+"instead of the default Post Type plural name."
 msgstr ""
 
 #: templates/posttypes.php:84 templates/taxonomies.php:60
@@ -665,8 +711,7 @@ msgstr ""
 
 #: templates/posttypes.php:94
 msgid ""
-"The base slug this post type will use for the WordPress REST API. Defaults "
-"to Post Type singular name."
+"The slug name for the WordPress REST API. Defaults to Post Type plural name."
 msgstr ""
 
 #: templates/posttypes.php:97
