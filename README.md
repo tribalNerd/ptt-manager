@@ -5,15 +5,15 @@
 * **Requires at least:** 4.6
 * **Tested up to:** 4.7.3
 * **Stable tag:** 0.1.0
-* **License:** GNU GPL
-* **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
+* **License:** GNU GPLv3
+* **License URI:** https://github.com/tribalNerd/ptt-manager/blob/master/LICENSE
 
 Post Type & Taxonomy Manager, featuring pre-created and custom post types and taxonomies.
 
 :: Description
 --------
 
-The Post Type & Taxonomy Manager Wordpress Plugin allows you to register your custom post types and taxonomies with ease, while providing you with 8 pre-created and simple to use post types and taxonomies, including: Books, Docs, FAQ's, Music, Portfolio, Teams, Testimonials, and Videos.
+The Post Type & Taxonomy Manager WordPress Plugin allows you to register your custom post types and taxonomies with ease, while providing you with 8 pre-created and simple to use post types and taxonomies, including: Books, Docs, FAQ's, Music, Portfolio, Teams, Testimonials, and Videos.
 
 
 ### Features
@@ -33,12 +33,6 @@ The Post Type & Taxonomy Manager Wordpress Plugin allows you to register your cu
 
 #### Credits
 [Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by [bradvin](https://github.com/bradvin)
-
-
-#### To Do
-1. Retest everything again
-2. Take new screenshots of plugin
-3. Release to Wordpress Repo
 
 
 ### Installation
@@ -63,7 +57,7 @@ It is recommended that you use the built in WordPress plugin manager to download
 
 = Q) What does this plugin do? =
 
-A) The Post Type & Taxonomy Manager Wordpress plugin registers Post Types and Taxonomies for you.
+A) The Post Type & Taxonomy Manager WordPress plugin registers Post Types and Taxonomies for you.
 
 = Q) Does it create templates for Post Types and Taxonomies? =
 
@@ -75,7 +69,11 @@ A) To an extent, some features are automated to help simplify the process.
 
 = Q) Can I delete Post Types and Taxonomies? =
 
-A) Yes, but only those created by the Plugin. To delete: Click on either the Post Type or Taxonomy tab, then from the Edit dropdown menu select the Post Type or Taxonomy you wish to delete. Afterward scroll down and check the "Delete This Record" checkbox then click the blue Save Changes button.
+A) Yes, but only those created by the Plugin. To delete: Click on either the Post Type or Taxonomy tab, then from the Edit dropdown menu select the Post Type or Taxonomy you wish to delete. Or, select the Saved Settings tab, then click the "Delete All Settings?" button to permanently delete all settings.
+
+= Q) Does deleting a Post Type / Taxonomy delete content?
+
+A) No, only the Post Type / Taxonomy record is deleted.
 
 
 ### Arbitrary section
@@ -85,25 +83,39 @@ A) Yes, but only those created by the Plugin. To delete: Click on either the Pos
 
 ##### Quick Setup
 
-* The "home" tab within the Plugin Admin provides 8 pre-created Post Types and Taxonomies. To use, simply select the ones you want, then scroll down and click the blue Save Changes button.
+* The "home" tab within the Plugin Admin provides 8 pre-created Post Types and Taxonomies. To use, click the "Activate" button next to the Post Type or Taxonomy. Once activated, the presets can be edited via the Post Types and Taxonomies tabs.
 
 ##### Custom Post Type
 
 * To create a Custom Post Type: Click the Post Types tab, complete the form with the desired settings, then click the blue Save Changes button.
+* To edit a Custom Post Type: Select the Post Type from the Dropdown Menu.
 
 ##### Custom Taxonomy
 
 * To create a Custom Taxonomy:  Click the Taxonomies tab, complete the form with the desired settings, then click the blue Save Changes button.
+* To edit a Custom Taxonomy: Select the Post Type from the Dropdown Menu.
 
 ##### Delete a Post Type / Taxonomy
 
-* Click on either the Post Type or Taxonomy tab, then from the Edit dropdown menu select the Post Type or Taxonomy you wish to delete. Afterward scroll down and check the "Delete This Record" checkbox then click the blue Save Changes button.
+* Click on either the Post Types or Taxonomies tab, then from the edit dropdown menu select the Post Type or Taxonomy you wish to delete. Afterward scroll down and check the "Delete This Record" checkbox then click the blue Save Changes button.
 
-##### Export / Imports, PHP Output and Template Instructions
+##### Import / Export
 
-* Click the "Tools" tab, then the large blue button for the section you wish to view.
+* The import & export feature is for the Post Type and Taxonomy plugin only.
 
-##### Disabling & Deleting
+##### PHP Output
+
+* Under the PHP Output tab, all Post Types and Taxonomies are available via php snips. Under both output textareas, you can select to stop/block the Post Type & Taxonomy Manager plugin from rendering saved Post Types/Taxonomies. All other features work. This allows you to use the plugin to store data, thus using the PHP output code within your themes functions.php.
+
+##### Saved Settings
+
+* The Saved Settings tab displays all settings saved by the plugin. Click the "Delete All Settings?" button to permanently delete all settings.
+
+##### Templates
+
+* The Templates Tab explains who to display both Post Types and Taxonomies within your WordPress Theme Templates.
+
+##### Disabling / Deleting The Plugin
 
 * When you disable the plugin, no settings/options are deleted. When you delete the plugin, saved "options" are permanently removed. However, any created Posts/Categories, etc related to a Custom Post Type / Taxonomy are not deleted.
 
@@ -113,3 +125,24 @@ A) Yes, but only those created by the Plugin. To delete: Click on either the Pos
 = 0.1.0 2017-3-14 =
 
 Beta Release
+
+
+### Screenshots
+
+1. [Home Tab - Presets with Menu & Post Type Displayed](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-1.png)
+
+2. [Post Type Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-2.png)
+
+3. [Post Type Tab - With Edit Dropdown](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-3.png)
+
+4. [Taxonomy Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-4.png)
+
+5. [Taxonomy Tab - With Edit Dropdown](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-5.png)
+
+6. [Import/Export Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-6.png)
+
+7. [PHP Output Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-7.png)
+
+8. [Saved Settings Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-8.png)
+
+9. [Templates Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-9.png)

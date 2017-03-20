@@ -6,142 +6,70 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @about Register Custom Taxonomies
  * @url http://codex.wordpress.org/Function_Reference/register_taxonomy
  * @url https://codex.wordpress.org/Function_Reference/register_taxonomy_for_object_type
- * @action add_action( 'init', array( 'tNtePTTManager_Taxonomy', 'instance' ) );
+ * @call new PTTManager_Taxonomies( $option_data );
  * 
- * @method init()           Init Class Methods
- * @method options()        Get Taxonomy Options
- * @method args()           Args for Taxonomies
+ * @method __construct()    Required Settings
  * @method register()       Register Taxonomies
- * @method instance()       Class Instance
+ * @method args()           Args for Taxonomies
+ * @method labels()         Labels for Taxonomies
+ * @method posttypes()      Assigned Post Types
+ * @method slug()           Taxonomy Slug
+ * @method sanitize()       Sanitize Text Strings
  */
 if( ! class_exists( 'PTTManager_Taxonomies' ) )
 {
-    class PTTManager_Taxonomies extends PTTManager_Extended
+    class PTTManager_Taxonomies
     {
-        // Holds Instance Object
-        protected static $instance = NULL;
+        // Option Data Array
+        private $data = array();
+
+        // Plural label name
+        private $plural;
+
+        // Singular label name
+        private $single;
 
 
         /**
-         * @about Initiate Registration
+         * @about Required Taxonomy Settings
+         * @param array $option_data Saved Option Taxonomy Data
          */
-        final public function init()
-        {
-            // Register if not blocked
-            if ( ! get_option( $this->plugin_name . '_taxonomy_block' ) ) {
-                // Load Taxonomies
-                $this->taxonomies();
-
-                // Checkbox Listing of Post Types
-                add_filter( $this->plugin_name . '_list_posttypes', array( $this, 'listPosttypes' ), 10, 1 );
-            }
-        }
-
-
-        /**
-         * @about Start Taxonomy Register
-         */
-        final public function options()
-        {
-            // Get Taxonomy Markers
-            $markers = get_option( $this->plugin_name . '_taxonomy' );
-
-            // Ignore if No Markers
-            if ( ! $markers || empty( $markers ) ) { return; }
-
-            // Get Saved Taxonomy Data & Register
-            foreach( $markers as $marker ) {
-                // Get Unique Record Option
-                $data = get_option( $this->plugin_name . '_taxonomy_' . $marker );
-
-                // Start Registration
-                if ( isset( $data['plural'], $data['singular'] ) && ! empty( $data ) && is_array( $data ) ) {
-                    $this->register( $this->sanitize( $data['plural'] ), $this->sanitize( $data['singular'] ), $data );
-                }
-            }
-        }
-
-
-        /**
-         * @about Args for Taxonomies
-         * @param string $plural    Plural Post Type Name
-         * @param string $single    Single Post Type Name
-         * @param array $data       Option Data
-         */
-        final private function args( $plural, $single, $data = array() )
+        final public function __construct( array $option_data )
         {
             // Required
-            if( ! isset( $plural, $single ) || ! $data || ! is_array( $data ) ) { return; }
+            if ( ! $option_data || ! is_array( $option_data ) ) {
+                wp_die( __( 'The $option_data array is required!', 'ptt-manager' ) );
+            }
 
-            // If checked, the taxonomy is not publicly viewable
-            $public = ( ! empty( $data['public'] ) ) ? (bool) false : (bool) true;
+            // Set Option Data Varabile
+            $this->data = $option_data;
 
-            // If checked, do not show within WP Admin
-            $showui = ( ! empty( $data['showui'] ) ) ? (bool) false : (bool) true;
+            if ( empty( $this->data['plural'] ) ) {
+                wp_die( __( 'The taxonomy plural name is missing and required!', 'ptt-manager' ) );
+            }
 
-            // Parent-Children (true like categories) (false like tags)
-            $hierarchical = ( ! empty( $data['hierarchical'] ) ) ? (bool) false : (bool) true;
+            if ( empty( $this->data['singular'] ) ) {
+                wp_die( __( 'The taxonomy singular name is missing and required!', 'ptt-manager' ) );
+            }
 
-            // Set the taxonomy description if it has been defined
-            $description = ( ! empty( $data['description'] ) ) ? esc_html( $this->sanitize( $data['description'] ) ) : (bool) false;
+            // Set Plural and Single Taxonomy Name
+            $this->plural   = $this->sanitize( $this->data['plural'] );
+            $this->single   = $this->sanitize( $this->data['singular'] );
 
-            // Taxonomy Slug
-            $slug = ( ! empty( $data['slug'] ) ) ? $this->sanitizeName( $data['slug'] ) : $this->sanitizeName( $single );
-
-            // Arguments for this taxonomy
-            return array(
-                'public'            => $public,
-                'show_in_nav_menus' => $public,
-                'query_var'         => $public,
-                'show_ui'           => $showui,
-                'hierarchical'      => $hierarchical,
-                'description'       => $description,
-                'show_admin_column' => true,
-                'rewrite'           => array( 'slug' => $slug, 'with_front' => true ),
-                'labels'            => array(
-                    'name'              => sprintf( esc_attr_x( '%1$s', 'taxonomy general name', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'singular_name'     => sprintf( esc_attr_x( '%1$s', 'taxonomy singular name', 'ptt-manager' ), ucfirst( $single ) ),
-                    'new_item_name'     => sprintf( esc_attr__( 'New %1$s', 'ptt-manager' ), ucfirst( $single ) ),
-                    'edit_item'         => sprintf( esc_attr__( 'Edit %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'update_item'       => sprintf( esc_attr__( 'Update %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'add_new_item'      => sprintf( esc_attr__( 'Add New %1$s', 'ptt-manager' ), ucfirst( $single ) ),
-                    'search_items'      => sprintf( esc_attr__( 'Search %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'all_items'         => sprintf( esc_attr__( 'All %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'parent_item'       => sprintf( esc_attr__( 'Parent %1$s', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'parent_item_colon' => sprintf( esc_attr__( 'Parent %1$s:', 'ptt-manager' ), ucfirst( $plural ) ),
-                    'not_found'         => sprintf( esc_attr__( 'No %1$s Found', 'ptt-manager' ), ucfirst( $plural ) ),
-            ) );
+            // Register Taxonomies
+            add_action( 'init', array( $this, 'register' ) );
         }
 
 
         /**
-         * @about Register Taxonomies
-         * @param string $plural    Plural Post Type Name
-         * @param string $single    Single Post Type Name
-         * @param array $data       Option Data
+         * @about Register Taxonomy
          */
-        final public function register( $plural, $single, $data = array() )
+        final public function register()
         {
-            // Get Array Args
-            $args = $this->args( $plural, $single, $data );
-
-            // For Post Types Tab
-            $posttype_array = array();
-
-            // Post Types Tab: Loop through Selected Post Types from templates/taxonomies.php
-            if ( ( isset( $data['pt'] ) && is_array( $data['pt'] ) ) ) {
-                foreach ( $data['pt'] as $key => $posttype ) {
-                    $posttype_array[$key] = $posttype;
-                }
-            } else {
-                $posttype_array["page"] = "page";
-            }
-
-            // Create Taxonomy
-            register_taxonomy( $this->sanitizeName( $plural ), $posttype_array, $args );
+            register_taxonomy( $this->sanitize( $this->plural, true ), $this->posttypes(), $this->args() );
 
             // Add Taxonomy To Post Type
-            foreach( $posttype_array as $key => $type ) {
+            foreach( $this->posttypes() as $key => $type ) {
                 if ( isset( $key ) ) {
                     register_taxonomy_for_object_type( 'category', $type );
                     register_taxonomy_for_object_type( 'post_tag', $type );
@@ -151,16 +79,99 @@ if( ! class_exists( 'PTTManager_Taxonomies' ) )
 
 
         /**
-         * @about Create Instance
+         * @about Taxonomy Arguments Array
+         * @return array Taxonomy Arguments
          */
-        public static function instance()
+        final private function args()
         {
-            if ( ! self::$instance ) {
-                self::$instance = new self();
-                self::$instance->init();
+            return array(
+                'public'            => ( ! empty( $this->data['public'] ) ) ? (bool) false : (bool) true,
+                'show_in_nav_menus' => ( ! empty( $this->data['public'] ) ) ? (bool) false : (bool) true,
+                'query_var'         => ( ! empty( $this->data['public'] ) ) ? (bool) false : (bool) true,
+                'show_ui'           => ( ! empty( $this->data['showui'] ) ) ? (bool) false : (bool) true,
+                'hierarchical'      => ( ! empty( $this->data['hierarchical'] ) ) ? (bool) false : (bool) true,
+                'description'       => ( ! empty( $this->data['description'] ) ) ? $this->sanitize( $this->data['description'] ) : (bool) false,
+                'rewrite'           => array( 'slug' => $this->slug(), 'with_front' => true ),
+                'show_admin_column' => true,
+                'labels'            => $this->labels()
+            );
+        }
+
+
+        /**
+         * @about Taxonomy Labels Array
+         * @return array Taxonomy Labels
+         */
+        final private function labels()
+        {
+            return array(
+                'name'              => sprintf( esc_attr_x( '%1$s', 'taxonomy general name', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'singular_name'     => sprintf( esc_attr_x( '%1$s', 'taxonomy singular name', 'ptt-manager' ), ucfirst( $this->single ) ),
+                'new_item_name'     => sprintf( esc_attr__( 'New %1$s', 'ptt-manager' ), ucfirst( $this->single ) ),
+                'edit_item'         => sprintf( esc_attr__( 'Edit %1$s', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'update_item'       => sprintf( esc_attr__( 'Update %1$s', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'add_new_item'      => sprintf( esc_attr__( 'Add New %1$s', 'ptt-manager' ), ucfirst( $this->single ) ),
+                'search_items'      => sprintf( esc_attr__( 'Search %1$s', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'all_items'         => sprintf( esc_attr__( 'All %1$s', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'parent_item'       => sprintf( esc_attr__( 'Parent %1$s', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'parent_item_colon' => sprintf( esc_attr__( 'Parent %1$s:', 'ptt-manager' ), ucfirst( $this->plural ) ),
+                'not_found'         => sprintf( esc_attr__( 'No %1$s Found', 'ptt-manager' ), ucfirst( $this->plural ) ),
+            );
+        }
+
+
+        /**
+         * @about Assigned Post Types
+         * @return array $posttypes Selected Post Types
+         */
+        final private function posttypes()
+        {
+            // For Post Types Tab
+            $posttypes = array();
+
+            // Post Types Tab: Loop through Selected Post Types from templates/taxonomies.php
+            if ( ( isset( $this->data['pt'] ) && is_array( $this->data['pt'] ) ) ) {
+                foreach ( $this->data['pt'] as $key => $posttype ) {
+                    $posttypes[$key] = $posttype;
+                }
+            } else {
+                $posttypes["page"] = "page";
             }
 
-            return self::$instance;
+            return $posttypes;
+        }
+
+
+        /**
+         * @about Taxonomy Slug
+         * @return string Slug Name
+         */
+        final private function slug()
+        {
+            return ( ! empty( $this->data['slug'] ) ) ? $this->sanitize( $this->data['slug'], true ) : $this->sanitize( $this->single, true );
+        }
+
+
+        /**
+         * @about Sanitize Strings
+         * @param string $string Filter var, sanitize string, strip, sanitize_text_field()
+         * @param bool   $strict True to clear sapces, underscores to dashes, lowercase string
+         * @default Strip tags, line breaks, tabs, whitespace, octets, validate UTF-8, < to entities
+         * @strict  Strip tags, line breaks, tabs, whitespace, octets, validate UTF-8, < to entities, lowercase, replace spaces and _ with -
+         * @return string Sanitized Item
+         */
+        final public function sanitize( $string, $strict = false )
+        {
+            $filtered = sanitize_text_field( filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) );
+
+            if ( $strict ) {
+                // Clear spaces, underscores to dashes, lowercase string
+                $sanitized = preg_replace( '/\s/', '', str_replace( '_', '-', strtolower( $filtered ) ) );
+            } else {
+                $sanitized = $filtered;
+            }
+
+            return $sanitized;
         }
     }
 }

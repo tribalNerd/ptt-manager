@@ -5,7 +5,7 @@
  * Description: Post Type & Taxonomy Manager for WordPress Themes
  * Tags: post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
  * Version: 0.1.0
- * License: GNU GPL
+ * License: GNU GPLv3
  * Copyright (c) 2017 Chris Winters
  * Author: tribalNerd, Chris Winters
  * Author URI: http://techNerdia.com/
@@ -92,12 +92,6 @@ if( ! class_exists( 'ptt_manager' ) )
             // Load Admin Area
             add_action( 'wp_loaded', array( 'PTTManager_AdminArea', 'instance' ) );
 
-            // Register Post Types
-            add_action( 'init', array( 'PTTManager_Posttypes', 'instance' ) );
-
-            // Register Taxonomies
-            add_action( 'init', array( 'PTTManager_Taxonomies', 'instance' ) );
-
             // Update Settings
             add_action( 'init', array( 'PTTManager_Process', 'instance' ) );
 
@@ -108,6 +102,62 @@ if( ! class_exists( 'ptt_manager' ) )
 
             // Inject Plugin Links
             add_filter( 'plugin_row_meta', array( $this, 'links' ), 10, 2 );
+
+            // Start Post Type Register
+            $this->posttypes();
+
+            // Start Taxonomy Register
+            $this->taxonomies();
+        }
+
+
+        /**
+         * @about Start Post Type Register
+         */
+        final private function posttypes()
+        {
+            // Stop Registration if Block is Enabled
+            if ( get_option( PTT_MANAGER_PLUGIN_NAME . '_posttype_block' ) ) { return; }
+
+            // Get Post Type Markers
+            $markers = get_option( PTT_MANAGER_PLUGIN_NAME . '_posttype' );
+
+            // Markers Required
+            if ( $markers && ! empty( $markers ) && is_array( $markers ) ) {
+                // Create Post Type for each Marker
+                foreach( $markers as $marker ) {
+                    // Get Post Type Option
+                    $option_data = get_option( PTT_MANAGER_PLUGIN_NAME . '_posttype_' . $marker );
+
+                    // Create Post Type
+                    new PTTManager_Posttypes( $option_data );
+                }
+            }
+        }
+
+
+        /**
+         * @about Start Taxonomy Register
+         */
+        final private function taxonomies()
+        {
+            // Stop Registration if Block is Enabled
+            if ( get_option( PTT_MANAGER_PLUGIN_NAME . '_taxonomy_block' ) ) { return; }
+
+            // Get Taxonomy Markers
+            $taxonomy_markers = get_option( PTT_MANAGER_PLUGIN_NAME . '_taxonomy' );
+
+            // Markers Required
+            if ( $taxonomy_markers && ! empty( $taxonomy_markers ) && is_array( $taxonomy_markers ) ) {
+                // Get Saved Taxonomy Data & Register
+                foreach( $taxonomy_markers as $taxonomy_marker ) {
+                    // Get Taxonomy Option
+                    $taxonomy_data = get_option( PTT_MANAGER_PLUGIN_NAME . '_taxonomy_' . $taxonomy_marker );
+
+                    // Create Taxonomy
+                    new PTTManager_Taxonomies( $taxonomy_data );
+                }
+            }
         }
 
 
