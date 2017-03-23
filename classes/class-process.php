@@ -124,7 +124,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
                 // Process Import
                 if ( ! $post ) {
-                    $this->import( $post);
+                    $this->import( $post );
                 } else {
                     // Display Message
                     parent::message( 'importerror', 'error' );
@@ -442,7 +442,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
          */
         final public function dashiconString( $string )
         {
-            return ( filter_input( INPUT_GET, "posttype" ) ) ? $string . esc_attr( parent::filterInputGet( 'posttype' ) ) : $string . esc_attr( 'add' );
+            return ( filter_input( INPUT_GET, "posttype" ) ) ? $string . esc_attr( parent::filterInputGet( 'posttype' ) ) : $string . 'add';
         }
 
 
@@ -556,7 +556,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 $merged_data = array_merge( $markers, $data );
 
                 // Export Encoded JSON Object
-                echo esc_html( json_encode( $merged_data ) );
+                echo json_encode( $merged_data );
             }
         }
 

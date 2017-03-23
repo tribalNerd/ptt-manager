@@ -73,6 +73,11 @@ A) Yes, but only those created by the Plugin. To delete: Click on either the Pos
 A) No, only the Post Type / Taxonomy record is deleted.
 
 
+== Upgrade Notice ==
+
+No Upgrades At This Time.
+
+
 == Arbitrary section ==
 
 * By default, no settings are activated/installed.
@@ -143,4 +148,3 @@ Beta Release
 8. Saved Settings Tab
 
 9. Templates Tab
-

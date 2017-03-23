@@ -115,7 +115,7 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
         final public function enqueue()
         {
             // Post Type & Taxonomy Manager
-            wp_enqueue_style( $this->plugin_name, plugins_url( '/assets/css/style.css', $this->plugin_file ), '', date( 'YmdHis', time() ), 'all' );
+            wp_enqueue_style( $this->plugin_name, plugins_url( '/assets/style.css', $this->plugin_file ), '', date( 'YmdHis', time() ), 'all' );
 
             // Wordpress Dashicons Picker
             wp_enqueue_style( 'dashicons-picker',  plugins_url( '/vendors/dashicons-picker/css/dashicons-picker.css', $this->plugin_file ), array( 'dashicons' ), '1.0', false );

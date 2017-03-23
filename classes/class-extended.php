@@ -72,13 +72,13 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
             // Tabs Names: &tab=home
             $this->tabs = array( 
-                'home'          => esc_html__( 'Home', 'ptt-manager' ),
-                'posttypes'     => esc_html__( 'Post Types', 'ptt-manager' ),
-                'taxonomies'    => esc_html__( 'Taxonomies', 'ptt-manager' ),
-                'importexport'  => esc_html__( 'Import/Export', 'ptt-manager' ),
-                'phpoutput'     => esc_html__( 'PHP Output', 'ptt-manager' ),
-                'settings'      => esc_html__( 'Saved Settings', 'ptt-manager' ),
-                'templates'     => esc_html__( 'Templates', 'ptt-manager' ),
+                'home'          => __( 'Home', 'ptt-manager' ),
+                'posttypes'     => __( 'Post Types', 'ptt-manager' ),
+                'taxonomies'    => __( 'Taxonomies', 'ptt-manager' ),
+                'importexport'  => __( 'Import/Export', 'ptt-manager' ),
+                'phpoutput'     => __( 'PHP Output', 'ptt-manager' ),
+                'settings'      => __( 'Saved Settings', 'ptt-manager' ),
+                'templates'     => __( 'Templates', 'ptt-manager' ),
             );
         }
 
@@ -96,47 +96,47 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             // Message Switch
             switch ( $slug ) {
                 case 'posttypeupdate':
-                    $message = esc_html__( 'Post Type Settings Updated!' );
+                    $message = __( 'Post Type Settings Updated!' );
                 break;
 
                 case 'taxonomyupdate':
-                    $message = esc_html__( 'Taxonomy Settings Updated!' );
+                    $message = __( 'Taxonomy Settings Updated!' );
                 break;
 
                 case 'blockerupdate':
-                    $message = esc_html__( 'Blocker Settings Updated!' );
+                    $message = __( 'Blocker Settings Updated!' );
                 break;
 
                 case 'importupdate':
-                    $message = esc_html__( 'Settings Imported!' );
+                    $message = __( 'Settings Imported!' );
                 break;
 
                 case 'settingsupdate':
-                    $message = esc_html__( 'Settings Deleted!' );
+                    $message = __( 'Settings Deleted!' );
                 break;
 
                 case 'duplicate':
-                    $message = esc_html__( 'The Post Type / Taxonomy Is Already Registered or Reserved!' );
+                    $message = __( 'The Post Type / Taxonomy Is Already Registered or Reserved!' );
                 break;
 
                 case 'posttypeerror':
-                    $message = esc_html__( 'Post Type Settings Failed To Update!' );
+                    $message = __( 'Post Type Settings Failed To Update!' );
                 break;
 
                 case 'taxonomyerror':
-                    $message = esc_html__( 'Taxonomy Settings Failed To Update! ' );
+                    $message = __( 'Taxonomy Settings Failed To Update! ' );
                 break;
 
                 case 'blockererror':
-                    $message = esc_html__( 'Blocker Settings Failed To Update!' );
+                    $message = __( 'Blocker Settings Failed To Update!' );
                 break;
 
                 case 'importerror':
-                    $message = esc_html__( 'Import Failed!' );
+                    $message = __( 'Import Failed!' );
                 break;
 
                 case 'unknownerror':
-                    $message = esc_html__( 'Error: No Post Data!' );
+                    $message = __( 'Error: No Post Data!' );
                 break;
 
             }
@@ -320,9 +320,9 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 $html .= '<select name="' . esc_attr( $type ) . '" onchange="this.form.submit()">';
 
                 if ( filter_input( INPUT_GET, $type ) ) {
-                    $html .= '<option value="">' . esc_html__( 'Select To Add', 'ptt-manager' ) . '</option>';
+                    $html .= '<option value="">' . __( 'Select To Add', 'ptt-manager' ) . '</option>';
                 } else {
-                    $html .= '<option value="">' . esc_html__( 'Select To Edit', 'ptt-manager' ) . '</option>';
+                    $html .= '<option value="">' . __( 'Select To Edit', 'ptt-manager' ) . '</option>';
                 }
 
                 foreach ( $names as $name => $value ) {
@@ -476,10 +476,10 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
                 // Build Post Type Name
                 if ( $posttype == "post" ) {
-                    $name = esc_attr__( 'Post (core)', 'ptt-manager' );
+                    $name = __( 'Post (core)', 'ptt-manager' );
 
                 } elseif ( $posttype == "page" ) {
-                    $name = esc_attr__( 'Page (core)', 'ptt-manager' );
+                    $name = __( 'Page (core)', 'ptt-manager' );
 
                 } else {
                     $name = esc_attr( ucfirst( $posttype ) );
@@ -526,10 +526,10 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
                 // Build Taxonomy Name
                 if ( $taxonomy == "post_tag" ) {
-                    $name = esc_attr__( 'Tags (core)', 'ptt-manager' );
+                    $name = __( 'Tags (core)', 'ptt-manager' );
 
                 } elseif ( $taxonomy == "category" ) {
-                    $name = esc_attr__( 'Categories (core)', 'ptt-manager' );
+                    $name = __( 'Categories (core)', 'ptt-manager' );
 
                 } else {
                     $name = esc_attr( ucfirst( $taxonomy ) );
@@ -573,7 +573,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             foreach ( wp_load_alloptions() as $option => $value ) {
                 if ( strpos( $option, $this->plugin_name ) === 0 ) {
                     $html .= '<tr>';
-                    $html .= '<td><label>' . esc_attr( $option ) . '</label></td>';
+                    $html .= '<td><label>' . esc_html( $option ) . '</label></td>';
                     $html .= '<td><input name="' . esc_attr( $option ) . '" type="text" value="' . esc_attr( $value ) . '" class="regular-text" readonly="readonly" /></td>';
                     $html .= '</tr>';
                 }

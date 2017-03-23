@@ -89,7 +89,7 @@ if ( ! class_exists( 'PTTManager_Posttypes' ) )
                 'show_in_menu'          => ( ! empty( $this->data['showui'] ) ) ? (bool) false : (bool) true,
                 'show_in_admin_bar'     => ( ! empty( $this->data['showui'] ) ) ? (bool) false : (bool) true,
                 'show_in_rest'          => ( ! empty( $this->data['showrest'] ) ) ? (bool) true : (bool) false,
-                'description'           => ( ! empty( $this->data['description'] ) ) ? esc_html( $this->sanitize( $this->data['description'] ) ) : (bool) false,
+                'description'           => ( ! empty( $this->data['description'] ) ) ? $this->sanitize( $this->data['description'] ) : (bool) false,
                 'rest_base'             => ( ! empty( $this->data['restbase'] ) ) ? $this->sanitize( $this->data['restbase'], true ) : (bool) false,
                 'menu_position'         => ( ! empty( $this->data['position'] ) ) ? absint( $this->data['position'] ) : (bool) false,
                 'rewrite'               => array( 'slug' => $this->slug(), 'with_front' => true ),
