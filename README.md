@@ -129,20 +129,20 @@ Beta Release
 
 ### Screenshots
 
-1. [Home Tab - Presets with Menu & Post Type Displayed](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-1.png)
+1. [Home Tab - Presets with Menu & Post Type Displayed](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-1.png)
 
-2. [Post Type Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-2.png)
+2. [Post Type Tab](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-2.png)
 
-3. [Post Type Tab - With Edit Dropdown](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-3.png)
+3. [Post Type Tab - With Edit Dropdown](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-3.png)
 
-4. [Taxonomy Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-4.png)
+4. [Taxonomy Tab](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-4.png)
 
-5. [Taxonomy Tab - With Edit Dropdown](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-5.png)
+5. [Taxonomy Tab - With Edit Dropdown](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-5.png)
 
-6. [Import/Export Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-6.png)
+6. [Import/Export Tab](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-6.png)
 
-7. [PHP Output Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-7.png)
+7. [PHP Output Tab](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-7.png)
 
-8. [Saved Settings Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-8.png)
+8. [Saved Settings Tab](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-8.png)
 
-9. [Templates Tab](https://github.com/tribalNerd/ptt-manager/blob/master/assets/screenshot-9.png)
+9. [Templates Tab](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-9.png)
