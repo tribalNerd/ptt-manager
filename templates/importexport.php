@@ -5,9 +5,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 <h3><?php _e( 'Export / Import Post Types', 'ptt-manager' );?></h3>
 <p><?php _e( 'Export and import post type data for the Post Types & Taxonomies Manager plugin. Export does not include presets! Importing will override saved Post Type data from this plugin only!', 'ptt-manager' );?></p>
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="import" />
 
     <table>
@@ -29,9 +28,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 <h3><?php _e( 'Export / Import Taxonomies', 'ptt-manager' );?></h3>
 <p><?php _e( 'Export and import taxonomy data for the Post Types & Taxonomies Manager plugin. Export does not include presets! Importing will override saved Taxonomy data from this plugin only!', 'ptt-manager' );?></p>
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="import" />
 
     <table>

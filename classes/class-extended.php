@@ -11,18 +11,18 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method presetPosttype() Preset Post Type Fields
  * @method presetTaxonomy() Preset Taxonomy Fields
  * @method editDropdown()   Get Saved Options For Edit Dropdown
- * @method filterInputGet() INPUT_GET Filter
  * @method sanitize()       Sanitize Text Strings
  * @method sanitizeName()   Sanitize Label/Name
  * @method wpPosttypes()    Get All Post Type Keys
- * @method validate()       Simple Form Validation
  * @method createdUpdated() Created/Updated Inputs and Message
  * @method listPosttypes()  Create Checkbox Listing of Post Types
  * @method listTaxonomies() Checkbox Listing of Taxonomies
  * @method date()           Get the Current Date & Time
  * @method author()         Get Current Logged In User Display Name
  * @method settings()       Get All Plugin Options
- * @method protect()        Admin Area Protection
+ * @method field()          Get Saved Option Data For Inputs/Display
+ * @method qString()        Get Query String Item
+ * @method validate()       Form Validation
  */
 if( ! class_exists( 'PTTManager_Extended' ) )
 {
@@ -52,6 +52,9 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         // Tab Names
         public $tabs;
 
+        // Base Option Name
+        public $option_name;
+
         // True if Plugin Options
         public $settings = false;
 
@@ -68,6 +71,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             $this->plugin_file      = PTT_MANAGER_PLUGIN_FILE;
             $this->plugin_version   = PTT_MANAGER_VERSION;
             $this->menu_name        = PTT_MANAGER_MENU_NAME;
+            $this->option_name      = PTT_MANAGER_OPTION_NAME;
             $this->templates        = PTT_MANAGER_TEMPLATES;
 
             // Tabs Names: &tab=home
@@ -96,47 +100,47 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             // Message Switch
             switch ( $slug ) {
                 case 'posttypeupdate':
-                    $message = __( 'Post Type Settings Updated!' );
+                    $message = __( 'Post Type Settings Updated! You may need to <a href="javascript:window.location.reload(true)">refresh</a> to see the post type within the admin menu.', 'ptt-manager' );
                 break;
 
                 case 'taxonomyupdate':
-                    $message = __( 'Taxonomy Settings Updated!' );
+                    $message = __( 'Taxonomy Settings Updated! You may need to <a href="javascript:window.location.reload(true)">refresh</a> to see the taxonomy within the admin menu.', 'ptt-manager' );
                 break;
 
                 case 'blockerupdate':
-                    $message = __( 'Blocker Settings Updated!' );
+                    $message = __( 'Blocker Settings Updated!', 'ptt-manager' );
                 break;
 
                 case 'importupdate':
-                    $message = __( 'Settings Imported!' );
+                    $message = __( 'Settings Imported!', 'ptt-manager' );
                 break;
 
                 case 'settingsupdate':
-                    $message = __( 'Settings Deleted!' );
+                    $message = __( 'Settings Deleted!', 'ptt-manager' );
                 break;
 
                 case 'duplicate':
-                    $message = __( 'The Post Type / Taxonomy Is Already Registered or Reserved!' );
+                    $message = __( 'The Post Type / Taxonomy Is Already Registered or Reserved!', 'ptt-manager' );
                 break;
 
                 case 'posttypeerror':
-                    $message = __( 'Post Type Settings Failed To Update!' );
+                    $message = __( 'Post Type Settings Failed To Update!', 'ptt-manager' );
                 break;
 
                 case 'taxonomyerror':
-                    $message = __( 'Taxonomy Settings Failed To Update! ' );
+                    $message = __( 'Taxonomy Settings Failed To Update!', 'ptt-manager' );
                 break;
 
                 case 'blockererror':
-                    $message = __( 'Blocker Settings Failed To Update!' );
+                    $message = __( 'Blocker Settings Failed To Update!', 'ptt-manager' );
                 break;
 
                 case 'importerror':
-                    $message = __( 'Import Failed!' );
+                    $message = __( 'Import Failed!', 'ptt-manager' );
                 break;
 
                 case 'unknownerror':
-                    $message = __( 'Error: No Post Data!' );
+                    $message = __( 'Error: No Post Data!', 'ptt-manager' );
                 break;
 
             }
@@ -217,33 +221,36 @@ if( ! class_exists( 'PTTManager_Extended' ) )
          */
         final public function presetPosttype( $plural, $singular, $about )
         {
-            if ( ! get_post_type_object( $this->sanitizeName( $plural ) ) ) {?>
-                <form enctype="multipart/form-data" method="post" action="options.php">
-                <?php settings_fields( $this->plugin_name );?>
-                <?php do_settings_sections( $this->plugin_name );?>
+            if ( ! get_option( $this->option_name . 'posttype_' . $plural ) ) {?>
+                <form enctype="multipart/form-data" method="post" action="">
+                <?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
                 <input type="hidden" name="type" value="posttype" />
-                <input type="hidden" name="plural" value="<?php echo $plural;?>" />
-                <input type="hidden" name="singular" value="<?php echo $singular;?>" />
-                <input id="dashicons_picker_<?php echo $plural;?>" name="dashicons_picker_<?php echo $plural;?>" type="hidden" value="" />
+                <input type="hidden" name="plural" value="<?php echo esc_attr( $plural );?>" />
+                <input type="hidden" name="singular" value="<?php echo esc_attr( $singular );?>" />
+                <input type="hidden" name="created" value="<?php echo esc_attr( $this->date() );?>" />
+                <input type="hidden" name="author" value="<?php echo esc_attr( $this->author() );?>" />
+                <input id="dashicons_picker_<?php echo esc_attr( $plural );?>" name="dashicons_picker_<?php echo esc_attr( $plural );?>" type="hidden" value="" />
                     <tr>
-                        <td><label for="<?php echo $plural;?>"><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
-                        <td class="td10 textcenter"><input class="button dashicons-picker" type="button" value="Icon" data-target="#dashicons_picker_<?php echo $plural;?>" /></td>
-                        <td class="td10 textcenter"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate"></td>
+                        <td><label for="<?php echo esc_attr( $plural );?>"><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
+                        <td class="td10 textcenter"><input class="button dashicons-picker" type="button" value="Icon" data-target="#dashicons_picker_<?php echo esc_attr( $plural );?>" /></td>
+                        <td class="td10 textcenter"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Activate', 'ptt-manager' );?>"></td>
                     </tr>
                 </form>
-            <?php } else {
+            <?php }
+
+            if ( get_option( $this->option_name . 'posttype_' . $plural ) ) {
                 // Get Taxonomy Data
-                if ( get_option( $this->plugin_name . '_posttype_' . $plural ) ) {
-                    $data = get_option( $this->plugin_name . '_posttype_' . $plural );
+                if ( get_option( $this->option_name . 'posttype_' . $plural ) ) {
+                    $data = get_option( $this->option_name . 'posttype_' . $plural );
                 }
 
                 // Dashicon
                 $dashicon = ( $data && isset( $data['dashicons_picker_' . $plural] ) ) ? $data['dashicons_picker_' . $plural] : '';
                 ?>
                     <tr>
-                        <td><label for="<?php echo $plural;?>"><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
+                        <td><label for="<?php echo esc_attr( $plural );?>"><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
                         <td class="td10 textcenter"><span class="dashicons <?php echo $dashicon;?>"></span></td>
-                        <td class="td10 textcenter"><a href="<?php echo admin_url();?>options-general.php?page=ptt-manager&tab=posttypes&posttype=<?php echo $plural;?>" class="button">Modify</a></td>
+                        <td class="td10 textcenter"><a href="<?php echo admin_url();?>options-general.php?page=ptt-manager&tab=posttypes&posttype=<?php echo esc_attr( $plural );?>" class="button"><?php _e( 'Modify', 'ptt-manager' );?></a></td>
                     </tr>
             <?php }
         }
@@ -258,26 +265,29 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
         final public function presetTaxonomy( $plural, $singular, $about )
         {
-            if ( ! get_taxonomy( $this->sanitizeName( $plural ) ) ) {?>
-                <form enctype="multipart/form-data" method="post" action="options.php">
-                <?php settings_fields( $this->plugin_name );?>
-                <?php do_settings_sections( $this->plugin_name );?>
+            if ( ! get_option( $this->option_name . 'taxonomy_' . $plural ) ) {?>
+                <form enctype="multipart/form-data" method="post" action="">
+                <?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
                 <input type="hidden" name="type" value="taxonomy" />
-                <input type="hidden" name="plural" value="<?php echo $plural;?>" />
-                <input type="hidden" name="singular" value="<?php echo $singular;?>" />
-                <input type="hidden" name="slug" value="<?php echo $plural;?>" />
+                <input type="hidden" name="plural" value="<?php echo esc_attr( $plural );?>" />
+                <input type="hidden" name="singular" value="<?php echo esc_attr( $singular );?>" />
+                <input type="hidden" name="slug" value="<?php echo esc_attr( $plural );?>" />
+                <input type="hidden" name="created" value="<?php echo esc_attr( $this->date() );?>" />
+                <input type="hidden" name="author" value="<?php echo esc_attr( $this->author() );?>" />
                     <tr>
-                        <td><label><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
-                        <td class="td10 textcenter"><input name="pt[<?php echo $plural;?>]" type="checkbox" id="books" value="<?php echo $plural;?>" /></td>
+                        <td><label><b><?php echo ucfirst( $plural );?>:</b> <?php echo esc_html( $about );?></label></th>
+                        <td class="td10 textcenter"><input name="pt[<?php echo esc_attr( $plural );?>]" type="checkbox" id="books" value="<?php echo esc_attr( $plural );?>" /></td>
                         <td class="td10 textcenter"><input name="pt[post]" type="checkbox" value="post" /></td>
                         <td class="td10 textcenter"><input name="pt[page]" type="checkbox" value="page" /></td>
-                        <td class="td10 textcenter"><input type="submit" name="submit" id="submit" class="button button-primary" value="Activate"></td>
+                        <td class="td10 textcenter"><input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e( 'Activate', 'ptt-manager' );?>"></td>
                     </tr>
                 </form>
-            <?php } else {
+            <?php }
+
+            if ( get_option( $this->option_name . 'taxonomy_' . $plural ) ) {
                 // Get Taxonomy Data
-                if ( get_option( $this->plugin_name . '_taxonomy_' . $plural ) ) {
-                    $data = get_option( $this->plugin_name . '_taxonomy_' . $plural );
+                if ( get_option( $this->option_name . 'taxonomy_' . $plural ) ) {
+                    $data = get_option( $this->option_name . 'taxonomy_' . $plural );
                 }
 
                 // Set Checked Items
@@ -286,11 +296,11 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 $checked_page = ( $data && ! empty( $data['pt'] ) && isset( $data['pt']['page'] ) ) ? 'checked="checked"' : '';
                 ?>
                     <tr>
-                        <td><label><b><?php echo ucfirst( $plural );?>:</b> <?php echo $about;?></label></th>
-                        <td class="td10 textcenter"><input name="<?php echo $plural;?>" type="checkbox" value="1" <?php echo $checked_plural;?>/></td>
+                        <td><label><b><?php echo ucfirst( $plural );?>:</b> <?php echo esc_html( $about );?></label></th>
+                        <td class="td10 textcenter"><input name="<?php echo esc_attr( $plural );?>" type="checkbox" value="1" <?php echo $checked_plural;?>/></td>
                         <td class="td10 textcenter"><input name="post" type="checkbox" value="1" <?php echo $checked_post;?>/></td>
                         <td class="td10 textcenter"><input name="page" type="checkbox" value="1" <?php echo $checked_page;?>/></td>
-                        <td class="td10 textcenter"><a href="<?php echo admin_url();?>options-general.php?page=ptt-manager&tab=taxonomies&taxonomy=<?php echo $plural;?>" class="button">Modify</a></td>
+                        <td class="td10 textcenter"><a href="<?php echo admin_url();?>options-general.php?page=ptt-manager&tab=taxonomies&taxonomy=<?php echo esc_attr( $plural );?>" class="button"><?php _e( 'Modify', 'ptt-manager' );?></a></td>
                     </tr>
             <?php }
         }
@@ -307,7 +317,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         final public function editDropdown( $type )
         {
             // Get Saved Names
-            $names = get_option( $this->plugin_name . '_' . $type );
+            $names = get_option( $this->option_name . $type );
 
             // No Form If No Names
             $html = '';
@@ -316,10 +326,10 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             if ( $names ) {
                 $html = '<form enctype="multipart/form-data" method="get" class="textright">';
                 $html .= '<input type="hidden" name="page" value="' . $this->plugin_name . '">';
-                $html .= '<input type="hidden" name="tab" value="' . esc_attr( $this->filterInputGet( 'tab' ) ) . '">';
+                $html .= '<input type="hidden" name="tab" value="' . esc_attr( $this->qString( 'tab' ) ) . '">';
                 $html .= '<select name="' . esc_attr( $type ) . '" onchange="this.form.submit()">';
 
-                if ( filter_input( INPUT_GET, $type ) ) {
+                if ( $this->qString( $type ) ) {
                     $html .= '<option value="">' . __( 'Select To Add', 'ptt-manager' ) . '</option>';
                 } else {
                     $html .= '<option value="">' . __( 'Select To Edit', 'ptt-manager' ) . '</option>';
@@ -327,7 +337,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
                 foreach ( $names as $name => $value ) {
                     // Set Selected
-                    $selected = ( $this->filterInputGet( $type ) == $name ) ? ' selected' : '';
+                    $selected = ( $this->qString( $type ) == $name ) ? ' selected' : '';
 
                     // Build Options
                     $html .= '<option value="' . esc_attr( $name ) . '"' . $selected .'>' . esc_html( ucfirst( $name ) ) . '</option>';
@@ -338,20 +348,6 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             }
 
             return $html;
-        }
-
-
-        /**
-         * @about INPUT_GET for Taxonomy, Post Type, Tab & Page
-         * @return string Sanitized INPUT_GET
-         */
-        final public function filterInputGet( $name )
-        {
-            // Lowercase & Sanitize String
-            $filter = strtolower( filter_input( INPUT_GET, $name, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) );
-
-            // Return No Spaces/Tabs, Stripped/Cleaned String
-            return sanitize_text_field( preg_replace( '/\s/', '', $filter ) );
         }
 
 
@@ -398,24 +394,6 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
 
         /**
-         * @about Simple Form Validation
-         * @note  Full Valiation Via Settings API
-         */
-        final public function validate()
-        {
-            // Validate Post Location
-            if ( strpos( filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL ), "options.php" ) === false ) {
-                wp_die( __( 'You are not authorized to perform this action.', 'ptt-manager' ) );
-            }
-
-            // Simple Referer Check
-            if ( strpos( filter_input( INPUT_POST, '_wp_http_referer', FILTER_UNSAFE_RAW ), $this->plugin_name ) === false ) {
-                wp_die( __( 'You are not authorized to perform this action.', 'ptt-manager' ) );
-            }
-        }
-
-
-        /**
          * @about Created/Updated Inputs and Message
          * @call parent::createdUpdated( 'posttype' );
          * @call parent::createdUpdated( 'taxonomy' );
@@ -425,19 +403,19 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             // Required
             if ( ! empty( $type ) && $type == 'posttype' || ! empty( $type ) && $type == 'taxonomy' ) {
 
-                if ( filter_input( INPUT_GET, $type ) ) {?>
-                    <input type="hidden" name="updated" value="<?php echo $this->date();?>" />
-                    <input type="hidden" name="author" value="<?php echo $this->author();?>" />
-                    <input type="hidden" name="created" value="<?php echo apply_filters( $this->plugin_name . '_field', $type, 'created' );?>" />
+                if ( $this->field( $type, 'created' ) && $this->qString( $type ) ) {?>
+                    <input type="hidden" name="updated" value="<?php echo esc_attr( $this->date() );?>" />
+                    <input type="hidden" name="author" value="<?php echo esc_attr( $this->author() );?>" />
+                    <input type="hidden" name="created" value="<?php echo $this->field( $type, 'created' );?>" />
 
                 <?php // Ignore If Not Created, Thus Deleted
-                if ( apply_filters( $this->plugin_name . '_field', $type, 'created' ) ) {?>
-                    <p class="textcenter"><b><?php _e( 'Created on' );?> <?php echo apply_filters( $this->plugin_name . '_field', $type, 'created' ); if ( apply_filters( $this->plugin_name . '_field', $type, 'updated' ) ) {?> <?php _e( 'and lasted updated on' );?> <?php echo apply_filters( $this->plugin_name . '_field', $type, 'updated' ); }?> <?php _e( 'by' );?> <?php echo apply_filters( $this->plugin_name . '_field', $type, 'author' );?>.</b></p>
+                if ( $this->field( $type, 'created' ) ) {?>
+                    <p class="textcenter"><b><?php _e( 'Created on', 'ptt-manager' );?> <?php echo $this->field( $type, 'created' ); if ( $this->field( $type, 'updated' ) ) {?> <?php _e( 'and lasted updated on', 'ptt-manager' );?> <?php echo $this->field( $type, 'updated' ); }?> <?php _e( 'by', 'ptt-manager' );?> <?php echo $this->field( $type, 'author' );?>.</b></p>
                 <?php }
 
                 } else {?>
-                    <input type="hidden" name="created" value="<?php echo $this->date();?>" />
-                    <input type="hidden" name="author" value="<?php echo $this->author();?>" />
+                    <input type="hidden" name="created" value="<?php echo esc_attr( $this->date() );?>" />
+                    <input type="hidden" name="author" value="<?php echo esc_attr( $this->author() );?>" />
                 <?php }
             }
         }
@@ -452,7 +430,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         final public function listPosttypes()
         {
             // Get Selected Post Types from Taxonomy Option for Checked Item
-            $data = get_option( $this->plugin_name . '_taxonomy_' . $this->filterInputGet( 'taxonomy' ) );
+            $data = get_option( $this->option_name . 'taxonomy_' . $this->qString( 'taxonomy' ) );
             $selected_posttypes = ( ! empty( $data ) && isset( $data['pt'] ) && is_array( $data['pt'] ) ) ? $data['pt'] : '';
 
             // Not Included Items
@@ -461,7 +439,8 @@ if( ! class_exists( 'PTTManager_Extended' ) )
                 '2' => 'revision',
                 '3' => 'nav_menu_item',
                 '4' => 'custom_css',
-                '5' => 'customize_changeset'
+                '5' => 'customize_changeset',
+                '6' => 'deprecated_log'
             );
 
             // No Form If No Post Types
@@ -503,7 +482,7 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         final public function listTaxonomies()
         {
             // Get Selected Taxonomies from Post Type Option for Checked Item
-            $data = get_option( $this->plugin_name . '_posttype_' . $this->filterInputGet( 'posttype' ) );
+            $data = get_option( $this->option_name . 'posttype_' . $this->qString( 'posttype' ) );
             $selected_taxonomies = ( ! empty( $data ) && isset( $data['tn'] ) && is_array( $data['tn'] ) ) ? $data['tn'] : '';
 
             // Not Included Items
@@ -584,23 +563,64 @@ if( ! class_exists( 'PTTManager_Extended' ) )
 
 
         /**
-         * @about Protect Admin from Lower Users
+         * @about Get Saved Option Data For Inputs/Display
+         * @location templates/posttypes.php & templates/taxonomies.php
+         * @call echo parent::field( 'posttype', 'plural' );
+         * @param string $option The option name to look up
+         * @param string $field The field to get data for
+         * @return string Input Field Data
          */
-	final public function protect()
+        final public function field( $option = '', $field = '' )
         {
-            // Nobody Can Access
-            $user_can_access = false;
+            if ( ! empty( $option ) && ! empty( $field ) ) {
+                // Block Post Type / Taxonomy
+                if ( $option == "posttype_block" || $option == "taxonomy_block" ) {
+                    $data = get_option( $this->option_name . $option );
 
-            // Authorized Users Can Access
-            if ( current_user_can( 'manage_options' ) ) {
-                $user_can_access = true;
+                // Post Type/Taxonomy Data
+                } else {
+                    // Option Name Example: ptt-manager_posttype_books
+                    $data = get_option( $this->option_name . $option . '_' . $this->qString( $option ) );
+                }
+
+                // Return Data From Field
+                if ( isset( $data[$field] ) ) {
+                    return esc_attr( $data[$field] );
+
+                }
+            }
+        }
+
+
+        /**
+         * @about Get Query String Item
+         * @param string $get Query String Get Item
+         * @return string Query String Item Sanitized
+         */
+        final public function qString( $get )
+        {
+            // Lowercase & Sanitize String
+            $filter = strtolower( filter_input( INPUT_GET, $get, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK ) );
+
+            // Return No Spaces/Tabs, Stripped/Cleaned String
+            return sanitize_text_field( preg_replace( '/\s/', '', $filter ) );
+        }
+
+
+        /**
+         * @about Form Validation
+         */
+        final public function validate()
+        {
+            // Plugin Admin Area Only
+            if ( $this->qString( 'page' ) != $this->plugin_name ) {
+                wp_die( __( 'You are not authorized to perform this action.', 'ptt-manager' ) );
             }
 
-            // Redirect Invalid Users
-            if ( ! $user_can_access ) {
-                wp_safe_redirect( admin_url( 'index.php' ) );
-                exit;
+            // Validate Nonce Action
+            if( ! check_admin_referer( $this->option_name . 'action', $this->option_name . 'nonce' ) ) {
+                wp_die( __( 'You are not authorized to perform this action.', 'ptt-manager' ) );
             }
-	}
+        }
     }
 }

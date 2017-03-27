@@ -19,9 +19,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 
 <hr />
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="posttype_block" />
 
     <table>
@@ -55,9 +54,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 
 <hr />
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="taxonomy_block" />
 
     <table>

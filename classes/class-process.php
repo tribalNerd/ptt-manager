@@ -5,7 +5,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
 
 /**
  * @about Manage Post Types and Taxonomies
- * @action add_action( 'init', array( 'PTTManager_Process', 'instance' ) );
+ * @action PTTManager_Process::instance();
  * 
  * @method init()           Init Admin Actions
  * @method update()         Start Update/Delete Steps
@@ -18,7 +18,6 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method cleanup()        Run unset() on $_POST
  * @method dashiconName()   Rebuild the Dashicon Name for New Records
  * @method dashiconString() Output the Dashicon String
- * @method field()          Get Post Type / Taxonomy Data from Option
  * @method import()         Import, Decode Post and Save Options
  * @method export()         Export Posttypes & Taxonomies
  * @method instance()       Class Instance
@@ -36,20 +35,26 @@ if ( ! class_exists( 'PTTManager_Process' ) )
          */
         final public function init()
         {
-            // Update Settings
-            add_action( 'admin_init', array( &$this, 'update') );
+            // Plugin Admin Only
+            if ( filter_input( INPUT_POST, 'type' ) && parent::qString( 'page' ) == $this->plugin_name ) {
+                // Post Action is Active: Marker For Flush Rewrite Rules
+                update_option( $this->option_name . 'active', '1', 'no' );
 
-            // Edit Post Types / Taxonomies Dropdown
-            add_filter( $this->plugin_name . '_dashicon', array( $this, 'dashiconString' ), 10, 1 );
+                // Update Settings
+                add_action( 'admin_init', array( $this, 'update') );
 
-            // Get Post Type / Taxonomy Data for Input Fields
-            add_filter( $this->plugin_name . '_field', array( $this, 'field' ), 10, 2 );
+                // Edit Post Types / Taxonomies Dropdown
+                add_filter( $this->plugin_name . '_dashicon', array( $this, 'dashiconString' ), 10, 1 );
 
-            // Export Filter
-            add_filter( $this->plugin_name . '_export', array( $this, 'export' ), 10, 1 );
+                // Get Post Type / Taxonomy Data for Input Fields
+                add_filter( $this->plugin_name . '_field', array( $this, 'field' ), 10, 2 );
 
-            // Saved Settings
-            add_action( $this->plugin_name . '_settings', array( $this, 'settings' ) );
+                // Export Filter
+                add_filter( $this->plugin_name . '_export', array( $this, 'export' ), 10, 1 );
+
+                // Saved Settings
+                add_action( $this->plugin_name . '_settings', array( $this, 'settings' ) );
+            }
         }
 
 
@@ -58,14 +63,8 @@ if ( ! class_exists( 'PTTManager_Process' ) )
          */
         final public function update()
         {
-            // Run Post Security
-            if ( filter_input( INPUT_POST, 'type' ) ) {
-                // Form Security Check
-                parent::validate();
-
-                // Whitelist Setting & Add Temp Option
-                register_setting( $this->plugin_name, $this->plugin_name . '_active' );
-            }
+            // Form Security Check
+            parent::validate();
 
             // Delete Option
             if ( filter_input( INPUT_POST, 'delete' ) == "1" ) {
@@ -162,20 +161,20 @@ if ( ! class_exists( 'PTTManager_Process' ) )
             if ( isset( $name ) ) {
 
                 // Delete Post Type / Taxonomy Record
-                delete_option( $this->plugin_name . '_' . $type . '_' . $name );
+                delete_option( $this->option_name . $type . '_' . $name );
 
                 // Get Post Type / Taxonomy Array
-                $option = get_option( $this->plugin_name . '_' . $type );
+                $option = get_option( $this->option_name . $type );
 
                 // Remove Record
                 unset( $option[$name] );
 
                 if ( $option && is_array( $option ) ) {
                     // Re-update Option
-                    update_option( $this->plugin_name . '_' . $type, $option, '', false );
+                    update_option( $this->option_name . $type, $option, '', false );
                 } else {
                     // Delete Post Type / Taxonomy Record
-                    delete_option( $this->plugin_name . '_' . $type );
+                    delete_option( $this->option_name . $type );
                 }
 
                 // Display Message
@@ -217,20 +216,20 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
             // Remove Option If Not Checked
             if ( ! $post && isset( $data['type'] ) && $data['type'] == "posttype_block" ) {
-                delete_option( $this->plugin_name . '_posttype_block' );
+                delete_option( $this->option_name . 'posttype_block' );
 
             // Else Add Option
             } elseif ( $post && isset( $data['type'] ) && $data['type'] == "posttype_block" ) {
-                update_option( $this->plugin_name . '_posttype_block', $post, '', true );
+                update_option( $this->option_name . 'posttype_block', $post, '', true );
             }
 
             // Remove Option If Not Checked
             if ( ! $post && isset( $data['type'] ) && $data['type'] == "taxonomy_block" ) {
-                delete_option( $this->plugin_name . '_taxonomy_block' );
+                delete_option( $this->option_name . 'taxonomy_block' );
 
             // Else Add Option
             } elseif ( $post && isset( $data['type'] ) && $data['type'] == "taxonomy_block" ) {
-                update_option( $this->plugin_name . '_taxonomy_block', $post, '', true );
+                update_option( $this->option_name . 'taxonomy_block', $post, '', true );
             }
 
             // Display Message
@@ -279,7 +278,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
             // Update Option
             if ( $post ) {
                 // Get Array Record With Saved Types
-                $option_array = get_option( $this->plugin_name . '_posttype' );
+                $option_array = get_option( $this->option_name . 'posttype' );
 
                 // Remove Old Record If Duplicate
                 if ( isset( $option_array[$name] ) ) {
@@ -292,15 +291,15 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                     $new_option_array = array_merge( array( $name => $name ), $option_array );
 
                     // Update Array Record
-                    update_option( $this->plugin_name . '_posttype', $new_option_array, '', false );
+                    update_option( $this->option_name . 'posttype', $new_option_array, '', false );
 
                 // New Array Record
                 } else {
-                    update_option( $this->plugin_name . '_posttype', array( $name => $name ), '', false );
+                    update_option( $this->option_name . 'posttype', array( $name => $name ), '', false );
                 }
 
                 // Save Posttype Record
-                update_option( $this->plugin_name . '_posttype_'. $name, $post, '', true );
+                update_option( $this->option_name . 'posttype_'. $name, $post, '', true );
 
                 // Display Message
                 parent::message( 'posttypeupdate', 'updated' );
@@ -341,7 +340,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
             // Update Name Marker Option & Full Taxonomy Record Option
             if ( $post ) {
                 // Get Array Record With Saved Types
-                $option_array = get_option( $this->plugin_name . '_taxonomy' );
+                $option_array = get_option( $this->option_name . 'taxonomy' );
 
                 // Remove Old Record If Duplicate
                 if ( isset( $option_array[$name] ) ) {
@@ -354,11 +353,11 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                     $new_option_array = array_merge( array( $name => $name ), $option_array );
 
                     // Update Array Record
-                    update_option( $this->plugin_name . '_taxonomy', $new_option_array, '', false );
+                    update_option( $this->option_name . 'taxonomy', $new_option_array, '', false );
 
                 // New Array Record
                 } else {
-                    update_option( $this->plugin_name . '_taxonomy', array( $name => $name ), '', false );
+                    update_option( $this->option_name . 'taxonomy', array( $name => $name ), '', false );
                 }
 
                 // Add Default Post Type Support If Not Set
@@ -367,7 +366,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 }
 
                 // Save Taxonomy Record
-                update_option( $this->plugin_name . '_taxonomy_'. $name, $post, '', true );
+                update_option( $this->option_name . 'taxonomy_'. $name, $post, '', true );
 
                 // Display Message
                 parent::message( 'taxonomyupdate', 'updated' );
@@ -390,9 +389,9 @@ if ( ! class_exists( 'PTTManager_Process' ) )
         {
             if ( ! empty( $post ) && is_array( $post ) ) {
                 // Remove Unused Values
+                unset( $post['ptt-manager_nonce'] );
                 unset( $post['_wp_http_referer'] );
                 unset( $post['option_page'] );
-                unset( $post['_wpnonce'] );
                 unset( $post['action'] );
                 unset( $post['submit'] );
                 unset( $post['type'] );
@@ -442,37 +441,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
          */
         final public function dashiconString( $string )
         {
-            return ( filter_input( INPUT_GET, "posttype" ) ) ? $string . esc_attr( parent::filterInputGet( 'posttype' ) ) : $string . 'add';
-        }
-
-
-        /**
-         * @about Get Post Type / Taxonomy Data from Option
-         * @location templates/posttypes.php & templates/taxonomies.php
-         * @call apply_filters( $this->plugin_name . '_field', 'posttype', 'singular' );
-         * @call apply_filters( $this->plugin_name . '_field', 'taxonomy', 'singular' );
-         * @param string $option The option name to look up
-         * @param string $field The field to get data for
-         * @return string Input Field Data
-         */
-        final public function field( $option = '', $field = '' )
-        {
-            if ( ! empty( $option ) && ! empty( $field ) ) {
-                // Block Post Type / Taxonomy
-                if ( $option == "posttype_block" || $option == "taxonomy_block" ) {
-                    $data = get_option( $this->plugin_name . '_' . $option );
-
-                // Post Type/Taxonomy Data
-                } else {
-                    $data = get_option( $this->plugin_name . '_' . $option . '_' . parent::filterInputGet( $option ) );
-                }
-
-                // Return Data From Field
-                if ( isset( $data[$field] ) ) {
-                    return esc_attr( $data[$field] );
-
-                }
-            }
+            return ( parent::qString( 'posttype' ) ) ? $string . esc_attr( parent::qString( 'posttype' ) ) : $string . 'add';
         }
 
 
@@ -511,7 +480,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 }
 
                 // Update Marker Record
-                update_option( $this->plugin_name . '_' . $this->sanitizeName( $type ), $markers, '', false );
+                update_option( $this->option_name . $this->sanitizeName( $type ), $markers, '', false );
 
                 // Loop Through Records
                 foreach ( $decoded as $key => $data ) {
@@ -519,7 +488,7 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                         $data = filter_var_array( $data, FILTER_SANITIZE_STRING );
 
                         // Save Postt Type Record
-                        update_option( $this->plugin_name . '_' . $this->sanitizeName( $type ) . '_' . $this->sanitizeName( $data['plural'] ), $data, '', true );
+                        update_option( $this->option_name . $this->sanitizeName( $type ) . '_' . $this->sanitizeName( $data['plural'] ), $data, '', true );
                     }
                 }
 
@@ -542,14 +511,14 @@ if ( ! class_exists( 'PTTManager_Process' ) )
             if ( empty( $type ) ) { return; }
 
             // Get Saved Option Markers
-            $markers = ( get_option( $this->plugin_name . '_' . $type ) ) ? get_option( $this->plugin_name . '_' . $type ) : '';
+            $markers = ( get_option( $this->option_name . $type ) ) ? get_option( $this->option_name . $type ) : '';
 
             // Ignore if No Markers
             if ( ! empty( $markers ) ) {
                 // Get Saved Post Type Data
                 foreach( $markers as $record ) {
                     // Get Records
-                    $data[] = get_option( $this->plugin_name . '_' . $this->sanitizeName( $type ) . '_' . $this->sanitizeName( $record ) );
+                    $data[] = get_option( $this->option_name . $this->sanitizeName( $type ) . '_' . $this->sanitizeName( $record ) );
                 }
 
                 // Merge Makers and Records

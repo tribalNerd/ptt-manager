@@ -13,14 +13,14 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     </tr>
     <?php
         // Preset Post Types
-        echo parent::presetPosttype( __( 'books', 'ptt-manager' ), __( 'book', 'ptt-manager' ), __( 'Retail, display, review books.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'docs', 'ptt-manager' ), __( 'docs', 'ptt-manager' ), __( 'Display help/user documents.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'faq', 'ptt-manager' ), __( 'faq', 'ptt-manager' ), __( 'Provide frequently asked questions.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'music', 'ptt-manager' ), __( 'music', 'ptt-manager' ), __( 'Selling, playing, downloading or displaying music.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'portfolio', 'ptt-manager' ), __( 'portfolio', 'ptt-manager' ), __( 'Showing off creatives, designs, photography and more.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'teams', 'ptt-manager' ), __( 'team', 'ptt-manager' ), __( 'Display your company/department team members.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'testimonials', 'ptt-manager' ), __( 'testimonial', 'ptt-manager' ), __( 'Testimonials from your visitors, clients or customers.', 'ptt-manager' ) );
-        echo parent::presetPosttype( __( 'videos', 'ptt-manager' ), __( 'video', 'ptt-manager' ), __( 'Provide videos to your visitors.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'books', 'book', __( 'Retail, display, review books.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'docs', 'docs', __( 'Display help/user documents.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'faq', 'faq', __( 'Provide frequently asked questions.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'music', 'music', __( 'Selling, playing, downloading or displaying music.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'portfolio', 'portfolio', __( 'Showing off creatives, designs, photography and more.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'teams', 'team', __( 'Display your company/department team members.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'testimonials', 'testimonial', __( 'Testimonials from your visitors, clients or customers.', 'ptt-manager' ) );
+        echo parent::presetPosttype( 'videos', 'video', __( 'Provide videos to your visitors.', 'ptt-manager' ) );
     ?>
 </table>
 
@@ -39,13 +39,13 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     </tr>
     <?php
         // Preset Post Types
-        echo parent::presetTaxonomy( __( 'books', 'ptt-manager' ), __( 'book', 'ptt-manager' ), __( 'Categories for selling or displaying books.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'docs', 'ptt-manager' ), __( 'docs', 'ptt-manager' ), __( 'Categories for providing help/user documents.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'faq', 'ptt-manager' ), __( 'faq', 'ptt-manager' ), __( 'Categories for displaying frequently asked questions.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'music', 'ptt-manager' ), __( 'music', 'ptt-manager' ), __( 'Categories for selling, playing, downloading or displaying music.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'portfolio', 'ptt-manager' ), __( 'portfolio', 'ptt-manager' ), __( 'Categories for creative professionals and businesses.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'teams', 'ptt-manager' ), __( 'team', 'ptt-manager' ), __( 'Categories for displaying your team members.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'testimonials', 'ptt-manager' ), __( 'testimonial', 'ptt-manager' ), __( 'Categories for testimonials to your visitors, clients or customers.', 'ptt-manager' ) );
-        echo parent::presetTaxonomy( __( 'videos', 'ptt-manager' ), __( 'video', 'ptt-manager' ), __( 'Categories for displaying videos to your visitors.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'books', 'book', __( 'Categories for selling or displaying books.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'docs', 'docs', __( 'Categories for providing help/user documents.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'faq', 'faq', __( 'Categories for displaying frequently asked questions.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'music', 'music', __( 'Categories for selling, playing, downloading or displaying music.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'portfolio', 'portfolio', __( 'Categories for creative professionals and businesses.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'teams', 'team', __( 'Categories for displaying your team members.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'testimonials', 'testimonial', __( 'Categories for testimonials to your visitors, clients or customers.', 'ptt-manager' ) );
+        echo parent::presetTaxonomy( 'videos', 'video', __( 'Categories for displaying videos to your visitors.', 'ptt-manager' ) );
     ?>
 </table>

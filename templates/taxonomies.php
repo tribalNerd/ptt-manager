@@ -12,26 +12,25 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <p><?php _e( 'Create a custom taxonomy. Taxonomies are categories, helping you organize content within Post Types.', 'ptt-manager' );?></p>
 <?php  }?>
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="taxonomy" />
 <?php parent::createdUpdated( 'taxonomy' );?>
 
     <table class="form-table">
     <tr>
         <td class="td"><label for="plural"><?php _e( 'Plural Name', 'ptt-manager' );?></label><span class="required">*</span></td>
-        <td><input name="plural" type="text" id="plural" value="<?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'plural' );?>" class="regular-text" placeholder="(e.g. Mysteries Genre, Classics, Local Events)" required="true" />
+        <td><input name="plural" type="text" id="plural" value="<?php echo parent::field( 'taxonomy', 'plural' );?>" class="regular-text" placeholder="(e.g. Mysteries Genre, Classics, Local Events)" required="true" />
             <p class="description"><?php _e( 'The plural (more than one) name for the taxonomy. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
         <td class="td"><label for="singular"><?php _e( 'Singular Name', 'ptt-manager' );?></label><span class="required">*</span></td>
-        <td><input name="singular" type="text" id="singular" value="<?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'singular' );?>" class="regular-text" placeholder="(e.g. Mystery Genre, Classic, Local Event)" required="true" />
+        <td><input name="singular" type="text" id="singular" value="<?php echo parent::field( 'taxonomy', 'singular' );?>" class="regular-text" placeholder="(e.g. Mystery Genre, Classic, Local Event)" required="true" />
             <p class="description"><?php _e( 'The singular (non-plural) name for the taxonomy. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
         <td class="td"><label for="slug"><?php _e( 'Slug Name', 'ptt-manager' );?></label><span class="required">*</span></td>
-        <td><input name="slug" type="text" id="slug" value="<?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'slug' );?>" class="regular-text" placeholder="(e.g. mystery, classic, local_event)" required="true" />
+        <td><input name="slug" type="text" id="slug" value="<?php echo parent::field( 'taxonomy', 'slug' );?>" class="regular-text" placeholder="(e.g. mystery, classic, local_event)" required="true" />
             <p class="description"><?php _e( 'The permalink slug name for this taxonomy. Alphanumeric, lowercase, dashes, no spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
@@ -46,7 +45,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <table class="form-table">
     <tr>
         <td class="td"><label for="description"><?php _e( 'Description', 'ptt-manager' );?></label></td>
-        <td><fieldset><label for="description"><textarea name="description" id="description" class="description"><?php echo apply_filters( $this->plugin_name . '_field', 'taxonomy', 'description' );?></textarea><br /><span class="description"><?php _e( 'Describe what the taxonomy is about. The description will appear on archive page, if the archive page displays descriptions.', 'ptt-manager' );?></span></label></fieldset></td>
+        <td><fieldset><label for="description"><textarea name="description" id="description" class="description"><?php echo parent::field( 'taxonomy', 'description' );?></textarea><br /><span class="description"><?php _e( 'Describe what the taxonomy is about. The description will appear on archive page, if the archive page displays descriptions.', 'ptt-manager' );?></span></label></fieldset></td>
     </tr>
     <tr>
         <td class="td"><label for="public"><?php _e( 'Public Access', 'ptt-manager' );?></label></td>

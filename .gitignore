@@ -13,6 +13,7 @@
 *.so
 *.sql
 *.sqlite
+*.yml
 
 .cvs
 .DS_Store
@@ -26,17 +27,13 @@
 .sync
 .Trash
 .Trash-*
-.travis.yml
 
-bin
-bin/
-nbproject
-nbproject/
-test
-test/
-vendor
-vendor/
+psds
+psds/
+tests
+tests/
 
+copy.sh
 access_log
 error_log
 license.txt

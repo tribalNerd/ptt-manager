@@ -1,10 +1,10 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
-if ( count( get_included_files() ) == 1 ){ exit(); }?>
+if ( count( get_included_files() ) == 1 ){ exit(); }
 
-<?php echo parent::editDropdown( 'posttype' );?>
+echo parent::editDropdown( 'posttype' );
 
-<?php if ( filter_input( INPUT_GET, "posttype" ) ) {?>
+if ( filter_input( INPUT_GET, "posttype" ) ) {?>
     <h3><?php _e( 'Edit Post Type', 'ptt-manager' );?></h3>
     <p><?php _e( 'Edit your custom post type. By default, post types are public, archived, will display on the admin area menu, and support all editor features.', 'ptt-manager' );?></p>
 <?php  } else {?>
@@ -12,27 +12,26 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <p><?php _e( 'Create a custom post type. By default, post types are public, archived, will display on the admin area menu, and support all editor features.', 'ptt-manager' );?></p>
 <?php  }?>
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="posttype" />
 <?php parent::createdUpdated( 'posttype' );?>
 
     <table class="form-table">
     <tr>
         <td class="td"><label for="plural"><?php _e( 'Plural Name', 'ptt-manager' );?></label><span class="required">*</span></td>
-        <td><input name="plural" type="text" id="plural" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'plural' );?>" class="regular-text" placeholder="(e.g. Cool Games, Best Movies, Top Advice, Local News)" required="true" />
+        <td><input name="plural" type="text" id="plural" value="<?php echo parent::field( 'posttype', 'plural' );?>" class="regular-text" placeholder="(e.g. Cool Games, Best Movies, Top Advice, Local News)" required="true" />
             <p class="description"><?php _e( 'The plural (more than one) name of the post type. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
         <td class="td"><label for="singular"><?php _e( 'Singular Name', 'ptt-manager' );?></label><span class="required">*</span></td>
-        <td><input name="singular" type="text" id="singular" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'singular' );?>" class="regular-text" placeholder="(e.g. Cool Game, Best Movie, Top Advice, Local News)" required="true" />
+        <td><input name="singular" type="text" id="singular" value="<?php echo parent::field( 'posttype', 'singular' );?>" class="regular-text" placeholder="(e.g. Cool Game, Best Movie, Top Advice, Local News)" required="true" />
             <p class="description"><?php _e( 'The singular (non-plural) name of the post type. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <?php $dashicon = apply_filters( $this->plugin_name . '_dashicon', 'dashicons_picker_' );?>
     <tr>
         <td class="td"><label><?php _e( 'Menu Icon', 'ptt-manager' );?></label></td>
-        <td><input name="<?php echo $dashicon;?>" type="text" id="<?php echo $dashicon;?>" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', $dashicon );?>" class="regular-text" /> <input class="button dashicons-picker" type="button" value="Select Icon" data-target="#<?php echo $dashicon;?>" />
+        <td><input name="<?php echo $dashicon;?>" type="text" id="<?php echo $dashicon;?>" value="<?php echo parent::field( 'posttype', $dashicon );?>" class="regular-text" /> <input class="button dashicons-picker" type="button" value="Select Icon" data-target="#<?php echo $dashicon;?>" />
             <p class="description"><?php _e( 'Select the WordPress Dashicon to display next to the menu item.', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
@@ -47,17 +46,17 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     <table class="form-table">
     <tr>
         <td class="td"><label for="slug"><?php _e( 'Slug Name', 'ptt-manager' );?></label></td>
-        <td><input name="slug" type="text" id="slug" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'slug' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
+        <td><input name="slug" type="text" id="slug" value="<?php echo parent::field( 'posttype', 'slug' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
             <p class="description"><?php _e( 'The permalink slug name for this post type. If not set, the Plural Name will be used. Alphanumeric, lowercase, dashes, no spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
         <td class="td"><label for="menuname"><?php _e( 'Menu Name', 'ptt-manager' );?></label></td>
-        <td><input name="menuname" type="text" id="smenuname" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'menuname' );?>" class="regular-text" placeholder="(e.g. My Games, Cool Movies, Good News)" />
+        <td><input name="menuname" type="text" id="smenuname" value="<?php echo parent::field( 'posttype', 'menuname' );?>" class="regular-text" placeholder="(e.g. My Games, Cool Movies, Good News)" />
             <p class="description"><?php _e( 'If not set, the Plural Name will be used. Alphanumeric, capitalization, spaces, max 32 character length!', 'ptt-manager' );?></p></td>
     </tr>
     <tr>
         <td class="td"><label for="description"><?php _e( 'Description', 'ptt-manager' );?></label></td>
-        <td><fieldset><label for="description"><textarea name="description" id="description" class="description"><?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'description' );?></textarea><br /><span class="description"><?php _e( 'Describe what the post type is about. Not natively used by templates or within the admin area.', 'ptt-manager' );?></span></label></fieldset></td>
+        <td><fieldset><label for="description"><textarea name="description" id="description" class="description"><?php echo parent::field( 'posttype', 'description' );?></textarea><br /><span class="description"><?php _e( 'Describe what the post type is about. Not natively used by templates or within the admin area.', 'ptt-manager' );?></span></label></fieldset></td>
     </tr>
     <tr>
         <td class="td"><label for="public"><?php _e( 'Public Access', 'ptt-manager' );?></label></td>
@@ -77,7 +76,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     </tr>
     <tr>
         <td class="td"><label for="archiveslug"><?php _e( 'Archive Slug', 'ptt-manager' );?></label></td>
-        <td><fieldset><label for="archiveslug"><input name="archiveslug" type="text" id="archiveslug" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'archiveslug' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
+        <td><fieldset><label for="archiveslug"><input name="archiveslug" type="text" id="archiveslug" value="<?php echo parent::field( 'posttype', 'archiveslug' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
             <p class="description"><?php _e( 'If Archive URL is selected, then optionally set an Archive Slug to be used instead of the default Post Type plural name.', 'ptt-manager' );?></p></label></fieldset></td>
     </tr>
     <tr>
@@ -90,7 +89,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
     </tr>
     <tr>
         <td class="td"><label for="restbase"><?php _e( 'REST API Slug', 'ptt-manager' );?></label></td>
-        <td><fieldset><label for="restbase"><input name="restbase" type="text" id="restbase" value="<?php echo apply_filters( $this->plugin_name . '_field', 'posttype', 'restbase' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
+        <td><fieldset><label for="restbase"><input name="restbase" type="text" id="restbase" value="<?php echo parent::field( 'posttype', 'restbase' );?>" class="regular-text" placeholder="(e.g. gaming, movies, advice, news)" />
             <p class="description"><?php _e( 'The slug name for the WordPress REST API. Defaults to Post Type plural name.', 'ptt-manager' );?></p></label></fieldset></td>
     </tr>
     <tr>

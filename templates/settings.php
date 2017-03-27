@@ -26,9 +26,8 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 <?php if ( ! empty( parent::settings() ) ) {?>
 <br /><br /><br /><br /><hr />
 
-<form enctype="multipart/form-data" method="post" action="options.php">
-<?php settings_fields( $this->plugin_name );?>
-<?php do_settings_sections( $this->plugin_name );?>
+<form enctype="multipart/form-data" method="post" action="">
+<?php wp_nonce_field( $this->option_name . 'action', $this->option_name . 'nonce' );?>
 <input type="hidden" name="type" value="deletesettings" />
 
     <div class="textcenter"><p class="submit"><input type="submit" name="submit" id="submit" class="button" value="Delete All Settings?" onclick="return confirm('Are you sure?');"></p></div>

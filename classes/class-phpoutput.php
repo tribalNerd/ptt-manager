@@ -4,7 +4,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
 
 /**
  * @about Output PHP For Post Types and Taxonomies
- * @action add_action( 'init', array( 'tNtePTTManager_PHPOutput', 'instance' ) );
+ * @action PTTManager_PHPOutput::instance();
  * 
  * @method init()       Init Class Methods
  * @method display()    Get Post Type / Taxonomy Data For Display
@@ -44,7 +44,7 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
             // Post Type Data
             if ( ! empty( $type ) && $type == 'posttypes' ) {
                 // Get Post Type Markers
-                $types = get_option( $this->plugin_name . '_posttype' );
+                $types = get_option( $this->option_name . 'posttype' );
 
                 // Ignore if No Markers
                 if ( ! $types || empty( $types ) ) { return; }
@@ -52,7 +52,7 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
                 // Get Saved Post Type Data & Register
                 foreach( $types as $type ) {
                     // Get Unique Record Option
-                    $data = get_option( $this->plugin_name . '_posttype_' . $type );
+                    $data = get_option( $this->option_name . 'posttype_' . $type );
 
                     // Start Registration
                     if ( isset( $data['plural'], $data['singular'] ) ) {
@@ -64,7 +64,7 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
             // Taxonomy Data
             if ( ! empty( $type ) && $type == 'taxonomies' ) {
                 // Get Post Type Markers
-                $taxonomies = get_option( $this->plugin_name . '_taxonomy' );
+                $taxonomies = get_option( $this->option_name . 'taxonomy' );
 
                 // Ignore if No Markers
                 if ( ! $taxonomies || empty( $taxonomies ) ) { return; }
@@ -72,7 +72,7 @@ if( ! class_exists( 'PTTManager_PHPOutput' ) )
                 // Get Saved Post Type Data & Register
                 foreach( $taxonomies as $taxonomy ) {
                     // Get Unique Record Option
-                    $data = get_option( $this->plugin_name . '_taxonomy_' . $taxonomy );
+                    $data = get_option( $this->option_name . 'taxonomy_' . $taxonomy );
 
                     // Start Registration
                     if ( isset( $data['plural'], $data['singular'] ) ) {

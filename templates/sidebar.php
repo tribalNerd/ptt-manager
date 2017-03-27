@@ -16,3 +16,5 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 
 </div></div> <!-- end inside-pad & inside -->
 </div> <!-- end postbox -->
+
+<p><a href="https://wordpress.org/plugins/ptt-manager/" target="_blank"><img src="<?php echo PTT_MANAGER_BASE_URL;?>/wp-content/plugins/ptt-manager/assets/sidebar_rate-plugin.gif" alt="<?php _e( 'Please Rate This Plugin At Wordpress.org!', 'ptt-manager' );?>" /></a></p>
