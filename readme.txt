@@ -10,6 +10,7 @@ License URI: https://github.com/tribalNerd/ptt-manager/blob/master/LICENSE
 
 Post Type & Taxonomy Manager, featuring pre-created and custom post types and taxonomies.
 
+
 == Description ==
 
 The Post Type & Taxonomy Manager WordPress Plugin allows you to register custom post types and taxonomies with ease, while providing you with 8 pre-created and simple to use post types and taxonomies, including: Books, Docs, FAQ's, Music, Portfolio, Teams, Testimonials, and Videos.
@@ -28,7 +29,12 @@ The Post Type & Taxonomy Manager WordPress Plugin allows you to register custom 
 * Complete menu placement control of custom post types
 * Date created/updated and author of custom post types and taxonomies
 
+= For Support, Bugs & Feature Requests =
+
+[Submit an Issue](https://github.com/tribalNerd/my-starter-plugin/issues) if you need assistance, found a bug, or if you would to request a feature!
+
 = Credits =
+
 [Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by [bradvin](https://github.com/bradvin)
 
 
@@ -71,11 +77,6 @@ A) Yes, but only those created by the Plugin. To delete: Click on either the Pos
 = Q) Does deleting a Post Type / Taxonomy delete content?
 
 A) No, only the Post Type / Taxonomy record is deleted.
-
-
-== Upgrade Notice ==
-
-No Upgrades At This Time.
 
 
 == Arbitrary section ==
@@ -123,6 +124,11 @@ No Upgrades At This Time.
 
 
 == Changelog ==
+
+= 0.1.1 2017-4-3 =
+
+Change: Added plugin description to header template
+Change: Replaced constants within templates with class variables
 
 = 0.1.0 2017-3-14 =
 

@@ -11,7 +11,7 @@ if ( count( get_included_files() ) == 1 ){ exit(); }?>
 </div></div><!-- poststuff and post-body -->
 
 <br /><hr />
-<p style="text-align:right;"><small><b><?php _e( 'Created by', 'ptt-manager' );?></b>: <a href="http://technerdia.com/" target="_blank">techNerdia</a></small></p>
+<p style="text-align:right;"><small><b><?php echo $this->statement();?></small></p>
 </div><!-- wrap -->
 
 <br class="clear" />

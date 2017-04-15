@@ -3,7 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( count( get_included_files() ) == 1 ){ exit(); }?>
 
 <div class="wrap">
-<h2><span class="dashicons dashicons-category"></span> <?php echo PTT_MANAGER_PAGE_NAME;?></h2>
+<h2><span class="dashicons dashicons-category"></span> <?php echo $this->plugin_title;?></h2>
+<p><?php echo $this->plugin_desc;?></p>
 
 <?php echo $this->tabs();?>
 

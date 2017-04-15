@@ -1,20 +1,19 @@
-# Post Type & Taxonomy Manager / PT & T Manager / PTT Manager #
+# Post Type & Taxonomy Manager / PT & T Manager / PTT Manager
 * **Plugin Name:** Post Type & Taxonomy Manager
 * **Contributors:** tribalNerd, Chris Winters
 * **Tags:** post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
 * **Requires at least:** 4.6
 * **Tested up to:** 4.7.3
-* **Stable tag:** 0.1.0
+* **Stable tag:** 0.1.1
 * **License:** GNU GPLv3
 * **License URI:** https://github.com/tribalNerd/ptt-manager/blob/master/LICENSE
 
 Post Type & Taxonomy Manager, featuring pre-created and custom post types and taxonomies.
 
-:: Description
---------
+
+## Description
 
 The Post Type & Taxonomy Manager WordPress Plugin allows you to register your custom post types and taxonomies with ease, while providing you with 8 pre-created and simple to use post types and taxonomies, including: Books, Docs, FAQ's, Music, Portfolio, Teams, Testimonials, and Videos.
-
 
 ### Features
 * A simple to use and clutter free admin area
@@ -30,14 +29,18 @@ The Post Type & Taxonomy Manager WordPress Plugin allows you to register your cu
 * Complete menu placement control of custom post types
 * Date created/updated and author of custom post types and taxonomies
 
+#### For Support, Bugs & Feature Requests
+
+[Submit an Issue](https://github.com/tribalNerd/my-starter-plugin/issues) if you need assistance, found a bug, or if you would to request a feature!
 
 #### Credits
+
 [Dashicons Picker](https://github.com/bradvin/dashicons-picker/) by [bradvin](https://github.com/bradvin)
 
 
 ### Installation
 
-= Standard Install =
+#### Standard Install
 
 It is recommended that you use the built in WordPress plugin manager to download and install plugins.
 
@@ -46,88 +49,93 @@ It is recommended that you use the built in WordPress plugin manager to download
 * Find the Plugin "Post Type & Taxonomy Manager"
 * Click the white Install Now button, then click the blue Activate Button
 
-= Upload and Install =
+#### Upload and Install
 
 * If uploading: upload the /ptt-manager/ folder to /wp-content/plugins/ directory for your Worpdress install
 * Then open your WP Admin area, locate the "Post Type & Taxonomy Manager" Plugin in your listing of plugins (sort by Inactive)
 * Click the Activate link to start the plugin
 
 
-### Frequently Asked Questions
+## Frequently Asked Questions
 
-= Q) What does this plugin do? =
+#### Q) What does this plugin do?
 
 A) The Post Type & Taxonomy Manager WordPress plugin registers Post Types and Taxonomies for you.
 
-= Q) Does it create templates for Post Types and Taxonomies? =
+#### Q) Does it create templates for Post Types and Taxonomies?
 
 A) No, however it does provide you the instructions (and some code snips) for your themes templates and functions.php file.
 
-= Q) Can I customize Post Types & Taxonomies however I like? =
+#### Q) Can I customize Post Types & Taxonomies however I like?
 
 A) To an extent, some features are automated to help simplify the process.
 
-= Q) Can I delete Post Types and Taxonomies? =
+#### Q) Can I delete Post Types and Taxonomies?
 
 A) Yes, but only those created by the Plugin. To delete: Click on either the Post Type or Taxonomy tab, then from the Edit dropdown menu select the Post Type or Taxonomy you wish to delete. Or, select the Saved Settings tab, then click the "Delete All Settings?" button to permanently delete all settings.
 
-= Q) Does deleting a Post Type / Taxonomy delete content?
+#### Q) Does deleting a Post Type / Taxonomy delete content?
 
 A) No, only the Post Type / Taxonomy record is deleted.
 
 
-### Arbitrary section
+## Arbitrary section
 
 * By default, no settings are activated/installed.
 * Access the Plugin Admin via the Settings menu > PT & T Manager link.
 
-##### Quick Setup
+#### Quick Setup
 
 * The "home" tab within the Plugin Admin provides 8 pre-created Post Types and Taxonomies. To use, click the "Activate" button next to the Post Type or Taxonomy. Once activated, the presets can be edited via the Post Types and Taxonomies tabs.
 
-##### Custom Post Type
+#### Custom Post Type
 
 * To create a Custom Post Type: Click the Post Types tab, complete the form with the desired settings, then click the blue Save Changes button.
 * To edit a Custom Post Type: Select the Post Type from the Dropdown Menu.
 
-##### Custom Taxonomy
+#### Custom Taxonomy
 
 * To create a Custom Taxonomy:  Click the Taxonomies tab, complete the form with the desired settings, then click the blue Save Changes button.
 * To edit a Custom Taxonomy: Select the Post Type from the Dropdown Menu.
 
-##### Delete a Post Type / Taxonomy
+#### Delete a Post Type / Taxonomy
 
 * Click on either the Post Types or Taxonomies tab, then from the edit dropdown menu select the Post Type or Taxonomy you wish to delete. Afterward scroll down and check the "Delete This Record" checkbox then click the blue Save Changes button.
 
-##### Import / Export
+#### Import / Export
 
 * The import & export feature is for the Post Type and Taxonomy plugin only.
 
-##### PHP Output
+#### PHP Output
 
 * Under the PHP Output tab, all Post Types and Taxonomies are available via php snips. Under both output textareas, you can select to stop/block the Post Type & Taxonomy Manager plugin from rendering saved Post Types/Taxonomies. All other features work. This allows you to use the plugin to store data, thus using the PHP output code within your themes functions.php.
 
-##### Saved Settings
+#### Saved Settings
 
 * The Saved Settings tab displays all settings saved by the plugin. Click the "Delete All Settings?" button to permanently delete all settings.
 
-##### Templates
+#### Templates
 
 * The Templates Tab explains who to display both Post Types and Taxonomies within your WordPress Theme Templates.
 
-##### Disabling / Deleting The Plugin
+#### Disabling / Deleting The Plugin
 
 * When you disable the plugin, no settings/options are deleted. When you delete the plugin, saved "options" are permanently removed. However, any created Posts/Categories, etc related to a Custom Post Type / Taxonomy are not deleted.
 
 
-### Changelog
+## Changelog
 
-= 0.1.0 2017-3-14 =
+#### 0.1.1 2017-4-3
+
+Change: Added plugin description to header template
+Change: Replaced constants within templates with class variables
+
+#### 0.1.0 2017-3-14
 
 Beta Release
 
 
-### Screenshots
+## Screenshots
 
 1. [Home Tab - Presets with Menu & Post Type Displayed](https://github.com/tribalNerd/ptt-manager/blob/master/svn/assets/screenshot-1.png)
 

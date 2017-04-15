@@ -37,6 +37,9 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         // Plugin Page Title
         public $plugin_title;
         
+        // Plugin Page Description
+        public $plugin_desc;
+        
         // Plugin filename.php
         public $plugin_file;
         
@@ -48,9 +51,6 @@ if( ! class_exists( 'PTTManager_Extended' ) )
         
         // Path To Plugin Templates
         public $templates;
-
-        // Tab Names
-        public $tabs;
 
         // Base Option Name
         public $option_name;
@@ -68,22 +68,12 @@ if( ! class_exists( 'PTTManager_Extended' ) )
             $this->base_url         = PTT_MANAGER_BASE_URL;
             $this->plugin_name      = PTT_MANAGER_PLUGIN_NAME;
             $this->plugin_title     = PTT_MANAGER_PAGE_NAME;
+            $this->plugin_desc      = PTT_MANAGER_PAGE_DESC;
             $this->plugin_file      = PTT_MANAGER_PLUGIN_FILE;
             $this->plugin_version   = PTT_MANAGER_VERSION;
             $this->menu_name        = PTT_MANAGER_MENU_NAME;
             $this->option_name      = PTT_MANAGER_OPTION_NAME;
             $this->templates        = PTT_MANAGER_TEMPLATES;
-
-            // Tabs Names: &tab=home
-            $this->tabs = array( 
-                'home'          => __( 'Home', 'ptt-manager' ),
-                'posttypes'     => __( 'Post Types', 'ptt-manager' ),
-                'taxonomies'    => __( 'Taxonomies', 'ptt-manager' ),
-                'importexport'  => __( 'Import/Export', 'ptt-manager' ),
-                'phpoutput'     => __( 'PHP Output', 'ptt-manager' ),
-                'settings'      => __( 'Saved Settings', 'ptt-manager' ),
-                'templates'     => __( 'Templates', 'ptt-manager' ),
-            );
         }
 
 

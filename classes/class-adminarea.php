@@ -12,8 +12,10 @@ if ( count( get_included_files() ) == 1 ){ exit(); }
  * @method menu()       Load Admin Area Menu
  * @method enqueue()    Load Stylesheets & jQuery
  * @method display()    Include Admin Area Templates
- * @method tabs()       Load Admin Area Tabs
  * @method rules()      Flush Rewrite Rules
+ * @method tabs()       Display Admin Area Tabs
+ * @method links()      Display Sidebar Links
+ * @method statement()  Display Footer Statement
  * @method instance()   Class Instance
  */
 if ( ! class_exists( 'PTTManager_AdminArea' ) )
@@ -22,6 +24,9 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
     {
         // Holds Instance Object
         protected static $instance = NULL;
+
+        // Tab Names
+        private $tabs;
 
 
         /**
@@ -39,6 +44,17 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
                 // Flush Rewrite Rules
                 $this->rules();
             }
+
+            // Tabs Names: &tab=home
+            $this->tabs = array( 
+                'home'          => __( 'Home', 'ptt-manager' ),
+                'posttypes'     => __( 'Post Types', 'ptt-manager' ),
+                'taxonomies'    => __( 'Taxonomies', 'ptt-manager' ),
+                'importexport'  => __( 'Import/Export', 'ptt-manager' ),
+                'phpoutput'     => __( 'PHP Output', 'ptt-manager' ),
+                'settings'      => __( 'Saved Settings', 'ptt-manager' ),
+                'templates'     => __( 'Templates', 'ptt-manager' ),
+            );
         }
 
 
@@ -47,7 +63,6 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
          */
         final public function menu()
         {
-            // Website Menu
             add_submenu_page(
                 'options-general.php',
                 $this->plugin_title,
@@ -119,7 +134,7 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
 
 
         /**
-         * @about Admin Area Tabs
+         * @about Display Admin Area Tabs
          * @return string $html Tab Display
          */
         final public function tabs()
@@ -161,7 +176,39 @@ if ( ! class_exists( 'PTTManager_AdminArea' ) )
 
 
         /**
-         * Create Instance
+         * @about Display Sidebar Links
+         * @location templates/sidebar.php
+         * @call <?php echo $this->sidebar();?>
+         * @return string $html Sidebar Links
+         */
+        final public function links()
+        {
+            $html  = '<ul>';
+            $html .= '<li>&bull; <a href="https://github.com/tribalNerd/ptt-manager" target="_blank">' . __( 'Plugin Home Page', 'ptt-manager' ) . '</a></li>';
+            $html .= '<li>&bull; <a href="https://github.com/tribalNerd/ptt-manager/issues" target="_blank">' . __( 'Bugs & Feature Requests', 'ptt-manager' ) . '</a></li>';
+            $html .= '<li>&bull; <a href="http://technerdia.com/help/" target="_blank">' . __( 'Contact Support', 'ptt-manager' ) . '</a></li>';
+            $html .= '<li>&bull; <a href="http://technerdia.com/feedback/" target="_blank">' . __( 'Submit Feedback', 'ptt-manager' ) . '</a></li>';
+            $html .= '<li>&bull; <a href="http://technerdia.com/projects/" target="_blank">' . __( 'More Plugins!', 'ptt-manager' ) . '</a></li>';
+            $html .= '</ul>';
+
+            return $html;
+        }
+
+
+        /**
+         * @about Display Footer Statement
+         * @location templates/footer.php
+         * @call <?php echo $this->footer();?>
+         * @return string $html Footer Statement
+         */
+        final public function statement()
+        {
+            return __( 'Created by', 'ptt-manager' ) . '</b>: <a href="http://technerdia.com/" target="_blank">techNerdia</a>';
+        }
+
+
+        /**
+         * @about Create Instance
          */
         public static function instance()
         {

@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/tribalNerd/ptt-manager
  * Description: Post Type & Taxonomy Manager for WordPress Themes
  * Tags: post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
- * Version: 0.1.0
+ * Version: 0.1.1
  * License: GNU GPLv3
  * Copyright (c) 2017 Chris Winters
  * Author: tribalNerd, Chris Winters
@@ -22,7 +22,7 @@ if( function_exists( 'PTTManagerConstants' ) )
 {
     PTTManagerConstants( Array(
         'PTT_MANAGER_BASE_URL'          => get_bloginfo( 'url' ),
-        'PTT_MANAGER_VERSION'           => '0.1.0',
+        'PTT_MANAGER_VERSION'           => '0.1.1',
         'PTT_MANAGER_WP_MIN_VERSION'    => '4.6',
 
         'PTT_MANAGER_PLUGIN_FILE'       => __FILE__,
@@ -31,7 +31,7 @@ if( function_exists( 'PTTManagerConstants' ) )
 
         'PTT_MANAGER_MENU_NAME'         => __( 'PT & T Manager', 'ptt-manager' ),
         'PTT_MANAGER_PAGE_NAME'         => __( 'Post Type & Taxonomy Manager', 'ptt-manager' ),
-        'PTT_MANAGER_PAGE_ABOUT'        => __( 'Post Type & Taxonomy Manager For Wordpress Themes', 'ptt-manager' ),
+        'PTT_MANAGER_PAGE_DESC'         => __( 'Post Type & Taxonomy Manager For WordPress Themes', 'ptt-manager' ),
         'PTT_MANAGER_OPTION_NAME'       => 'ptt-manager_',
         'PTT_MANAGER_PLUGIN_NAME'       => 'ptt-manager',
 

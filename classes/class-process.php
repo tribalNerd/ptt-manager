@@ -46,9 +46,6 @@ if ( ! class_exists( 'PTTManager_Process' ) )
                 // Edit Post Types / Taxonomies Dropdown
                 add_filter( $this->plugin_name . '_dashicon', array( $this, 'dashiconString' ), 10, 1 );
 
-                // Get Post Type / Taxonomy Data for Input Fields
-                add_filter( $this->plugin_name . '_field', array( $this, 'field' ), 10, 2 );
-
                 // Export Filter
                 add_filter( $this->plugin_name . '_export', array( $this, 'export' ), 10, 1 );
 
@@ -404,7 +401,6 @@ if ( ! class_exists( 'PTTManager_Process' ) )
 
                 return $post;
             }
-
         }
 
 
