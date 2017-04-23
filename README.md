@@ -3,8 +3,8 @@
 * **Contributors:** tribalNerd, Chris Winters
 * **Tags:** post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
 * **Requires at least:** 4.6
-* **Tested up to:** 4.7.3
-* **Stable tag:** 0.1.1
+* **Tested up to:** 4.7.4
+* **Stable tag:** 0.1.2
 * **License:** GNU GPLv3
 * **License URI:** https://github.com/tribalNerd/ptt-manager/blob/master/LICENSE
 
@@ -124,6 +124,10 @@ A) No, only the Post Type / Taxonomy record is deleted.
 
 
 ## Changelog
+
+#### 0.1.2 2017-23-4
+
+Tested: Wordpress Version 4.7.4
 
 #### 0.1.1 2017-4-3
 
