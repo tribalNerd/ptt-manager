@@ -130,12 +130,12 @@ A) No, only the Post Type / Taxonomy record is deleted.
 
 = 0.1.1 2017-4-3 =
 
-Change: Added plugin description to header template
-Change: Replaced constants within templates with class variables
+* Change: Added plugin description to header template
+* Change: Replaced constants within templates with class variables
 
 = 0.1.0 2017-3-14 =
 
-Beta Release
+* Beta Release
 
 
 == Screenshots ==
