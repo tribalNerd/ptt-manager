@@ -3,8 +3,8 @@ Plugin Name: Post Type & Taxonomy Manager
 Contributors: tribalNerd, Chris Winters
 Tags: post type, post types, custom-post-type, custom post types, taxonomy, taxonomies, custom taxonomy, custom taxonomies
 Requires at least: 4.6
-Tested up to: 4.8
-Stable tag: 0.1.3
+Tested up to: 4.8.1
+Stable tag: 0.1.4
 License: GNU GPLv3
 License URI: https://github.com/tribalNerd/ptt-manager/blob/master/LICENSE
 
@@ -13,7 +13,7 @@ Post Type & Taxonomy Manager, featuring pre-created and custom post types and ta
 
 == Description ==
 
-The Post Type & Taxonomy Manager WordPress Plugin allows you to register custom post types and taxonomies with ease, while providing you with 8 pre-created and simple to use post types and taxonomies, including: Books, Docs, FAQ's, Music, Portfolio, Teams, Testimonials, and Videos.
+The Post Type & Taxonomy Manager WordPress plugin allows you to register custom post types and taxonomies with ease, while providing you with 8 pre-created and simple to use post types and taxonomies, including: Books, Docs, FAQ's, Music, Portfolio, Teams, Testimonials, and Videos.
 
 = Features =
 * A simple to use and clutter free admin area
@@ -124,6 +124,10 @@ A) No, only the Post Type / Taxonomy record is deleted.
 
 
 == Changelog ==
+
+= 0.1.4 2017-3-8 =
+
+* Tested: Wordpress Version 4.8.1
 
 = 0.1.3 2017-9-6 =
 
